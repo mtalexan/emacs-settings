@@ -1,0 +1,6 @@
+*.dat
+auto-save-list/*
+recentf
+recentf~
+temp/*
+url/*
