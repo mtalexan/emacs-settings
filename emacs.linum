@@ -1,24 +1,27 @@
 ;; Places line numbers along the left edge.  Numbering is done on each window.
 
-; Add the hooks for c and c++ modes
-(add-hook 'c++-mode-hook 'linum-mode)
-(add-hook 'c-mode-hook 'linum-mode)
+; This package is included in Emacs 24.x by default
+(use-package linum
+  ; get it from package.el
+  :ensure t
+  :commands
+    linum-mode
+  :init
+    ; Add the hooks for c and c++ modes
+    (add-hook 'c++-mode-hook 'linum-mode)
+    (add-hook 'c-mode-hook 'linum-mode)
+    ; Enable global mode
+    (setq global-linum-mode t)
+  :config
+    ; Clear linum-eager mode
+    (setq linum-eager nil)
+    ; Pick a numbering alignment
+    ;; left align the numbering with spaces between numbers and content
+    ;(setq linum-format "%d ")
+    ; right align the numbering with a space between numbers and content
+  (setq linum-format (lambda (line) (propertize (format (let ((w (length (number-to-string (count-lines (point-min) (point-max)))))) (concat "%" (number-to-string w) "d ")) line) 'face 'linum)))
+  )
 
-; Enable global mode
-(setq global-linum-mode t)
-
-; Clear linum-eager mode
-(setq linum-eager nil)
-
-; Load the actual plugin
-(require 'linum)
-
-; Pick a numbering alignment
-
-;; left align the numbering with spaces between numbers and content
-;(setq linum-format "%d ")
-; right align the numbering with a space between numbers and content
-(setq linum-format (lambda (line) (propertize (format (let ((w (length (number-to-string (count-lines (point-min) (point-max)))))) (concat "%" (number-to-string w) "d ")) line) 'face 'linum)))
 
 
 

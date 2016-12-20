@@ -1,16 +1,25 @@
 ;; Package.el
 ;; Used for package management against different repos.
-;; Already included in 24, and repos allowed are different
-(when (>= emacs-major-version 24)
-  (add-to-list 'load-path "~/.emacs.d/package/")
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
+
+; package is included in Emacs 24.x and later, so we just need to add a repo source
+; Prior to that, we need to specify the file as a manual load, and add a different repo source
 (when (< emacs-major-version 24)
-  (add-to-list 'load-path "~/.emacs.d/package/")
-  (load-file "~/.emacs.d/package/package.el")
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-  )
+  (load-file "~/.emacs.d/package23.x/package.el"))
+
+(require 'package)
+
+(when (>= emacs-major-version 24)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
+(when (< emacs-major-version 24)
+    (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/")))
+
+;; Ensure we have package info, updating it if we don't have any (happens every time)
+;(unless package-archive-contents
+;  (package-refresh-contents))
+
+(package-initialize)
+
+;; All packages that are needed from a package repo should use the ":ensure t" tag in their use-package
+;; line, or ":ensure repoPackageName" if the name in the repo doesn't match the name that's downloaded.
+;; To pin to a specific archive, use the ":pin archive" tag in the call.  If you don't want it auto-updated
+;; you'll have to ":pin manual"

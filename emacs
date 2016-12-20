@@ -88,9 +88,14 @@
 
 (put 'upcase-region 'disabled nil)
 
-;;Load a coding style file that can be changed modularly
+;;Load a coding style settings file that can be changed modularly
 (let ((file "~/.emacs.d/emacs.codingstyle"))
   (if (file-executable-p file) (load-file file)))
+
+;;Load a file identification settings file that can be changed modularly
+(let ((file "~/.emacs.d/emacs.fileident"))
+  (if (file-executable-p file) (load-file file)))
+
 
 ;; Garbage collection default is very low.  Large file/index operations are therefore terrible.
 ;; fix it by increasing the default garbage collection limit
@@ -98,11 +103,6 @@
 
 ;; Increase the large file warning so it doesn't halt loading when TAG files are more than 10MB
 (setq large-file-warning-threshold 200000000) ;200MB file limit
-
-;; Add SConscript as a recognized python script file (front of list)
-(setq auto-coding-alist (cons '("SConscript[^/]+\\'" . python-mode) auto-coding-alist))
-;; Allow for random extensions on files containing the word "Makefile" (front of list)
-(setq auto-mode-alist (cons '("Makefile" . makefile-mode) auto-mode-alist))
 
 ;;; uncomment this line to disable loading of "default.el" at startup
 ;; (setq inhibit-default-init t)
@@ -382,14 +382,18 @@
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
 
-;; C++ File Identification Change
-;; Identify .h files as C++ by default rather than C
-;; For some reason adding this to the customize menu causes a warning.
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modules/Packages should be added here
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Do this first, since the rest of the package loading should be making use of it
+(load-file "~/.emacs.d/emacs.use-package")
+
+; This is almost deprecated, so conditionaly include it to make it easier to remove later
+(let ((file "~/.emacs.d/emacs.cl-lib"))
+  (if (file-executable-p file) (load-file file)))
+
+(load-file "~/.emacs.d/emacs.package")
 
 (load-file "~/.emacs.d/emacs.linum")
 

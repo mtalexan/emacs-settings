@@ -1,6 +1,7 @@
-emacs.local
 *.dat
 auto-save-list/*
+elpa/*
+emacs.local
 recentf
 recentf~
 temp/*
