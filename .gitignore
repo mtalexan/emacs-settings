@@ -1,3 +1,4 @@
+.emacs.local
 *.dat
 auto-save-list/*
 recentf

@@ -10,14 +10,12 @@
  ;; If there is more than one, they won't work right.
  '(auto-coding-alist
    (quote
-    (("SConscript[^/]+\\'" . python-mode)
-     ("\\.\\(arc\\|zip\\|lzh\\|lha\\|zoo\\|[jew]ar\\|xpi\\|rar\\|ARC\\|ZIP\\|LZH\\|LHA\\|ZOO\\|[JEW]AR\\|XPI\\|RAR\\)\\'" . no-conversion-multibyte)
+    (("\\.\\(arc\\|zip\\|lzh\\|lha\\|zoo\\|[jew]ar\\|xpi\\|rar\\|ARC\\|ZIP\\|LZH\\|LHA\\|ZOO\\|[JEW]AR\\|XPI\\|RAR\\)\\'" . no-conversion-multibyte)
      ("\\.\\(exe\\|EXE\\)\\'" . no-conversion)
      ("\\.\\(sx[dmicw]\\|odt\\|tar\\|tgz\\)\\'" . no-conversion)
      ("\\.\\(gz\\|Z\\|bz\\|bz2\\|gpg\\)\\'" . no-conversion)
      ("\\.\\(jpe?g\\|png\\|gif\\|tiff?\\|p[bpgn]m\\)\\'" . no-conversion)
-     ("\\.pdf\\'" . no-conversion)
-     ("/#[^/]+#\\'" . emacs-mule))))
+     ("\\.pdf\\'" . no-conversion))))
  '(auto-coding-regexp-alist
    (quote
     (("\\`BABYL OPTIONS:[ 	]*-\\*-[ 	]*rmail[ 	]*-\\*-" . no-conversion)
@@ -105,31 +103,12 @@
 ;; fix it by increasing the default garbage collection limit
 (setq gc-cons-threshold 20000000)
 
-;; Cl-lib is a forward compatibility package to support Emacs 24.x features on 23.x
-(when (< emacs-major-version 24)
-  (add-to-list 'load-path "~/.emacs.d/cl-lib/")
-  (require 'cl-lib)
-  )
-
-;; Package.el
-;; Used for package management against different repos.
-;; Already included in 24, and repos allowed are different
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
-(when (< emacs-major-version 24)
-  (load-file "~/.emacs.d/package.el")
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-  )
-
 ;; Increase the large file warning so it doesn't halt loading when TAG files are more than 10MB
 (setq large-file-warning-threshold 200000000) ;200MB file limit
 
-;; Allow for random extensions on files containing the word "Makefile"
+;; Add SConscript as a recognized python script file (front of list)
+(setq auto-coding-alist (cons '("SConscript[^/]+\\'" . python-mode) auto-coding-alist))
+;; Allow for random extensions on files containing the word "Makefile" (front of list)
 (setq auto-mode-alist (cons '("Makefile" . makefile-mode) auto-mode-alist))
 
 ;;; uncomment this line to disable loading of "default.el" at startup
@@ -416,5 +395,7 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 
-
-                
+;; This should always be last.  It configures for the specific system and isn't tracked, so it should be
+;; able to optionally override everything else in this file
+(let ((file "~/.emacs.d/.emacs.local"))
+  (if (file-executable-p file) (load-file file)))
