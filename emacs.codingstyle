@@ -1,0 +1,11 @@
+(setq c-offsets-alist
+   (quote
+    ((inline-open . 0)
+     (statement-case-open . +)
+     (substatement-open . 0)
+     (substatement-label . 0)
+     (case-label . +)
+     (access-label . -)
+     (label . 1)
+     (cpp-macro . -)
+     (innamespace . 0))))

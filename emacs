@@ -37,17 +37,6 @@
      (c++-mode . gtkdoc)
      (java-mode . javadoc)
      (pike-mode . autodoc))))
- '(c-offsets-alist
-   (quote
-    ((inline-open . 0)
-     (statement-case-open . +)
-     (substatement-open . 0)
-     (substatement-label . 0)
-     (case-label . +)
-     (access-label . -)
-     (label . 1)
-     (cpp-macro . -)
-     (innamespace . 0))))
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
@@ -98,6 +87,10 @@
 )
 
 (put 'upcase-region 'disabled nil)
+
+;;Load a coding style file that can be changed modularly
+(let ((file "~/.emacs.d/emacs.codingstyle"))
+  (if (file-executable-p file) (load-file file)))
 
 ;; Garbage collection default is very low.  Large file/index operations are therefore terrible.
 ;; fix it by increasing the default garbage collection limit
@@ -394,8 +387,7 @@
 ;; For some reason adding this to the customize menu causes a warning.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-
 ;; This should always be last.  It configures for the specific system and isn't tracked, so it should be
 ;; able to optionally override everything else in this file
-(let ((file "~/.emacs.d/.emacs.local"))
+(let ((file "~/.emacs.d/emacs.local"))
   (if (file-executable-p file) (load-file file)))
