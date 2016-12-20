@@ -387,6 +387,36 @@
 ;; For some reason adding this to the customize menu causes a warning.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Modules/Packages should be added here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(load-file "~/.emacs.d/emacs.linum")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Local emacs script is the only thing that should be loaded here
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; This should always be last.  It configures for the specific system and isn't tracked, so it should be
 ;; able to optionally override everything else in this file
 (let ((file "~/.emacs.d/emacs.local"))
