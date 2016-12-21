@@ -1,0 +1,106 @@
+;; A very different interface from IDO which is the default
+
+(use-package helm
+  ; get it from package.el
+  :ensure t
+  :commands (
+    helm-mode
+    helm-buffers-list
+    helm-resume
+   ) ; end :commands
+  :init
+    (helm-mode 1)
+  :config
+    (require 'helm-config)
+    ;auto resize, and set resize limits
+    (setq helm-autoresize-mode t)
+    (setq helm-autoresize-max-height 20) ;20%
+    (setq helm-autoresize-min-height 20) ;20%
+
+    (setq helm-buffer-max-length nil)
+
+    ;fuzzy match the M-x commands
+    (setq helm-M-x-fuzzy-match t)
+    ;key to enter commands
+    (setq helm-command-prefix "C-d")
+
+ :bind (
+    ;default helm keybinding is C-x c which is almost C-x C-c that's used to exit emacs.
+    ("C-x c" . nil)
+    ;override buffer list keys to use helm version
+    ("C-x C-b" . helm-buffers-list)
+    ;resume the last session again
+    ("C-c C-c" . helm-resume)
+
+    ;swap these around so C-e says "do everything" and C-z brings up the action list
+    ;rebind tab to run persistent actions
+    :map helm-map
+    ("C-e" . helm-execute-persistent-action)
+    ("C-z" . helm-select-action)
+    ;Ergo keys
+    ("M-i" . helm-previous-line)
+    ("M-k" . helm-next-line)
+    ("M-j" . helm-previous-source)
+    ("M-l" . helm-next-source)
+    ("M-I" . helm-previous-page)
+    ("M-K" . helm-next-page)
+    ([tab] . nil)
+
+    :map helm-buffer-map
+    ("C-k" . helm-delete-current-selection)
+    ("C-c C-k" . helm-delete-current-selection)
+    ;Ergo keys
+    ("M-i" . helm-previous-line)
+    ("M-k" . helm-next-line)
+    ("M-j" . helm-previous-source)
+    ("M-l" . helm-next-source)
+    ("M-I" . helm-previous-page)
+    ("M-K" . helm-next-page)
+    ([tab] . nil)
+
+
+    :map helm-etags-map
+    ;Ergo keys
+    ("M-i" . helm-previous-line)
+    ("M-k" . helm-next-line)
+    ("M-j" . helm-previous-source)
+    ("M-l" . helm-next-source)
+    ("M-I" . helm-previous-page)
+    ("M-K" . helm-next-page)
+    ([tab] . nil)
+
+    :map helm-generic-files-map
+    ;Ergo keys
+    ("M-i" . helm-previous-line)
+    ("M-k" . helm-next-line)
+    ("M-j" . helm-previous-source)
+    ("M-l" . helm-next-source)
+    ("M-I" . helm-previous-page)
+    ("M-K" . helm-next-page)
+    ([tab] . nil)
+
+    :map helm-buffers-ido-virtual-map
+    ;Ergo keys
+    ("M-i" . helm-previous-line)
+    ("M-k" . helm-next-line)
+    ("M-j" . helm-previous-source)
+    ("M-l" . helm-next-source)
+    ("M-I" . helm-previous-page)
+    ("M-K" . helm-next-page)
+    ([tab] . nil)
+
+    :map helm-grep-map
+    ;Ergo keys
+    ("M-i" . helm-previous-line)
+    ("M-k" . helm-next-line)
+    ("M-j" . helm-previous-source)
+    ("M-l" . helm-next-source)
+    ("M-I" . helm-previous-page)
+    ("M-K" . helm-next-page)
+    ([tab] . nil)
+    ) ;end of :bind
+  ) ; end of use-package
+
+
+
+
