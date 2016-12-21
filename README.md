@@ -6,6 +6,6 @@ Changes which should not be shared should be placed in a ~/.emacs.d/emacs.local 
 
 use-package should be used when possible as it significantly speeds up loading.
 
-The format of these changes is to provide a main emacs file with core functionality and configuration.  Packages should be pulled in via an emacs.packagename configuration file so they can be modularly controlled and configured.  All configuration and the actual loading of the module itself should occur in this package specific file.
+The format of these changes is to provide a main emacs file with core functionality and configuration.  Packages should be specified in an emacs.packagename configuration file, ideally using the use-package syntax, so they can be modularly controlled and configured.  All configuration and the actual loading of the module itself should occur in this package specific file.  If the package itself is not part of package.el, the package file itself should also be checked in.
 
 
