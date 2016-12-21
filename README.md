@@ -1,6 +1,5 @@
 To use the repo, clone it to ~/.emacs.d and then create a symlink from ~/.emacs to ~/.emacs.d/emacs
-
-After cloning, you'll need to do "git submodule update --init" as well.
+After cloning, do "git submodule update --init" in the .emacs.d directory, then open emacs with the --debug-init option.  This will download any missing packages via package.el from the ELPA repos, as well as confirming all the emacs configuration settings are working properly.
 
 Changes which should not be shared should be placed in a ~/.emacs.d/emacs.local file that will get imported (if present) into the main emacs script.
 
