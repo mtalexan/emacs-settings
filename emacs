@@ -396,6 +396,7 @@
 (load-file "~/.emacs.d/emacs.package")
 
 (load-file "~/.emacs.d/emacs.linum")
+(load-file "~/.emacs.d/emacs.smoothscrolling")
 
 
 

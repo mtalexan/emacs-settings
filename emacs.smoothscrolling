@@ -1,0 +1,9 @@
+;; Causes scrolling to happen as it occur rather than waiting and happening all at once
+
+(use-package smooth-scrolling
+  ; get it from package.el
+  :ensure t
+  )
+
+; always require this
+(require 'smooth-scrolling)
