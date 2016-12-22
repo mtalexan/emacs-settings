@@ -1,0 +1,41 @@
+;; Company is an auto-completion tool that can use various backends to retrieve possible completions
+;; It's significantly better maintained than auto-complete, which is one of the main alternatives
+
+
+(use-package company
+  ;get it from package.el if necessary
+  :ensure t
+
+  :commands (
+    company-mode
+    company-complete
+  )
+  :init
+    (add-hook 'lisp-mode-hook 'company-mode)
+    (add-hook 'c-mode-hook 'company-mode)
+    (add-hook 'c++-mode-hook 'company-mode)
+    (setq company-global-modes t)
+
+  :config
+    (setq company-abort-manual-when-too-short t)
+    (setq company-auto-complete 'company-explicit-action-p)
+    (setq company-backends (quote ((company-gtags company-dabbrev-code company-keywords company-files))))
+    (setq company-dabbrev-code-everywhere t)
+    (setq company-dabbrev-code-modes (quote (prog-mode batch-file-mode python-mode c++-mode c-mode)))
+    (setq company-dabbrev-code-other-buffers t)
+    (setq company-frontends (quote (company-pseudo-tooltip-frontend company-echo-metadata-frontend company-preview-frontend)))
+    (setq company-global-modes t)
+    (setq company-gtags-insert-arguments t)
+    (setq company-gtags-modes (quote (prog-mode c++-mode c-mode)))
+    (setq company-idle-delay 0.2)
+    (setq company-selection-wrap-around t)
+    (setq company-transformers (quote (company-sort-by-backend-importance)))
+
+  :bind (
+    ("M-'" . company-complete)
+
+    :map company-active-map
+    ([tab] . nil)
+    ([spc] . nil)
+   )
+)

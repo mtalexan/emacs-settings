@@ -402,6 +402,7 @@
 
 (load-file "~/.emacs.d/emacs.helm")
 
+(load-file "~/.emacs.d/emacs.company")
 
 
 
