@@ -69,4 +69,4 @@ echo ""
 echo "Completed successfully!"
 echo "Opening emacs for the first time to allow it to download missing packages"
 echo "This may take some time ..."
-emacs
+emacs --debug-init
