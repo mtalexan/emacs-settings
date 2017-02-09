@@ -8,3 +8,7 @@ use-package should be used when possible as it significantly speeds up loading.
 The format of these changes is to provide a main emacs file with core functionality and configuration.  Packages should be specified in an emacs.packagename configuration file, ideally using the use-package syntax, so they can be modularly controlled and configured.  All configuration and the actual loading of the module itself should occur in this package specific file.  If the package itself is not part of package.el, the package file itself should also be checked in.
 
 
+To use ggtags, GNU global and the related tools must be installed.  The global_install.sh is provided that will perform the download and install on an Ubuntu system.  The following line needs to be added to the .bashrc environment for gtags to work:
+
+export GTAGS_INSTALL_DIR=<root installation location, i.e. /usr/local/>
+

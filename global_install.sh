@@ -7,7 +7,7 @@ sudo apt-get install id-utils exuberant-ctags
 
 echo ""
 echo ""
-echo "Getting GNU Global 6.5.6..."
+echo "Getting GNU Global ${FILE_VERSION}..."
 cd /tmp && wget ftp://ftp.gnu.org/pub/gnu/global/global-${FILE_VERSION}.tar.gz
 
 if [ $? -ne 0 ] ; then
@@ -40,7 +40,7 @@ fi
 
 echo ""
 echo ""
-echo "Configuring GNU Global for instalation in /home/${USER}/global-6.5.6..."
+echo "Configuring GNU Global for instalation in /home/${USER}/global-${FILE_VERSION}..."
 ./configure --prefix=/home/${USER}/global-${FILE_VERSION} --with-exuberant-ctags=`which ctags`
 if [ $? -ne 0 ] ; then
     echo ""
@@ -78,3 +78,7 @@ rm -f /tmp/global-${FILE_VERSION}.tar.gz
 echo ""
 echo ""
 echo "Completed successfully.  gtags is located at `which gtags`"
+echo "Be sure to add the following to your .bashrc:"
+echo "   export GTAGSCONF=/home/\$USER/global-${FILE_VERSION}/share/gtags/gtags.conf"
+echo "   export GTAGSLABEL=native"
+echo "and add to your PATH appropriately.
