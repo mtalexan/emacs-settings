@@ -1,0 +1,36 @@
+;; Helm interface to Projectile requires both
+
+(use-package helm-projectile
+  ; get it from package.el
+  :ensure t
+  :init
+    (setq projectile-completion-system 'helm)
+    ; always use this
+    (require 'helm-projectile)
+  :config
+    (require 'helm)
+    (require 'projectile)
+
+ :bind (
+    ; find files looking at all within the projectile project
+    ("C-x f" . helm-projectile-find-file)
+    ; find matching header/source in pair
+    ("C-c h" . helm-projectile-find-other-file)
+    ; find file under point, or default to find-file
+    ("C-c f" . helm-projectile-find-file-dwim)
+
+    :map helm-projectile-find-file-map
+    ;Ergo keys
+    ("M-i" . helm-previous-line)
+    ("M-k" . helm-next-line)
+    ("M-j" . helm-previous-source)
+    ("M-l" . helm-next-source)
+    ("M-I" . helm-previous-page)
+    ("M-K" . helm-next-page)
+    ([tab] . nil)
+   ) ;end of :bind
+  ) ; end of use-package
+
+
+
+

@@ -2,6 +2,9 @@
 auto-save-list/*
 elpa/*
 emacs.local
+/projectile-*
+/projectile.*
+/session.*
 recentf
 recentf~
 temp/*

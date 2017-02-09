@@ -1,0 +1,12 @@
+;; Helm interface to search key bindings.  Hit C-h after a prefix key to see all bindings
+
+(use-package helm-descbinds
+  ; get it from package.el
+  :ensure t
+  :init
+    ; always use this
+    (require 'helm-descbinds)
+  :config
+    (require 'helm)
+    (helm-descbinds-mode)
+  ) ; end of use-package

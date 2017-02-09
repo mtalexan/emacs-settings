@@ -17,20 +17,56 @@
     (setq company-global-modes t)
 
   :config
-    (setq company-abort-manual-when-too-short t)
+    ; How to trigger an autocomplete to be used
     (setq company-auto-complete 'company-explicit-action-p)
-    (setq company-backends (quote ((company-gtags company-dabbrev-code company-keywords company-files))))
+    ; No specific autocomplete characters
+    (setq company-auto-complete-chars 'ignore)
+    ; Where to get completion candidates from
+    (setq company-backends
+          (quote
+           ((company-gtags
+             company-dabbrev-code
+             company-keywords
+             company-files))))
+    ; How to display the possible completions
+    (setq company-frontends
+          (quote
+           (company-pseudo-tooltip-frontend
+            company-echo-metadata-frontend
+            company-preview-frontend)))
+    ; Use dabbrev always
     (setq company-dabbrev-code-everywhere t)
-    (setq company-dabbrev-code-modes (quote (prog-mode batch-file-mode python-mode c++-mode c-mode)))
+    ; Use dabbrev in these modes
+    (setq company-dabbrev-code-modes
+          (quote
+           (prog-mode
+            batch-file-mode
+            python-mode
+            c++-mode
+            c-mode
+            java-mode)))
+    ; parse other buffers to populate dabbrev list
     (setq company-dabbrev-code-other-buffers t)
-    (setq company-frontends (quote (company-pseudo-tooltip-frontend company-echo-metadata-frontend company-preview-frontend)))
-    (setq company-global-modes t)
-    (setq company-gtags-insert-arguments t)
-    (setq company-gtags-modes (quote (prog-mode c++-mode c-mode)))
-    (setq company-idle-delay 0.2)
-    (setq company-selection-wrap-around t)
-    (setq company-transformers (quote (company-sort-by-backend-importance)))
 
+    ; Don't allow company when completion is too short
+    (setq company-abort-manual-when-too-short t)
+    ; Automatically add arguments when completing to functions from gtags
+    (setq company-gtags-insert-arguments t)
+    ; modes to use company gtags in
+    (setq company-gtags-modes
+          (quote
+           (prog-mode
+            c++-mode
+            c-mode
+            java-mode)))
+    ; Delay before autocomplete pops up
+    (setq company-idle-delay 0.2)
+    ; When going through completion list, should cursor wrap
+    (setq company-selection-wrap-around t)
+    ; How to sort completion candidates
+    (setq company-transformers (quote (company-sort-by-backend-importance)))
+    ; How to display the completion candidates
+    (setq completions-format (quote vertical))
   :bind (
     ("M-'" . company-complete)
 

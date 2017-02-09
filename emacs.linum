@@ -7,11 +7,11 @@
   :commands
     linum-mode
   :init
-    ; Add the hooks for c and c++ modes
-    (add-hook 'c++-mode-hook 'linum-mode)
-    (add-hook 'c-mode-hook 'linum-mode)
-    ; Enable global mode
-    (setq global-linum-mode t)
+    ; Add the hooks for c and c++ modes only
+    ;(add-hook 'c++-mode-hook 'linum-mode)
+    ;(add-hook 'c-mode-hook 'linum-mode)
+    ; Enable global mode (always visible)
+    (global-linum-mode t)
   :config
     ; Clear linum-eager mode
     (setq linum-eager nil)
@@ -21,10 +21,4 @@
     ; right align the numbering with a space between numbers and content
   (setq linum-format (lambda (line) (propertize (format (let ((w (length (number-to-string (count-lines (point-min) (point-max)))))) (concat "%" (number-to-string w) "d ")) line) 'face 'linum)))
   )
-
-
-
-
-
-
 

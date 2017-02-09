@@ -3,6 +3,13 @@
 ;; Don't edit this by hand, instead use the Options->Customize Emacs
 ;; from the menubar and edit the options from the customization groups.
 ;; Saving the changes there actually saves them here.
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -44,16 +51,19 @@
  '(delete-active-region (quote kill))
  '(ediff-make-buffers-readonly-at-startup nil)
  '(ediff-prefer-iconified-control-frame t)
- '(ediff-split-window-function (quote split-window-horizontally))
+ '(ediff-split-window-function (quote split-window-horizontally) t)
  '(ediff-temp-file-prefix "tmp_diff_")
  '(ediff-use-long-help-message t)
  '(ediff-version-control-package (quote vc))
- '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain) t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-do-not-save-duplicates t)
  '(kill-read-only-ok t)
  '(kill-whole-line nil)
+ '(package-selected-packages
+   (quote
+    (ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company)))
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode (quote right))
  '(select-enable-primary t)
@@ -83,8 +93,7 @@
  '(ediff-odd-diff-A ((t (:background "tomato4"))))
  '(ediff-odd-diff-Ancestor ((t (:background "tomato4"))))
  '(ediff-odd-diff-B ((t (:background "tomato4"))))
- '(ediff-odd-diff-C ((t (:background "tomato4"))))
-)
+ '(ediff-odd-diff-C ((t (:background "tomato4")))))
 
 (put 'upcase-region 'disabled nil)
 
@@ -382,6 +391,10 @@
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
 
+;; Modify some of the file type identification
+(add-to-list 'auto-mode-alist '("Makefile" . makefile-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modules/Packages should be added here
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -397,30 +410,36 @@
 
 (load-file "~/.emacs.d/emacs.linum")
 (load-file "~/.emacs.d/emacs.smoothscrolling")
+(load-file "~/.emacs.d/emacs.visible-mark")
 
+(load-file "~/.emacs.d/emacs.smart-mode-line")
+(load-file "~/.emacs.d/emacs.rich-minority")
 
+;multi-term doesn't show output correctly
+;(load-file "~/.emacs.d/emacs.multi-term")
+
+(load-file "~/.emacs.d/emacs.elscreen")
 
 (load-file "~/.emacs.d/emacs.helm")
+(load-file "~/.emacs.d/emacs.projectile")
+(load-file "~/.emacs.d/emacs.helm-projectile")
 
 (load-file "~/.emacs.d/emacs.company")
 
+(load-file "~/.emacs.d/emacs.xcscope")
 
+(load-file "~/.emacs.d/emacs.semantic")
+(load-file "~/.emacs.d/emacs.function-args")
 
-
-
-
-
-
-
-
-
-
-
-
+(load-file "~/.emacs.d/emacs.ggtags")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Local emacs script is the only thing that should be loaded here
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Things that can be considered for the emacs.local script
+;(load-file "~/.emacs.d/emacs.clearcase")
+;(load-file "~/.emacs.d/emacs.sr-speedbar")
 
 
 ;; This should always be last.  It configures for the specific system and isn't tracked, so it should be
