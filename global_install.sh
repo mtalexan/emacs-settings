@@ -81,4 +81,4 @@ echo "Completed successfully.  gtags is located at `which gtags`"
 echo "Be sure to add the following to your .bashrc:"
 echo "   export GTAGSCONF=/home/\$USER/global-${FILE_VERSION}/share/gtags/gtags.conf"
 echo "   export GTAGSLABEL=native"
-echo "and add to your PATH appropriately.
+echo "and add to your PATH appropriately."
