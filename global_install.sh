@@ -3,7 +3,7 @@
 FILE_VERSION=6.5.6
 
 echo "Using apt-get to install id-utils and exuberant-ctags.  Sudo access required."
-sudo apt-get install id-utils exuberant-ctags
+sudo apt-get install ncurses-dev id-utils exuberant-ctags
 
 echo ""
 echo ""

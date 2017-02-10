@@ -63,7 +63,7 @@
  '(kill-whole-line nil)
  '(package-selected-packages
    (quote
-    (ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company)))
+    (function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company)))
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode (quote right))
  '(select-enable-primary t)

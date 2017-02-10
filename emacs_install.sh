@@ -2,7 +2,7 @@
 
 echo "Adding Ubuntu repo for latest Emacs snapshot..."
 sudo apt-add-repository ppa:ubuntu-elisp/ppa
-if[ $? -ne 0 ] ; then
+if [ $? -ne 0 ] ; then
     echo ""
     echo ""
     echo "Unable to add repository"
@@ -10,7 +10,7 @@ if[ $? -ne 0 ] ; then
 fi
 
 sudo apt-get update
-if[ $? -ne 0 ] ; then
+if [ $? -ne 0 ] ; then
     echo ""
     echo ""
     echo "Unable to update apt-get database"
@@ -22,7 +22,7 @@ echo ""
 echo ""
 echo "Getting latest Emacs snapshot..."
 sudo apt-get install emacs-snapshot
-if[ $? -ne 0 ] ; then
+if [ $? -ne 0 ] ; then
     echo ""
     echo ""
     echo "Unable to install emacs-snapshot"
@@ -34,7 +34,7 @@ echo ""
 echo ""
 echo "Setting emacs-snapshot to remain unchanged..."
 sudo apt-mark hold emacs-snapshot
-if[ $? -ne 0 ] ; then
+if [ $? -ne 0 ] ; then
     echo ""
     echo ""
     echo "Unable to mark emacs-snapshot to hold against updates"
@@ -45,7 +45,7 @@ echo ""
 echo ""
 echo "Updating alternatives to use emacs-snapshot..."
 sudo update-alternatives --set emacs `which emacs-snapshot`
-if[ $? -ne 0 ] ; then
+if [ $? -ne 0 ] ; then
     echo ""
     echo ""
     echo "Unable to update emacs alternative to `which emacs-snapshot`"
@@ -57,7 +57,7 @@ echo ""
 echo ""
 echo "Creating link for .emacs config"
 cd ~ && ln -s .emacs.d/emacs .emacs
-if[ $? -ne 0 ] ; then
+if [ $? -ne 0 ] ; then
     echo ""
     echo ""
     echo "Couldn't create symlink from ~/.emacs to ~/.emacs.d/emacs"
