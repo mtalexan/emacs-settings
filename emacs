@@ -10,6 +10,13 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+;;Load a coding style settings file that can be changed modularly
+;;  This should be the only file like this before the custom-set-variables.
+;;  We want it here so different settings can be tested through the customize-group
+;;  and won't be overridden by these settings.
+(let ((file "~/.emacs.d/emacs.codingstyle"))
+  (if (file-executable-p file) (load-file file)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -96,10 +103,6 @@
  '(ediff-odd-diff-C ((t (:background "tomato4")))))
 
 (put 'upcase-region 'disabled nil)
-
-;;Load a coding style settings file that can be changed modularly
-(let ((file "~/.emacs.d/emacs.codingstyle"))
-  (if (file-executable-p file) (load-file file)))
 
 ;;Load a file identification settings file that can be changed modularly
 (let ((file "~/.emacs.d/emacs.fileident"))
