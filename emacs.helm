@@ -30,11 +30,11 @@
     ;fuzzy matching
     ;nearly everything (global helm mode)
     (setq helm-mode-fuzzy-match t)
-    (setq helm-completion-in-region-fuzzy-match t)
+    ;(setq helm-completion-in-region-fuzzy-match t)
     ;M-x commands
     (setq helm-M-x-fuzzy-match t)
     ;in the recentf
-    (setq helm-recentf-fuzzy-match t)
+    ;(setq helm-recentf-fuzzy-match t)
     ;in buffer list
     (setq helm-buffers-fuzzy-matching t)
     ;in minibuffer (needs helm-buffers-fuzzy-matching also)
@@ -76,9 +76,9 @@
     ;default helm keybinding is C-x c which is almost C-x C-c that's used to exit emacs.
     ("C-x c" . nil)
     ;override buffer list keys to use helm version
-    ;("C-x C-b" . helm-buffers-list)
+    ("C-x C-b" . helm-buffers-list)
     ;use helm-mini instead of helm-buffers-list since it includes recently visited files also
-    ("C-x C-b" . helm-mini)
+    ;("C-x C-b" . helm-mini)
     ;resume the last session again
     ("C-c C-c" . helm-resume)
     ;finding files uses helm
