@@ -58,11 +58,11 @@
  '(delete-active-region (quote kill))
  '(ediff-make-buffers-readonly-at-startup nil)
  '(ediff-prefer-iconified-control-frame t)
- '(ediff-split-window-function (quote split-window-horizontally) t)
+ '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-temp-file-prefix "tmp_diff_")
  '(ediff-use-long-help-message t)
  '(ediff-version-control-package (quote vc))
- '(ediff-window-setup-function (quote ediff-setup-windows-plain) t)
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-do-not-save-duplicates t)
@@ -70,7 +70,7 @@
  '(kill-whole-line nil)
  '(package-selected-packages
    (quote
-    (function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company)))
+    (color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company)))
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode (quote right))
  '(select-enable-primary t)
@@ -175,6 +175,10 @@
 (define-key global-map [(meta L)] 'forward-word)
 (define-key global-map [(meta O)] 'forward-sexp)
 (define-key global-map [(meta U)] 'backward-sexp)
+
+;; Set subword-mode to trigger in all C/C++ mode buffers so camelcase is treated as a word boundary
+(add-hook 'c-mode-common-hook
+          (lambda () (subword-mode 1)))
 
 ;; In no-window mode arrow keys, pgup, pgdn, home, end, etc are prefaced with "ESC O"
 (define-prefix-command 'no-window-map)
@@ -395,7 +399,11 @@
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
 
 ;; Modify some of the file type identification
-(add-to-list 'auto-mode-alist '("Makefile" . makefile-mode))
+(add-to-list 'auto-mode-alist '("Makefile" . makefile-gmake-mode))
+(add-to-list 'auto-mode-alist '("GNUMakefile" . makefile-gmake-mode))
+(add-to-list 'auto-mode-alist '("\\.mk\\'" . makefile-gmake-mode))
+(add-to-list 'auto-mode-alist '("\\.defs\\'" . makefile-gmake-mode))
+(add-to-list 'auto-mode-alist '("\\.class\\'" . makefile-gmake-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -415,8 +423,9 @@
 (load-file "~/.emacs.d/emacs.smoothscrolling")
 (load-file "~/.emacs.d/emacs.visible-mark")
 
-(load-file "~/.emacs.d/emacs.smart-mode-line")
+(load-file "~/.emacs.d/emacs.color-theme-approximate")
 (load-file "~/.emacs.d/emacs.rich-minority")
+(load-file "~/.emacs.d/emacs.smart-mode-line")
 
 ;multi-term doesn't show output correctly
 ;(load-file "~/.emacs.d/emacs.multi-term")
@@ -443,7 +452,7 @@
 ;; Things that can be considered for the emacs.local script
 ;(load-file "~/.emacs.d/emacs.clearcase")
 ;(load-file "~/.emacs.d/emacs.sr-speedbar")
-
+;(load-file "~/.emacs.d/emacs.egg")
 
 ;; This should always be last.  It configures for the specific system and isn't tracked, so it should be
 ;; able to optionally override everything else in this file
