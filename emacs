@@ -58,11 +58,11 @@
  '(delete-active-region (quote kill))
  '(ediff-make-buffers-readonly-at-startup nil)
  '(ediff-prefer-iconified-control-frame t)
- '(ediff-split-window-function (quote split-window-horizontally))
+ '(ediff-split-window-function (quote split-window-horizontally) t)
  '(ediff-temp-file-prefix "tmp_diff_")
  '(ediff-use-long-help-message t)
  '(ediff-version-control-package (quote vc))
- '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain) t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-do-not-save-duplicates t)
@@ -70,7 +70,7 @@
  '(kill-whole-line nil)
  '(package-selected-packages
    (quote
-    (color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company)))
+    (projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company)))
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode (quote right))
  '(select-enable-primary t)
@@ -423,7 +423,6 @@
 (load-file "~/.emacs.d/emacs.smoothscrolling")
 (load-file "~/.emacs.d/emacs.visible-mark")
 
-(load-file "~/.emacs.d/emacs.color-theme-approximate")
 (load-file "~/.emacs.d/emacs.rich-minority")
 (load-file "~/.emacs.d/emacs.smart-mode-line")
 
