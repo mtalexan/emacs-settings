@@ -2,8 +2,25 @@
 
 FILE_VERSION=6.5.6
 
-echo "Using apt-get to install id-utils and exuberant-ctags.  Sudo access required."
-sudo apt-get install ncurses-dev id-utils exuberant-ctags
+UBUNTU=0
+CENTOS=0
+
+if command -v aptitude ; then
+    UBUNTU=1
+elif command -v yum ; then
+    CENTOS=1
+else
+    echo "Unrecognized Linux distribution" >&2
+    exit 1
+fi
+
+if [ $UBUNTU -eq 1 ] ; then
+    echo "Using aptitude to install id-utils and exuberant-ctags.  Sudo access required."
+    sudo aptitude install -y ncurses-dev id-utils exuberant-ctags
+elif [ $CENTOS -eq 1 ] ; then
+    echo "Using yum install -y ncurses-devel coreutils ctags.  Sudo access required."
+    sudo yum install -y ncurses-devel coreutils ctags
+fi
 
 echo ""
 echo ""
@@ -41,7 +58,7 @@ fi
 echo ""
 echo ""
 echo "Configuring GNU Global for instalation in /home/${USER}/global-${FILE_VERSION}..."
-./configure --prefix=/home/${USER}/global-${FILE_VERSION} --with-exuberant-ctags=`which ctags`
+./configure --prefix=/home/${USER}/global-${FILE_VERSION} --with-exuberant-ctags=$(which ctags)
 if [ $? -ne 0 ] ; then
     echo ""
     echo ""
@@ -77,8 +94,11 @@ rm -f /tmp/global-${FILE_VERSION}.tar.gz
 
 echo ""
 echo ""
-echo "Completed successfully.  gtags is located at `which gtags`"
+echo "Completed successfully.  gtags is located at $(which gtags)"
 echo "Be sure to add the following to your .bashrc:"
 echo "   export GTAGSCONF=/home/\$USER/global-${FILE_VERSION}/share/gtags/gtags.conf"
 echo "   export GTAGSLABEL=native"
 echo "and add to your PATH appropriately."
+echo " or"
+echo "If cloning common settings, instead put the following in your .bashrc:"
+echo "   export GTAGS_INSTALL_DIR=/home/\$USER/global-${FILE_VERSION}"
