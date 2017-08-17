@@ -1,12 +1,12 @@
 #!/bin/bash
 
-UBUNTU=0
-CENTOS=0
+APTITUDE=0
+YUM=0
 
-if command -v aptitude ; then
-    UBUNTU=1
-elif command -v yum ; then
-    CENTOS=1
+if command -v aptitude >/dev/null ; then
+    APTITUDE=1
+elif command -v yum >/dev/null ; then
+    YUM=1
 else
     echo "Unrecognized Linux distribution" >&2
     exit 1
@@ -14,7 +14,9 @@ fi
 
 NEW_EMACS_EXECUTABLE_NAME=
 
-if [ $UBUNTU -eq 1 ] ; then
+if [ $APTITUDE -eq 1 ] ; then
+    # Ubuntu has a snapshot repo we can just add to get the latest
+
     echo "Adding Ubuntu repo for latest Emacs snapshot..."
     if command -v apt-add-repository ; then
         sudo apt-add-repository ppa:ubuntu-elisp/ppa
@@ -63,12 +65,14 @@ if [ $UBUNTU -eq 1 ] ; then
 
     # the installed executable to set as the "emacs" version
     NEW_EMACS_EXECUTABLE_NAME=$(which emacs-snapshot)
-    
-elif [ $CENTOS -eq 1 ] ; then
+
+elif [ $YUM -eq 1 ] ; then
+    # Fedora, CentOS, etc don't have a snapshot repo, so we have to build from source
+
     # get the list of deps for the emacs package, but exclude any sub-packages named emacs
     DEPS=$(yum deplist emacs | awk '/provider:/ {print $2}' | sort -u | grep -v emacs | sed -e "s@[.]$(uname -i)@@g" -e "s@[.]noarch@@g" )
 
-    
+
     # we need the development versions of these packages too so we can build against them
     DEVEL_DEPS=autoconf automake
     for D in $DEPS ; do
@@ -93,7 +97,7 @@ elif [ $CENTOS -eq 1 ] ; then
 
     EMACS_GIT_REPO=https://git.savannah.gnu.org/git/emacs.git
     # clone the source for the emacs repo
-    git clone --recursive --depth=1  ${EMACS_GIT_REPO}
+    git clone --recursive --depth=1  ${EMACS_GIT_REPO} emacs-src
     if [ $? -ne 0 ] ; then
         echo ""
         echo ""
@@ -102,7 +106,7 @@ elif [ $CENTOS -eq 1 ] ; then
     fi
 
     # go into the cloned directory
-    cd emacs
+    cd emacs-src
 
     # fetch all available tags so we can parse them
     git fetch --tags
@@ -176,7 +180,7 @@ elif [ $CENTOS -eq 1 ] ; then
 
     # cleanup by deleting the source repo
     cd ..
-    rm -rf emacs
+    rm -rf emacs-src
 fi
 
 echo ""
