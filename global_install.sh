@@ -20,6 +20,23 @@ if [ $APTITUDE -eq 1 ] ; then
     sudo aptitude install -y ncurses-dev id-utils exuberant-ctags
 
     PACKAGE_VERSION=$(aptitude show global | grep "^Version" | awk '{print $2}' | sed -e 's@^\([0-9.]*\).*@\1@g')
+
+    #make sure the correct version of ctags is being used, in case Emacs was already installed and added it's idiotic ctags version
+    CTAGS_PATH=$(update-alternatives --list ctags | grep "exuberant" | head -n1)
+    #if we don't have other alternatives it may not return 0 and we won't be able to set it
+    if [ $? -eq 0 ] ; then
+        echo ""
+        echo ""
+        echo "Updating alternatives to use exuberant-ctags..."
+        sudo update-alternatives --set ctags ${CTAGS_PATH}
+        if [ $? -ne 0 ] ; then
+            echo ""
+            echo ""
+            echo "Unable to update ctags alternative to ${CTAGS_PATH}"
+            exit 1
+        fi
+    fi
+
 elif [ $YUM -eq 1 ] ; then
     echo "Using yum to install ncurses-devel coreutils ctags.  Sudo access required."
     sudo yum install -y ncurses-devel coreutils ctags

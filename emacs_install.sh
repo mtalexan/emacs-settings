@@ -167,7 +167,7 @@ elif [ $YUM -eq 1 ] ; then
     EXE_VERSION=$(echo $VERSION | grep -Eo "emacs-[0-9]{2}[.][0-9]+")
 
     # add the newly installed version to the alternatives list
-    sudo alternatives --install /usr/bin/emacs emacs /usr/local/bin/${EXE_VERSION} 10
+    sudo update-alternatives --install /usr/bin/emacs emacs /usr/local/bin/${EXE_VERSION} 10
     if [ $? -ne 0 ] ; then
         echo ""
         echo ""
