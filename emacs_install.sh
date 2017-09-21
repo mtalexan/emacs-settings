@@ -5,6 +5,12 @@ YUM=0
 
 if command -v aptitude >/dev/null ; then
     APTITUDE=1
+    APTGET=aptitude
+    APTMARK=aptitude
+elif command -v apt-get >/dev/null ; then
+    APTITUDE=1
+    APTGET=apt-get
+    APTMARK=apt-mark
 elif command -v yum >/dev/null ; then
     YUM=1
 else
@@ -31,11 +37,11 @@ if [ $APTITUDE -eq 1 ] ; then
         exit 1
     fi
 
-    sudo aptitude update
+    sudo ${APTGET} update
     if [ $? -ne 0 ] ; then
         echo ""
         echo ""
-        echo "Unable to update aptitude database"
+        echo "Unable to update ${APTGET} database"
         exit 1
     fi
 
@@ -43,7 +49,7 @@ if [ $APTITUDE -eq 1 ] ; then
     echo ""
     echo ""
     echo "Getting latest Emacs snapshot..."
-    sudo aptitude install -y emacs-snapshot
+    sudo ${APTGET} install -y emacs-snapshot
     if [ $? -ne 0 ] ; then
         echo ""
         echo ""
@@ -55,7 +61,7 @@ if [ $APTITUDE -eq 1 ] ; then
     echo ""
     echo ""
     echo "Setting emacs-snapshot to remain unchanged..."
-    sudo aptitude hold emacs-snapshot
+    sudo ${APTMARK} hold emacs-snapshot
     if [ $? -ne 0 ] ; then
         echo ""
         echo ""
