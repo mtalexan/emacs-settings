@@ -405,6 +405,7 @@
 (add-to-list 'auto-mode-alist '("\\.defs\\'" . makefile-gmake-mode))
 (add-to-list 'auto-mode-alist '("\\.class\\'" . makefile-gmake-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '(".?Config.*" . makefile-gmake-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modules/Packages should be added here
