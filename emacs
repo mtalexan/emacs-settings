@@ -58,11 +58,11 @@
  '(delete-active-region (quote kill))
  '(ediff-make-buffers-readonly-at-startup nil)
  '(ediff-prefer-iconified-control-frame t)
- '(ediff-split-window-function (quote split-window-horizontally) t)
+ '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-temp-file-prefix "tmp_diff_")
  '(ediff-use-long-help-message t)
  '(ediff-version-control-package (quote vc))
- '(ediff-window-setup-function (quote ediff-setup-windows-plain) t)
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-do-not-save-duplicates t)
@@ -70,7 +70,7 @@
  '(kill-whole-line nil)
  '(package-selected-packages
    (quote
-    (projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company)))
+    (lua-mode projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company)))
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode (quote right))
  '(select-enable-primary t)
