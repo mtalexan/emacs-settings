@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -o pipefail
+
 APTITUDE=0
 YUM=0
 
@@ -7,10 +9,12 @@ if command -v aptitude >/dev/null ; then
     APTITUDE=1
     APTGET=aptitude
     APTMARK=aptitude
+    APTCACHE=aptitude
 elif command -v apt-get >/dev/null ; then
     APTITUDE=1
     APTGET=apt-get
     APTMARK=apt-mark
+    APTCACHE=apt-cache
 elif command -v yum >/dev/null ; then
     YUM=1
 else
@@ -24,49 +28,53 @@ if [ $APTITUDE -eq 1 ] ; then
     # Ubuntu has a snapshot repo we can just add to get the latest
 
     echo "Adding Ubuntu repo for latest Emacs snapshot..."
-    if command -v apt-add-repository ; then
-        sudo apt-add-repository ppa:ubuntu-elisp/ppa
+    # check if it's already added
+    if [ -z "$(find /etc/apt -name '*.list' -exec grep -E '^[^#]+ubuntu-elisp/ppa' {} \;)" ] ; then
+        if command -v apt-add-repository ; then
+            sudo apt-add-repository ppa:ubuntu-elisp/ppa
+            if [ $? -ne 0 ] ; then
+                echo ""
+                echo ""
+                echo "Unable to add repository"
+                exit 1
+            fi
+        else
+            echo "Tool apt-add-repository not available!" >&2
+            exit 1
+        fi
+
+        sudo ${APTGET} update
         if [ $? -ne 0 ] ; then
             echo ""
             echo ""
-            echo "Unable to add repository"
+            echo "Unable to update ${APTGET} database"
             exit 1
         fi
-    else
-        echo "Tool apt-add-repository not available!" >&2
-        exit 1
     fi
-
-    sudo ${APTGET} update
-    if [ $? -ne 0 ] ; then
-        echo ""
-        echo ""
-        echo "Unable to update ${APTGET} database"
-        exit 1
-    fi
-
 
     echo ""
     echo ""
     echo "Getting latest Emacs snapshot..."
-    sudo ${APTGET} install -y emacs-snapshot
-    if [ $? -ne 0 ] ; then
-        echo ""
-        echo ""
-        echo "Unable to install emacs-snapshot"
-        exit 1
-    fi
+    #check if it's already installed
+    if ! dpkg -l emacs-snapshot 2>/dev/null | grep -qE '.i.[ ]+emacs-snapshot[ ]+' &>/dev/null ; then
+        sudo ${APTGET} install -y emacs-snapshot
+        if [ $? -ne 0 ] ; then
+            echo ""
+            echo ""
+            echo "Unable to install emacs-snapshot"
+            exit 1
+        fi
 
-
-    echo ""
-    echo ""
-    echo "Setting emacs-snapshot to remain unchanged..."
-    sudo ${APTMARK} hold emacs-snapshot
-    if [ $? -ne 0 ] ; then
         echo ""
         echo ""
-        echo "Unable to mark emacs-snapshot to hold against updates"
-        exit 1
+        echo "Setting emacs-snapshot to remain unchanged..."
+        sudo ${APTMARK} hold emacs-snapshot
+        if [ $? -ne 0 ] ; then
+            echo ""
+            echo ""
+            echo "Unable to mark emacs-snapshot to hold against updates"
+            exit 1
+        fi
     fi
 
     # the installed executable to set as the "emacs" version
@@ -204,7 +212,7 @@ fi
 echo ""
 echo ""
 echo "Creating link for .emacs config"
-cd ~ && ln -s .emacs.d/emacs .emacs
+cd ~ && ln -sf .emacs.d/emacs .emacs
 if [ $? -ne 0 ] ; then
     echo ""
     echo ""

@@ -1,14 +1,24 @@
 #!/bin/bash
 
+set -o pipefail
+
 # Minimum version needed, also the version of the source downloaded if no package is available
 FILE_VERSION=6.5.6
 
 APTITUDE=0
 YUM=0
 
-if command -v aptitude ; then
+if command -v aptitude >/dev/null ; then
     APTITUDE=1
-elif command -v yum ; then
+    APTGET=aptitude
+    APTMARK=aptitude
+    APTCACHE=aptitude
+elif command -v apt-get >/dev/null ; then
+    APTITUDE=1
+    APTGET=apt-get
+    APTMARK=apt-mark
+    APTCACHE=apt-cache
+elif command -v yum >/dev/null ; then
     YUM=1
 else
     echo "Unrecognized Linux distribution" >&2
@@ -16,10 +26,12 @@ else
 fi
 
 if [ $APTITUDE -eq 1 ] ; then
-    echo "Using aptitude to install id-utils and exuberant-ctags.  Sudo access required."
-    sudo aptitude install -y ncurses-dev id-utils exuberant-ctags
+    echo "Using ${APTGET} to install id-utils and exuberant-ctags.  Sudo access required."
 
-    PACKAGE_VERSION=$(aptitude show global | grep "^Version" | awk '{print $2}' | sed -e 's@^\([0-9.]*\).*@\1@g')
+    #worst case we update these, but ncurses-dev is a metapackage and therefore has no matching dpkg to check for
+    sudo ${APTGET} install -y ncurses-dev id-utils exuberant-ctags
+
+    PACKAGE_VERSION=$(${APTCACHE} show global | grep "^Version" | awk '{print $2}' | sed -e 's@^\([0-9.]*\).*@\1@g')
 
     #make sure the correct version of ctags is being used, in case Emacs was already installed and added it's idiotic ctags version
     CTAGS_PATH=$(update-alternatives --list ctags | grep "exuberant" | head -n1)
@@ -35,6 +47,11 @@ if [ $APTITUDE -eq 1 ] ; then
             echo "Unable to update ctags alternative to ${CTAGS_PATH}"
             exit 1
         fi
+    else
+        echo ""
+        echo ""
+        echo "Error, cannot locate exuberant-ctags version of ctags tool"
+        exit 1
     fi
 
 elif [ $YUM -eq 1 ] ; then
