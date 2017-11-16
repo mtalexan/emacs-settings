@@ -77,6 +77,7 @@
  '(show-paren-mode t)
  '(show-trailing-whitespace t)
  '(standard-indent 4)
+ '(tab-width 4)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(winner-mode t)
@@ -407,6 +408,9 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '(".?Config.*" . makefile-gmake-mode))
 
+;; Changes the tabify to only operate on leading whitespace
+(setq tabify-regexp "^\\t* [ \\t]+")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modules/Packages should be added here
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -458,3 +462,4 @@
 ;; able to optionally override everything else in this file
 (let ((file "~/.emacs.d/emacs.local"))
   (if (file-executable-p file) (load-file file)))
+
