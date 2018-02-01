@@ -99,7 +99,7 @@ else
     echo ""
     echo ""
     echo "Getting GNU Global ${FILE_VERSION}..."
-    cd /tmp && wget ftp://ftp.gnu.org/pub/gnu/global/global-${FILE_VERSION}.tar.gz
+    cd /tmp && wget http://ftp.gnu.org/pub/gnu/global/global-${FILE_VERSION}.tar.gz
 
     if [ $? -ne 0 ] ; then
         echo ""
