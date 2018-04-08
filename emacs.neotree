@@ -1,0 +1,39 @@
+;; Makes a vim nerdtree like split in the window that shows the directory heirarchy
+
+(use-package neotree
+  ; get it from package.el
+  :ensure t
+  :commands
+    neotree
+    neotree-show
+    neotree-hide
+    neotree-toggle
+    neotree-refresh
+    netoree-quick-look
+    neotree-hidden-file-toggle
+  :init
+    ; Auto-open in C and C++ modes
+    (add-hook 'c++-mode 'neotree-show)
+    (add-hook 'c-mode 'neotree-show)
+  :config
+    ; Remap the select window command to use the sr-speedbar version
+    (global-set-key (kbd "f8") 'neotree-toggle)
+
+    ; If theme not set, set it to "nerd" for graphics displays and "arrow" for terminal displays
+    ; Options are: classic (default), ascii, arrow, icons, or nerd.  Icon requires special
+    ;  all-the-icons package that needs manual font installation as well.
+    (if (not neo-theme) (setq neo-theme 'nerd))
+
+    ;Jumps to current node every time neo-tree is opened
+    (setq neo-smart-open t)
+
+    ; Neotree updates the root dir to the new projectile project immediately
+    (setq projectile-switch-project-action 'neotree-projectile-action)
+  )
+
+
+
+
+
+
+

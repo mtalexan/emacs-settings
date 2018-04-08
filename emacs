@@ -58,11 +58,11 @@
  '(delete-active-region (quote kill))
  '(ediff-make-buffers-readonly-at-startup nil)
  '(ediff-prefer-iconified-control-frame t)
- '(ediff-split-window-function (quote split-window-horizontally))
+ '(ediff-split-window-function (quote split-window-horizontally) t)
  '(ediff-temp-file-prefix "tmp_diff_")
  '(ediff-use-long-help-message t)
  '(ediff-version-control-package (quote vc))
- '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain) t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-do-not-save-duplicates t)
@@ -418,6 +418,15 @@
 ; Do this first, since the rest of the package loading should be making use of it
 (load-file "~/.emacs.d/emacs.use-package")
 
+
+; the emacs.local-overrides so it can be set there if we want something different locally
+(defvar use-helm-instead-of-ivy t "Variable selecting between helm and ivy in custom config")
+
+; This file can optionally exist, and will override some things in the settings for existing packages
+(let ((file "~/.emacs.d/emacs.local-overrides"))
+  (if (file-executable-p file) (load-file file)))
+
+
 ; This is almost deprecated, so conditionaly include it to make it easier to remove later
 (let ((file "~/.emacs.d/emacs.cl-lib"))
   (if (file-executable-p file) (load-file file)))
@@ -436,9 +445,13 @@
 
 (load-file "~/.emacs.d/emacs.elscreen")
 
-(load-file "~/.emacs.d/emacs.helm")
+(if use-helm-instead-of-ivy
+    (load-file "~/.emacs.d/emacs.helm"))
+
 (load-file "~/.emacs.d/emacs.projectile")
-(load-file "~/.emacs.d/emacs.helm-projectile")
+
+(if use-helm-instead-of-ivy
+    (load-file "~/.emacs.d/emacs.helm-projectile"))
 
 (load-file "~/.emacs.d/emacs.company")
 
@@ -449,6 +462,9 @@
 
 (load-file "~/.emacs.d/emacs.ggtags")
 
+(load-file "~/.emacs.d/emacs.ace-jump-mode")
+(load-file "~/.emacs.d/emacs.ace-window")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Local emacs script is the only thing that should be loaded here
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -456,6 +472,7 @@
 ;; Things that can be considered for the emacs.local script
 ;(load-file "~/.emacs.d/emacs.clearcase")
 ;(load-file "~/.emacs.d/emacs.sr-speedbar")
+;(load-file "~/.emacs.d/emacs.neotree")
 ;(load-file "~/.emacs.d/emacs.egg")
 
 ;; This should always be last.  It configures for the specific system and isn't tracked, so it should be

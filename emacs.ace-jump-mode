@@ -1,0 +1,44 @@
+;; A quick-jump tool for within visible
+
+(use-package ace-jump-mode
+  ; get it from package.el
+  :ensure t
+  :commands (
+    ace-jump-mode
+    ace-jump-word-mode
+    ace-jump-line-mode
+    ace-jump-char-mode
+    ace-jump-mode-pop-mark
+   ) ; end :commands
+  :init
+    ; Turn on ace-jump-mode and ace-jump-mode-pop-mark support
+    (autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
+    (autoload 'ace-jump-mode-pop-mark "ace-jump-mode" "Ace mode jump back" t)
+    ; Set the keybindings
+    (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+  :config
+    ; Swap the char and line mode defaults
+    (setq ace-jump-mode-submode-list
+      '(ace-jump-word-mode              ;; the first one always map to : C-c SPC
+        ace-jump-line-mode              ;; the second one always map to: C-u C-c SPC            
+        ace-jump-char-mode) )           ;; the third one always map to ：C-u C-u C-c SPC
+
+    ; Set the scope of matches: global, frame, window, or visible.
+    (setq ace-jump-mode-scope 'visible)
+
+    ; Autoswitch to char-mode when punctuation is entered (default is t, enabled, set to nil to disable)
+    (setq ace-jump-mode-detect-punc t)
+
+    ; synchronize between the ace-jump mark ring and the global mark ring
+    (ace-jump-mode-enable-mark-sync)
+    ;(ace-jump-mode-disable-mark-sync)
+
+ :bind (
+    ; Pops between visible frames too
+    ("C-M-," . ace-jump-mode-pop-mark)
+    ) ;end of :bind
+  ) ; end of use-package
+
+
+
+

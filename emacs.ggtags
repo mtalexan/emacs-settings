@@ -41,7 +41,8 @@
   :config
 
     ; This must be set to the location of gtags (global)
-    (setq ggtags-executable-directory "~/global-6.5.6/bin/")
+    (if (not ggtags-executable-directory)
+        (setq ggtags-executable-directory "~/global-6.5.6/bin/"))
     ; Allow very large database files
     (setq ggtags-oversize-limit 104857600)
     (setq ggtags-sort-by-nearness t)
