@@ -419,6 +419,7 @@
 (load-file "~/.emacs.d/emacs.use-package")
 
 
+; Set a variable we use to determine whether we're using Ivy-Counsel-Swiper or Helm before
 ; the emacs.local-overrides so it can be set there if we want something different locally
 (defvar use-helm-instead-of-ivy t "Variable selecting between helm and ivy in custom config")
 
