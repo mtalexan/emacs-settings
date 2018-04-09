@@ -1,0 +1,8 @@
+; An ace-jump-mode like tool, but provides necessary dependencies for ace-window.
+
+; NOTE: minimal necessary to force install, but not usage.  ace-window dependencies in MELPA are screwed up
+;       and this fixes the problem
+(use-package avy
+  ; get it from package.el
+  :ensure t
+)

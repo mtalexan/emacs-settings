@@ -464,6 +464,7 @@
 (load-file "~/.emacs.d/emacs.ggtags")
 
 (load-file "~/.emacs.d/emacs.ace-jump-mode")
+(load-file "~/.emacs.d/emacs.avy") ; required for ace-window to work right, not used otherwise
 (load-file "~/.emacs.d/emacs.ace-window")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

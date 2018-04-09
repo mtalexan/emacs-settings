@@ -1,5 +1,8 @@
 ;; A quick-jump tool for going between windows
 
+
+;; WARNING: Requires package "avy", but the dependency selection in MELPA doesn't work.
+;;          "avy" must be manually installed instead.
 (use-package ace-window
   ; get it from package.el
   :ensure t
