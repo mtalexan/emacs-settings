@@ -33,6 +33,10 @@
     (setq ivy-re-builders-alist
           '((t . ivy--regex-ignore-order)))
 
+    ; What to do when hitting DEL in buffer with nothing left to delete.
+    ; Default is to exit the ivy session.  Set to nil means do nothing
+    (setq ivy-on-del-error-function nil)
+    
     ; Copy ivy-yank-word, and replace the contents of the with-ivy-window call with the
     ; equivalent logic from isearch-forward-symbol-at-point
     (defun ivy-yank-symbol ()
@@ -104,6 +108,7 @@
        ("C-M-l" . forward-word)
        ("M-o" . move-end-of-line)
        ("M-u" . move-beginning-of-line)
+
    ) ;end of :bind
   ) ; end of use-package
 

@@ -58,11 +58,11 @@
  '(delete-active-region (quote kill))
  '(ediff-make-buffers-readonly-at-startup nil)
  '(ediff-prefer-iconified-control-frame t)
- '(ediff-split-window-function (quote split-window-horizontally) t)
+ '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-temp-file-prefix "tmp_diff_")
  '(ediff-use-long-help-message t)
  '(ediff-version-control-package (quote vc))
- '(ediff-window-setup-function (quote ediff-setup-windows-plain) t)
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-do-not-save-duplicates t)
@@ -71,6 +71,7 @@
  '(package-selected-packages
    (quote
     (json-mode lua-mode projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company)))
+ '(paradox-github-token t)
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode (quote right))
  '(select-enable-primary t)
@@ -490,10 +491,7 @@
 
 (load-file "~/.emacs.d/emacs.company")
 
-(load-file "~/.emacs.d/emacs.xcscope")
-
 (load-file "~/.emacs.d/emacs.semantic")
-(load-file "~/.emacs.d/emacs.function-args")
 
 (load-file "~/.emacs.d/emacs.ggtags")
 
@@ -502,11 +500,19 @@
 (load-file "~/.emacs.d/emacs.visual-regexp")
 (load-file "~/.emacs.d/emacs.visual-regexp-steroids")
 
+(load-file "~/.emacs.d/emacs.ibuffer")
+
+(load-file "~/.emacs.d/emacs.zzz-to-char")
+
+(load-file "~/.emacs.d/emacs.easy-kill")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Local emacs script is the only thing that should be loaded here
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Things that can be considered for the emacs.local script
+;(load-file "~/.emacs.d/emacs.function-args")
+;(load-file "~/.emacs.d/emacs.xcscope")
 ;(load-file "~/.emacs.d/emacs.clearcase")
 ;(load-file "~/.emacs.d/emacs.sr-speedbar")
 ;(load-file "~/.emacs.d/emacs.neotree")
