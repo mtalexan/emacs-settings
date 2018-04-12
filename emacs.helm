@@ -3,6 +3,9 @@
 (use-package helm
   ; get it from package.el
   :ensure t
+  :after (
+          elscreen
+    ); after
   :commands (
     helm-mode
     helm-apropos
@@ -19,7 +22,6 @@
   :init
     (helm-mode 1)
   :config
-    (require 'elscreen)
     ;auto resize, and set resize limits
     (setq helm-autoresize-mode t)
     (setq helm-autoresize-max-height 20) ;20%

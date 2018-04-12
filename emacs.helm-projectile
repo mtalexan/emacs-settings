@@ -3,15 +3,17 @@
 (use-package helm-projectile
   ; get it from package.el
   :ensure t
+  :after (
+          helm
+          projectile
+   );after
   :init
     (setq projectile-completion-system 'helm)
     ; always use this
     (require 'helm-projectile)
   :config
-    (require 'helm)
-    (require 'projectile)
 
- :bind (
+  :bind (
     ; find files looking at all within the projectile project
     ("C-x f" . helm-projectile-find-file)
     ; find matching header/source in pair

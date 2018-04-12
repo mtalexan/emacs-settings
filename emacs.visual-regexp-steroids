@@ -1,0 +1,50 @@
+;; Shows real-time replacements based on regex, advanced regex support
+
+
+; Requires Python!
+(use-package visual-regexp-steroids
+  ; get it from package.el
+  :ensure t
+  :after (
+          visual-regexp
+    )
+  :commands (
+             vr/replace
+             vr/query-replace
+             vr/mc-mark ; requires multiple-cursors
+   )
+  :init
+    (if (executable-find "python")
+        (require 'visual-regexp-steroids)
+        (user-error "Required program \"python\" not found in your path"))
+  :config
+
+    ; always show help for keys available in the minibuffer during replace when non-nil
+    (setq vr/auto-show-help t)
+
+    ; Limit the number of visual feedback items shown, default=50, unlimited=nil
+    (setq vr/default-feedback-limit 100)
+
+    ; preview of replacement activated by default? If activated, original not shown alongside replacement
+    ; default=nil
+    (setq vr/default-replace-preview nil)
+
+    ; if set, works like plain search/replace instead of regex.  Default=nil
+    (setq vr/plain nil)
+
+    ; Set the engine type to use: emacs, pcre2el, python (default), custom
+    (setq vr/engine 'python)
+
+    ; how to call python for the regex parsing. Default="python"
+    ;(setq vr/command-python 'python)
+
+    ; Regex Modifiers, I=ignorecase M=multiline(^ and $ match on every line), S=dotall (dot matches newline), U=Unicode
+    (setq vr/default-regexp-modifiers '(:I nil :M t :S nil :U nil))
+
+  :bind (
+    ;remap from replace-regex to vr/replace
+    ("C-M-%" . vr/replace)
+    ; remap from query-replace-regex to vr/query-replace
+    ("M-%" . vr/query-replace)
+    ); bind
+  )

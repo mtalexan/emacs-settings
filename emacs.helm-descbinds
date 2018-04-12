@@ -3,10 +3,12 @@
 (use-package helm-descbinds
   ; get it from package.el
   :ensure t
+  :after (
+          helm
+   )
   :init
     ; always use this
     (require 'helm-descbinds)
   :config
-    (require 'helm)
     (helm-descbinds-mode)
   ) ; end of use-package

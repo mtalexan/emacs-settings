@@ -3,8 +3,18 @@
 (use-package clearcase
   ; get it from package.el
   :ensure t
+  :commands (
+             clearcase
+             clearcase-checkout-current-buffer
+             clearcase-checkin-current-buffer
+             clearcase-ediff-pred-current-buffer
+             clearcase-find-checkouts-in-current-view
+             clearcase-edcs-edit
+             clearcase-mkelem-current-buffer
+             clearcase-uncheckout-current-buffer
+             clearcase-command-mode-map
+   ); commands
   :init
-    (require 'clearcase)
     (define-prefix-command 'clearcase-command-mode-map)
     (define-key global-map [(control x) (C)] 'clearcase-command-mode-map)
   :config

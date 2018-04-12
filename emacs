@@ -421,7 +421,11 @@
 
 ; Set a variable we use to determine whether we're using Ivy-Counsel-Swiper or Helm before
 ; the emacs.local-overrides so it can be set there if we want something different locally
-(defvar use-helm-instead-of-ivy t "Variable selecting between helm and ivy in custom config")
+(defvar use-helm-instead-of-ivy nil "Variable selecting between helm and ivy in custom config")
+
+; Set a variable we use to determine whether we're using Ivy-Counsel-Swiper or Helm before
+; the emacs.local-overrides so it can be set there if we want something different locally
+(defvar use-avy-instead-of-ace-jump t "Variable selecting between Avy and ace-jump-mode in custom config")
 
 ; This file can optionally exist, and will override some things in the settings for existing packages
 (let ((file "~/.emacs.d/emacs.local-overrides"))
@@ -449,6 +453,11 @@
 (if use-helm-instead-of-ivy
     (load-file "~/.emacs.d/emacs.helm"))
 
+(if (not use-helm-instead-of-ivy)
+    (load-file "~/.emacs.d/emacs.ivy"))
+(if (not use-helm-instead-of-ivy)
+    (load-file "~/.emacs.d/emacs.counsel"))
+
 (load-file "~/.emacs.d/emacs.projectile")
 
 (if use-helm-instead-of-ivy
@@ -463,9 +472,16 @@
 
 (load-file "~/.emacs.d/emacs.ggtags")
 
-(load-file "~/.emacs.d/emacs.ace-jump-mode")
-(load-file "~/.emacs.d/emacs.avy") ; required for ace-window to work right, not used otherwise
+; pick either ace-jump-mode or avy
+(if (not use-avy-instead-of-ace-jump)
+    (load-file "~/.emacs.d/emacs.ace-jump-mode"))
+(if use-avy-instead-of-ace-jump
+    (load-file "~/.emacs.d/emacs.avy"))
+
 (load-file "~/.emacs.d/emacs.ace-window")
+
+(load-file "~/.emacs.d/emacs.visual-regexp")
+(load-file "~/.emacs.d/emacs.visual-regexp-steroids")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Local emacs script is the only thing that should be loaded here

@@ -3,6 +3,9 @@
 (use-package helm-swoop
   ; get it from package.el
   :ensure t
+  :after (
+          helm
+   ) ; after
   :commands (
     helm-swoop-back-to-last-point
     ) ; end :commands
@@ -10,8 +13,6 @@
     ; always use this
     (require 'helm-swoop)
   :config
-    (require 'helm)
-
     ; change how the window is split for helm-swoop
     (setq helm-swoop-split-direction 'split-window-horizontally)
  :bind (

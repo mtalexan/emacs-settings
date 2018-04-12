@@ -1,0 +1,84 @@
+;; An alternative to helm or ido
+
+;; NOTE: Counsel should really be used instead, it has ivy as a dependency, but
+;;       significantly extends what it can do.
+(use-package ivy
+  ; get it from package.el
+  :ensure t
+  :commands (
+     ivy-mode
+     ivy-resume
+   ) ; end :commands
+  :init
+    (ivy-mode 1)
+  :config
+
+    ; Includes recentf-mode and bookmarks to ivy-switch-buffer completion candidates
+    (setq ivy-use-virtual-buffers t)
+    (setq enable-recursive-minibuffers t)
+    
+    ; How to display the number of candidate matches.  Default is "%d ".
+    ; Following displays the item number of the current selection as well.
+    (setq ivy-count-format "(%d/%d) ")
+    
+    ; When reaching top or bottom of list, wrap to the other end.  Default is off/nil
+    ;(setq ivy-wrap t)
+    
+    ; Default number of lines in ivy prompt. Default is 10
+    ;(setq ivy-height 10)
+    
+    ; Sets the match function: ivy--regex, ivy--regex-plus, ivy--regex-ignore-order,
+    ;                          ivy--regex-fuzzy, or regezp-quote.
+    ; default is ivy--regex-plus
+    (setq ivy-re-builders-alist
+          '((t . ivy--regex-ignore-order)))
+  
+  :bind (
+     ("C-c C-r" . ivy-resume) ; alsy re-bound in counsel to the same thing
+
+     ; NOTE: This map is inherited by multiple counsel maps that are customizable by specific
+     ;       function being performed.  Only minimal changes should be included here.
+     :map ivy-minibuffer-map
+       ; defaults
+       ("C-n" . ivy-next-line)
+       ("C-p" . ivy-previous-line)
+       ("M-<" . ivy-beginning-of-buffer)
+       ("M->" . ivy-end-of-buffer)
+       ("C-v" . ivy-scroll-up-command)
+       ("M-v" . ivy-scroll-down-command)
+       ("C-m" . ivy-done)
+       ("RET" . ivy-done)
+       ("M-o" . ivy-dispatching-done)
+       ("C-j" . ivy-alt-done)
+       ("TAB" . ivy-partial-or-done)
+       ("C-M-j" . ivy-immediate-done) ; necessary for when creating new file from find-file
+       ;("C-'" . ivy-avy)
+       ("M-;" . ivy-avy) ; match the key used for avy-isearch
+       ("C-M-m" . ivy-call) ; do default on candidate, but don't exit ivy
+       ("C-M-o" . ivy-dispatching-call) ; prompt for action on candidate, but when done don't exit ivy
+       ("C-M-n" . ivy-next-line-and-call) ; ivy-call, but move to next line in ivy afterward
+       ("C-M-p" . ivy-previous-line-and-call) ; ivy-call, but move to previous line in ivy afterward
+       ("M-n" . ivy-next-history-element)
+       ("M-p" . ivy-previous-history-element)
+       ;("M-i" . ivy-insert-current)
+       ;("M-j" . ivy-yank-word)
+       ("S-SPC" . ivy-restrict-to-matches)
+       ("C-r" . ivy-reverse-i-search)
+       ("M-w" . ivy-kill-ring-save)
+       ;("C-o" . hydra-ivy/body) ; requires hydra
+       ("C-c C-o" . ivy-occur)
+       ;; in file mode, M-r switches between regex and non-regex mode
+       
+       ;Ergo
+       ("M-k" . ivy-next-line)
+       ("C-M-k" . ivy-next-line-and-call)
+       ("M-K" . ivy-scroll-up-command)
+       ("M-i" . ivy-previous-line)
+       ("C-M-i" . ivy-previous-line-and-call)
+       ("M-I" . ivy-scroll-down-command)
+   ) ;end of :bind
+  ) ; end of use-package
+
+
+
+
