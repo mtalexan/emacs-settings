@@ -95,6 +95,10 @@
        ("C-c C-o" . ivy-occur)
        ;; in file mode, M-r switches between regex and non-regex mode
 
+       ; Make the ivy area larger or smaller
+       ("C-+" . ivy-minibuffer-grow)
+       ("C--" . ivy-minibuffer-shrink)
+
        ;Ergo
        ("M-k" . ivy-next-line)
        ("C-M-k" . ivy-next-line-and-call)
