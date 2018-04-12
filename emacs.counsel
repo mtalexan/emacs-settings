@@ -102,7 +102,7 @@
     ; doesn't include defaults in the yank ring though
     ; Default nil.
     (setq counsel-yank-pop-preselect-last nil)
-    
+
   :bind (
      ("C-c C-r" . ivy-resume) ; rebind to what's specified in the ivy file
      ("C-x b" . counsel-ibuffer)

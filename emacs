@@ -105,6 +105,21 @@
 
 (put 'upcase-region 'disabled nil)
 
+; Set default font based on system type
+(cond
+ ((string-equal system-type "windows-nt") ; Microsoft Windows
+  (when (member "Consolas" (font-family-list))
+    (add-to-list 'initial-frame-alist '(font . "Consolas-10"))
+    (add-to-list 'default-frame-alist '(font . "Consolas-10"))))
+ ((string-equal system-type "darwin") ; macOS
+  (when (member "Menlo" (font-family-list))
+    (add-to-list 'initial-frame-alist '(font . "Menlo"))
+    (add-to-list 'default-frame-alist '(font . "Menlo"))))
+ ((string-equal system-type "gnu/linux") ; linux
+  (when (member "DejaVu Sans Mono" (font-family-list))
+    (add-to-list 'initial-frame-alist '(font . "DejaVu Sans Mono-10"))
+    (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))))
+
 ;;Load a file identification settings file that can be changed modularly
 (let ((file "~/.emacs.d/emacs.fileident"))
   (if (file-executable-p file) (load-file file)))
@@ -453,10 +468,18 @@
 (if use-helm-instead-of-ivy
     (load-file "~/.emacs.d/emacs.helm"))
 
+; pick either ace-jump-mode or avy
+(if (not use-avy-instead-of-ace-jump)
+    (load-file "~/.emacs.d/emacs.ace-jump-mode"))
+(if use-avy-instead-of-ace-jump
+    (load-file "~/.emacs.d/emacs.avy"))
+
 (if (not use-helm-instead-of-ivy)
     (load-file "~/.emacs.d/emacs.ivy"))
 (if (not use-helm-instead-of-ivy)
     (load-file "~/.emacs.d/emacs.counsel"))
+(if (not use-helm-instead-of-ivy)
+    (load-file "~/.emacs.d/emacs.swiper"))
 
 (load-file "~/.emacs.d/emacs.projectile")
 
@@ -471,12 +494,6 @@
 (load-file "~/.emacs.d/emacs.function-args")
 
 (load-file "~/.emacs.d/emacs.ggtags")
-
-; pick either ace-jump-mode or avy
-(if (not use-avy-instead-of-ace-jump)
-    (load-file "~/.emacs.d/emacs.ace-jump-mode"))
-(if use-avy-instead-of-ace-jump
-    (load-file "~/.emacs.d/emacs.avy"))
 
 (load-file "~/.emacs.d/emacs.ace-window")
 

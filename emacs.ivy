@@ -32,7 +32,22 @@
     ; default is ivy--regex-plus
     (setq ivy-re-builders-alist
           '((t . ivy--regex-ignore-order)))
-  
+
+    ; Copy of ivy-yank-word with forward-word replaced with forward-symbol instead
+    (defun ivy-yank-symbol ()
+      "Pull next word from buffer into search string."
+      (interactive)
+      (let (amend)
+        (with-ivy-window
+          (let ((pt (point))
+                (le (line-end-position)))
+            (forward-symbol 1)
+            (if (> (point) le)
+                (goto-char pt)
+              (setq amend (buffer-substring-no-properties pt (point))))))
+        (when amend
+          (insert (replace-regexp-in-string "  +" " " amend)))))
+    
   :bind (
      ("C-c C-r" . ivy-resume) ; alsy re-bound in counsel to the same thing
 
