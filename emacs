@@ -477,6 +477,8 @@
 (if (not use-helm-instead-of-ivy)
     (load-file "~/.emacs.d/emacs.ivy"))
 (if (not use-helm-instead-of-ivy)
+    (load-file "~/.emacs.d/emacs.ivy-rich"))
+(if (not use-helm-instead-of-ivy)
     (load-file "~/.emacs.d/emacs.counsel"))
 (if (not use-helm-instead-of-ivy)
     (load-file "~/.emacs.d/emacs.swiper"))

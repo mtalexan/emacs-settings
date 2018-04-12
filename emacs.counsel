@@ -105,8 +105,8 @@
 
   :bind (
      ("C-c C-r" . ivy-resume) ; rebind to what's specified in the ivy file
-     ("C-x b" . counsel-ibuffer)
-     ("C-x C-b" . counsel-ibuffer)
+     ("C-x b" . ivy-switch-buffer) ; counsel-ibuffer sucks, use ivy-switch-buffer with ivy-rich instead
+     ("C-x C-b" . ivy-switch-buffer) ; counsel-ibuffer sucks, use ivy-switch-buffer with ivy-rich instead
      ("C-x C-f" . counsel-find-file)
      ; replace C-s and C-r with this counsel-grep-or-swiper
      ("C-s" . counsel-grep-or-swiper) ; can use avy-isearch from this too
