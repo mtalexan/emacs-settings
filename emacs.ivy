@@ -33,21 +33,25 @@
     (setq ivy-re-builders-alist
           '((t . ivy--regex-ignore-order)))
 
-    ; Copy of ivy-yank-word with forward-word replaced with forward-symbol instead
+    ; Copy ivy-yank-word, and replace the contents of the with-ivy-window call with the
+    ; equivalent logic from isearch-forward-symbol-at-point
     (defun ivy-yank-symbol ()
       "Pull next word from buffer into search string."
       (interactive)
       (let (amend)
         (with-ivy-window
-          (let ((pt (point))
-                (le (line-end-position)))
-            (forward-symbol 1)
-            (if (> (point) le)
-                (goto-char pt)
-              (setq amend (buffer-substring-no-properties pt (point))))))
-        (when amend
-          (insert (replace-regexp-in-string "  +" " " amend)))))
-    
+          ; start of from isearch-forward-symbol-at-point
+          (let ((bounds (find-tag-default-bounds)))
+            (cond
+             (bounds
+              (when (< (car bounds) (point))
+                (goto-char (car bounds)))
+              ;setq amend instead of direct usage of buffer-substring-no-properties
+              (setq amend (buffer-substring-no-properties (car bounds) (cdr bounds)))))))
+           ; end of from isearch-forward-symbol-at-point
+             (when amend
+               (insert (replace-regexp-in-string "  +" " " amend)))))
+
   :bind (
      ("C-c C-r" . ivy-resume) ; alsy re-bound in counsel to the same thing
 
@@ -63,10 +67,12 @@
        ("M-v" . ivy-scroll-down-command)
        ("C-m" . ivy-done)
        ("RET" . ivy-done)
-       ("M-o" . ivy-dispatching-done)
+       ;("M-o" . ivy-dispatching-done)
+       ("C-o" . ivy-dispatching-done)
        ("C-j" . ivy-alt-done)
        ("TAB" . ivy-partial-or-done)
-       ("C-M-j" . ivy-immediate-done) ; necessary for when creating new file from find-file
+       ;("C-M-j" . ivy-immediate-done) ; necessary for when creating new file from find-file
+       ("C-l" . ivy-immediate-done) ; for some reason C-J overwrites C-j keybinding too
        ;("C-'" . ivy-avy)
        ("M-;" . ivy-avy) ; match the key used for avy-isearch
        ("C-M-m" . ivy-call) ; do default on candidate, but don't exit ivy
@@ -76,14 +82,15 @@
        ("M-n" . ivy-next-history-element)
        ("M-p" . ivy-previous-history-element)
        ;("M-i" . ivy-insert-current)
-       ;("M-j" . ivy-yank-word)
+       ;("M-j" . ivy-yank-word) ; from point
+       ("C-w" . ivy-yank-symbol) ; from point
        ("S-SPC" . ivy-restrict-to-matches)
-       ("C-r" . ivy-reverse-i-search)
+       ("C-r" . ivy-reverse-i-search) ; searches thru ivy history for specific command set
        ("M-w" . ivy-kill-ring-save)
        ;("C-o" . hydra-ivy/body) ; requires hydra
        ("C-c C-o" . ivy-occur)
        ;; in file mode, M-r switches between regex and non-regex mode
-       
+
        ;Ergo
        ("M-k" . ivy-next-line)
        ("C-M-k" . ivy-next-line-and-call)
@@ -91,6 +98,12 @@
        ("M-i" . ivy-previous-line)
        ("C-M-i" . ivy-previous-line-and-call)
        ("M-I" . ivy-scroll-down-command)
+       ("M-j" . left-char)
+       ("C-M-j" . backward-word)
+       ("M-l" . right-char)
+       ("C-M-l" . forward-word)
+       ("M-o" . move-end-of-line)
+       ("M-u" . move-beginning-of-line)
    ) ;end of :bind
   ) ; end of use-package
 
