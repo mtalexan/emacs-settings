@@ -50,7 +50,8 @@
     ; Set the keybindings
     (define-key global-map (kbd "C-:") 'avy-goto-char)
   :config
-    ; Use the letters a-z as the decision keys rather than default of home-row letters only
+    ; Use the letters listed as decision keys rather than just the homerow keys
+    ; (number-sequenc ?a ?z) can also be used instead of a list
     ; WARNING: the following keys are normally reserved for avy actions if not used in the avy-keys list
     ;          x=avy-action-kill-move
     ;          X=avy-action-kill-stay
@@ -60,7 +61,9 @@
     ;          y=avy-action-yank
     ;          i=avy-action-ispell
     ;          z=avy-action-zap-to-char
-    ;(setq avy-keys (number-sequence ?a ?z))
+    ; WARNING: avy limits to 2 cycles of jump keys, so this list needs to have enough to
+    ;          index everything within that number of loops
+    (setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?w ?e ?r ?u ?o ?p ?c ?v ?b))
 
     ; Overlay style for keys: pre, at, at-full, or post
     (setq avy-style 'at)
@@ -91,6 +94,8 @@
     ; Starts single character select against beginning of words
     ("M-:" . avy-goto-char-in-line)
     ("M-;" . avy-goto-word-1)
+    ("C-M-;" . avy-goto-char)
+    ("C-M-:" . avy-goto-line)
     ("C-:" . avy-resume)
 
     ; Pops between visible frames too
