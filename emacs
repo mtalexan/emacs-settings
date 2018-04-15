@@ -506,6 +506,9 @@
 
 (load-file "~/.emacs.d/emacs.easy-kill")
 
+; hidden until F8 is pressed
+(load-file "~/.emacs.d/emacs.neotree")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Local emacs script is the only thing that should be loaded here
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -515,7 +518,6 @@
 ;(load-file "~/.emacs.d/emacs.xcscope")
 ;(load-file "~/.emacs.d/emacs.clearcase")
 ;(load-file "~/.emacs.d/emacs.sr-speedbar")
-;(load-file "~/.emacs.d/emacs.neotree")
 ;(load-file "~/.emacs.d/emacs.egg")
 
 ;; This should always be last.  It configures for the specific system and isn't tracked, so it should be
