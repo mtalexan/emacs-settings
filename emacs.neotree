@@ -13,9 +13,8 @@
     neotree-hidden-file-toggle
    )
   :init
-    ; Start, but then hide the neotree so it actually works
-    (neotree)
-    (neotree-hide)
+    ; Don't auto-start it since it can be slow
+    (define-key global-map (kbd "<f8>") 'neotree-toggle)
   :config
     ; If theme not set, set it to "nerd" for graphics displays and "arrow" for terminal displays
     ; Options are: classic (default), ascii, arrow, icons, or nerd.  Icon requires special
@@ -24,6 +23,9 @@
 
     ; Neotree updates the root dir to the new projectile project immediately
     (setq projectile-switch-project-action 'neotree-projectile-action)
+
+    ; Immediately try to set the projectile root when we load
+    (neotree-projectile-action)
 
     ; Automatically follow the current file in the neotree buffer
     (setq neo-autorefresh t)
@@ -70,11 +72,10 @@
     (setq neo-confirm-kill-buffers-for-files-in-directory 'yes-or-no-p)
 
     ;Change root without prompting?
-    (setq neo-force-change-root nil)
+    ; If this is set to prompt, it goes crazy with ivy since the buffers it creates don't
+    ; correspond to a file neotree can find and it will constantly keep prompting
+    (setq neo-force-change-root t)
 
-  :bind (
-    ("<f8>" . neotree-toggle)
-   )
   )
 
 
