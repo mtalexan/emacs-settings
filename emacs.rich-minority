@@ -24,5 +24,6 @@
                          " Projectile*"
                          " counsel"
                          " ivy"
-                         " swiper"))
+                         " swiper"
+                         " Compile"))
   ) ; end of use-package

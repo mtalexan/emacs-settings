@@ -17,7 +17,7 @@
     ; find files looking at all within the projectile project
     ("C-x f" . helm-projectile-find-file)
     ; find matching header/source in pair
-    ("C-c h" . helm-projectile-find-other-file)
+    ([remap projectile-find-other-file] . helm-projectile-find-other-file)
     ; find file under point, or default to find-file
     ("C-c f" . helm-projectile-find-file-dwim)
 

@@ -24,8 +24,9 @@
     ; Neotree updates the root dir to the new projectile project immediately
     (setq projectile-switch-project-action 'neotree-projectile-action)
 
-    ; Immediately try to set the projectile root when we load
-    (neotree-projectile-action)
+    ; Immediately try to set the projectile root when we load if we're in a projectile project
+    (if (projectile-project-p)
+        (neotree-projectile-action))
 
     ; Automatically follow the current file in the neotree buffer
     (setq neo-autorefresh t)
