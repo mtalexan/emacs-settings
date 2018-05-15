@@ -8,18 +8,33 @@
 
 (require 'package)
 
-(when (>= emacs-major-version 24)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
+;  There is a small bug in Emacs 24’s package.el such that the dependency order comes out backwards. The problem is patched by some advice.
+(when (= emacs-major-version 24)
+ (defadvice package-compute-transaction
+  (before package-compute-transaction-reverse (package-list requirements) activate compile)
+    "reverse the requirements"
+    (setq requirements (reverse requirements))
+    (print requirements)))
+
+;Emacs 25 and later can do asynchronous package operations
+(when (>= emacs-major-version 25)
+  (setq package-menu-async t)) ; do activities asynchronously
+
+; Always add melpa-stable
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+;older than emacs-24
 (when (< emacs-major-version 24)
-    (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/")))
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
 
 ;; Ensure we have package info, updating it if we don't have any (happens every time)
 ;(unless package-archive-contents
 ;  (package-refresh-contents))
 
-; As of version 27.x of emacs, this is automatically called already
+; As of version emacs-27, this is no longer needed
 (if (< emacs-major-version 27)
-    (package-initialize))
+  (package-initialize))
 
 ;; All packages that are needed from a package repo should use the ":ensure t" tag in their use-package
 ;; line, or ":ensure repoPackageName" if the name in the repo doesn't match the name that's downloaded.

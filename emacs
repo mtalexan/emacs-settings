@@ -9,9 +9,17 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
-; As of version 27.x of emacs, this is automatically called already
-(if (< emacs-major-version 27)
-    (package-initialize))
+; We need to initialize package before we load our regular config, and we need the use-package (which
+; is cloned as a submodule) in order to use that. 
+
+; Do this first, since the rest of the package loading should be making use of it
+(load-file "~/.emacs.d/emacs.use-package")
+
+; This is almost deprecated, so conditionaly include it to make it easier to remove later
+(let ((file "~/.emacs.d/emacs.cl-lib"))
+  (if (file-executable-p file) (load-file file)))
+
+(load-file "~/.emacs.d/emacs.package")
 
 ;;Load a coding style settings file that can be changed modularly
 ;;  This should be the only file like this before the custom-set-variables.
@@ -428,9 +436,6 @@
 ;; Modules/Packages should be added here
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Do this first, since the rest of the package loading should be making use of it
-(load-file "~/.emacs.d/emacs.use-package")
-
 
 ; Set a variable we use to determine whether we're using Ivy-Counsel-Swiper or Helm before
 ; the emacs.local-overrides so it can be set there if we want something different locally
@@ -443,13 +448,6 @@
 ; This file can optionally exist, and will override some things in the settings for existing packages
 (let ((file "~/.emacs.d/emacs.local-overrides"))
   (if (file-executable-p file) (load-file file)))
-
-
-; This is almost deprecated, so conditionaly include it to make it easier to remove later
-(let ((file "~/.emacs.d/emacs.cl-lib"))
-  (if (file-executable-p file) (load-file file)))
-
-(load-file "~/.emacs.d/emacs.package")
 
 (load-file "~/.emacs.d/emacs.linum")
 (load-file "~/.emacs.d/emacs.smoothscrolling")
