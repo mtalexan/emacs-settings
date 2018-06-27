@@ -1,6 +1,11 @@
 ;; Guesses at whether indenting is tab or space-based, the size of tabs, and/or the number of spaces per indent level
 
-(use-package smart-tabs-mode
+; define the functions that can be called
+(autoload 'guess-style-set-variable "guess-style" nil t)
+(autoload 'guess-style-guess-variable "guess-style")
+(autoload 'guess-style-guess-all "guess-style" nil t)
+
+(use-package guess-style
   ; there is no package that can be downloaded for this, we have to manually load it
   :after (
       lua-mode
@@ -12,12 +17,9 @@
       guess-style-guess-all
   )
   :init
-      (autoload 'guess-style-set-variable "guess-style" nil t)
-      (autoload 'guess-style-guess-variable "guess-style")
-      (autoload 'guess-style-guess-all "guess-style" nil t)
-  :config
       ; we have to manually load this
       (load-file "~/.emacs.d/guess-style.el")
+
       ; add hooks for these formats
       (add-hook 'c-mode-common-hook 'guess-style-guess-all)
       (add-hook 'python-mode-hook 'guess-style-guess-all)

@@ -69,13 +69,17 @@
  '(ediff-use-long-help-message t)
  '(ediff-version-control-package 'vc)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
+ '(elscreen-display-tab nil)
+ '(elscreen-tab-display-control nil)
+ '(elscreen-tab-display-kill-screen nil)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(ivy-use-selectable-prompt t)
  '(kill-do-not-save-duplicates t)
  '(kill-read-only-ok t)
  '(kill-whole-line nil)
  '(package-selected-packages
-   '(smart-tabs-mode smart-tab neotree easy-kill zzz-to-char visual-regexp-steroids visual-regexp ace-window counsel ivy-rich ivy avy json-mode lua-mode projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company))
+   '(neotree easy-kill zzz-to-char visual-regexp-steroids visual-regexp ace-window counsel ivy-rich ivy avy json-mode lua-mode projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company))
  '(paradox-github-token t)
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode 'right)
@@ -86,6 +90,8 @@
  '(tab-width 4)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style 'forward nil (uniquify))
+ '(whitespace-style
+   '(face trailing tabs spaces lines newline empty indentation space-before-tab space-mark tab-mark newline-mark))
  '(winner-mode t)
  '(yank-pop-change-selection t))
 (custom-set-faces
