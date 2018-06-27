@@ -64,18 +64,18 @@
  '(delete-active-region 'kill)
  '(ediff-make-buffers-readonly-at-startup nil)
  '(ediff-prefer-iconified-control-frame t)
- '(ediff-split-window-function 'split-window-horizontally t)
+ '(ediff-split-window-function 'split-window-horizontally)
  '(ediff-temp-file-prefix "tmp_diff_")
  '(ediff-use-long-help-message t)
  '(ediff-version-control-package 'vc)
- '(ediff-window-setup-function 'ediff-setup-windows-plain t)
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(kill-do-not-save-duplicates t)
  '(kill-read-only-ok t)
  '(kill-whole-line nil)
  '(package-selected-packages
-   '(neotree easy-kill zzz-to-char visual-regexp-steroids visual-regexp ace-window counsel ivy-rich ivy avy json-mode lua-mode projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company))
+   '(smart-tabs-mode smart-tab neotree easy-kill zzz-to-char visual-regexp-steroids visual-regexp ace-window counsel ivy-rich ivy avy json-mode lua-mode projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company))
  '(paradox-github-token t)
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode 'right)
@@ -430,7 +430,7 @@
 (add-to-list 'auto-mode-alist '(".?Config.*" . makefile-gmake-mode))
 
 ;; Changes the tabify to only operate on leading whitespace
-(setq tabify-regexp "^\\t* [ \\t]+")
+(setq tabify-regexp "^\t* [ \t]+")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modules/Packages should be added here
@@ -496,6 +496,9 @@
 (load-file "~/.emacs.d/emacs.visual-regexp-steroids")
 
 (load-file "~/.emacs.d/emacs.ibuffer")
+
+(load-file "~/.emacs.d/emacs.smart-tab")
+(load-file "~/.emacs.d/emacs.guess-style")
 
 (load-file "~/.emacs.d/emacs.zzz-to-char")
 
