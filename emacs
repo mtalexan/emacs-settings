@@ -334,16 +334,6 @@
 (frame-bg (selected-frame))
 (add-hook 'after-make-frame-functions 'frame-bg)
 
-;; Python Mode Fixes
-; For some inexplicable reason, the python block indent doesn't work like the default block indent
-; of everything else.  We have to manually bind the Tab key to do a python indent and S-Tab to do an unindent
-; using the default python indent and unindent functions so they operate on a whole block.  Otherwise
-; the electric-indent mode that python-mode auto-enables and only affects a single line at a time is the only
-; mechanism performing indents
-(with-eval-after-load 'python 
-  (define-key python-mode-map (kbd "<tab>") 'python-indent-shift-right)
-  (define-key python-mode-map (kbd "S-<tab>") 'python-indent-shift-left) )
-
 ;; WINNER MODE
 ;; This is already included in default emacs as of 20.  It allows window configuration changes
 ;; to have an undo/redo history.  It's useful if pulling up cscope results when window already
