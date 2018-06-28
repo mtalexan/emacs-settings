@@ -16,6 +16,9 @@
     (add-hook 'perl-mode-hook 'company-mode)
     (add-hook 'python-mode-hook 'company-mode)
     (add-hook 'lua-mode-hook 'company-mode)
+    (add-hook 'sh-mode-hook 'company-mode)
+    (add-hook 'makefile-mode-hook 'company-mode)
+    (add-hook 'emacs-list-mode-hook 'company-mode)
     (setq company-global-modes t)
 
   :config
