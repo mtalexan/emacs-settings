@@ -12,8 +12,10 @@
   )
   :init
     (add-hook 'lisp-mode-hook 'company-mode)
-    (add-hook 'c-mode-hook 'company-mode)
-    (add-hook 'c++-mode-hook 'company-mode)
+    (add-hook 'c-mode-common-hook 'company-mode)
+    (add-hook 'perl-mode-hook 'company-mode)
+    (add-hook 'python-mode-hook 'company-mode)
+    (add-hook 'lua-mode-hook 'company-mode)
     (setq company-global-modes t)
 
   :config

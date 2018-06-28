@@ -79,7 +79,7 @@
  '(kill-read-only-ok t)
  '(kill-whole-line nil)
  '(package-selected-packages
-   '(neotree easy-kill zzz-to-char visual-regexp-steroids visual-regexp ace-window counsel ivy-rich ivy avy json-mode lua-mode projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company))
+   '(smart-tabs-mode aggressive-indent neotree easy-kill zzz-to-char visual-regexp-steroids visual-regexp ace-window counsel ivy-rich ivy avy json-mode lua-mode projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company))
  '(paradox-github-token t)
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode 'right)
@@ -333,6 +333,16 @@
     ))
 (frame-bg (selected-frame))
 (add-hook 'after-make-frame-functions 'frame-bg)
+
+;; Python Mode Fixes
+; For some inexplicable reason, the python block indent doesn't work like the default block indent
+; of everything else.  We have to manually bind the Tab key to do a python indent and S-Tab to do an unindent
+; using the default python indent and unindent functions so they operate on a whole block.  Otherwise
+; the electric-indent mode that python-mode auto-enables and only affects a single line at a time is the only
+; mechanism performing indents
+(with-eval-after-load 'python 
+  (define-key python-mode-map (kbd "<tab>") 'python-indent-shift-right)
+  (define-key python-mode-map (kbd "S-<tab>") 'python-indent-shift-left) )
 
 ;; WINNER MODE
 ;; This is already included in default emacs as of 20.  It allows window configuration changes
