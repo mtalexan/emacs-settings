@@ -1,5 +1,6 @@
 ;; Package.el
 ;; Used for package management against different repos.
+;; This tool is used by use-package and therefore cannot rely on it
 
 ; package is included in Emacs 24.x and later, so we just need to add a repo source
 ; Prior to that, we need to specify the file as a manual load, and add a different repo source
@@ -33,9 +34,14 @@
 ;(unless package-archive-contents
 ;  (package-refresh-contents))
 
-; As of version emacs-27, this is no longer needed
+; As of version emacs-27.0, this is no longer needed,
+; but it is needed on the very first load of emacs after it's installed
 (if (< emacs-major-version 27)
-  (package-initialize))
+    (package-initialize))
+
+; TODO: find a way to detect if package has ever been initialized on the
+; system before, and always trigger package-initialize if it hasn't been
+
 
 ;; All packages that are needed from a package repo should use the ":ensure t" tag in their use-package
 ;; line, or ":ensure repoPackageName" if the name in the repo doesn't match the name that's downloaded.

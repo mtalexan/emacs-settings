@@ -12,14 +12,14 @@
 ; We need to initialize package before we load our regular config, and we need the use-package (which
 ; is cloned as a submodule) in order to use that. 
 
-; Do this first, since the rest of the package loading should be making use of it
-(load-file "~/.emacs.d/emacs.use-package")
-
 ; This is almost deprecated, so conditionaly include it to make it easier to remove later
 (let ((file "~/.emacs.d/emacs.cl-lib"))
   (if (file-executable-p file) (load-file file)))
 
 (load-file "~/.emacs.d/emacs.package")
+
+; Do this first, since the rest of the package loading should be making use of it
+(load-file "~/.emacs.d/emacs.use-package")
 
 ;;Load a coding style settings file that can be changed modularly
 ;;  This should be the only file like this before the custom-set-variables.
@@ -64,11 +64,11 @@
  '(delete-active-region 'kill)
  '(ediff-make-buffers-readonly-at-startup nil)
  '(ediff-prefer-iconified-control-frame t)
- '(ediff-split-window-function 'split-window-horizontally)
+ '(ediff-split-window-function 'split-window-horizontally t)
  '(ediff-temp-file-prefix "tmp_diff_")
  '(ediff-use-long-help-message t)
  '(ediff-version-control-package 'vc)
- '(ediff-window-setup-function 'ediff-setup-windows-plain)
+ '(ediff-window-setup-function 'ediff-setup-windows-plain t)
  '(elscreen-display-tab nil)
  '(elscreen-tab-display-control nil)
  '(elscreen-tab-display-kill-screen nil)
