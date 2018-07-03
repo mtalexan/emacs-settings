@@ -34,10 +34,14 @@
 ;(unless package-archive-contents
 ;  (package-refresh-contents))
 
-; As of version emacs-27.0, this is no longer needed,
-; but it is needed on the very first load of emacs after it's installed
-(if (< emacs-major-version 27)
+; Some versions of Emacs will automatically initialize this, some won't.  Check to see if it's already
+; initialized and manually initialize it here if it's not
+(if (not package--initialized)
     (package-initialize))
+
+; WARNING: When updating the emacs configuration of an existing install, you may have to remove all non-built-in
+; packages and then restart emacs to get it to properly download a matched set.  Otherwise weird variable missing
+; errors can occur
 
 ; TODO: find a way to detect if package has ever been initialized on the
 ; system before, and always trigger package-initialize if it hasn't been

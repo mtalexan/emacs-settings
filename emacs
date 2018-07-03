@@ -12,11 +12,11 @@
 ; We need to initialize package before we load our regular config, and we need the use-package (which
 ; is cloned as a submodule) in order to use that. 
 
+(load-file "~/.emacs.d/emacs.package")
+
 ; This is almost deprecated, so conditionaly include it to make it easier to remove later
 (let ((file "~/.emacs.d/emacs.cl-lib"))
   (if (file-executable-p file) (load-file file)))
-
-(load-file "~/.emacs.d/emacs.package")
 
 ; Do this first, since the rest of the package loading should be making use of it
 (load-file "~/.emacs.d/emacs.use-package")
@@ -79,7 +79,7 @@
  '(kill-read-only-ok t)
  '(kill-whole-line nil)
  '(package-selected-packages
-   '(smart-tabs-mode aggressive-indent neotree easy-kill zzz-to-char visual-regexp-steroids visual-regexp ace-window counsel ivy-rich ivy avy json-mode lua-mode projectile helm color-theme-approximate egg function-args ggtags xcscope smart-mode-line smooth-scrolling multi-term helm-projectile elscreen company))
+   '(neotree easy-kill zzz-to-char smart-tabs-mode visual-regexp-steroids visual-regexp ace-window ggtags company projectile counsel ivy-rich ivy avy elscreen ibuffer semantic aggressive-indent json-mode lua-mode color-theme-approximate egg multi-term))
  '(paradox-github-token t)
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode 'right)
