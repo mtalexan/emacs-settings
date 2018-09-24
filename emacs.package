@@ -34,18 +34,12 @@
 ;(unless package-archive-contents
 ;  (package-refresh-contents))
 
-; Some versions of Emacs will automatically initialize this, some won't.  Check to see if it's already
-; initialized and manually initialize it here if it's not
-(if (not package--initialized)
-    (package-initialize))
-
-; WARNING: When updating the emacs configuration of an existing install, you may have to remove all non-built-in
-; packages and then restart emacs to get it to properly download a matched set.  Otherwise weird variable missing
-; errors can occur
-
-; TODO: find a way to detect if package has ever been initialized on the
-; system before, and always trigger package-initialize if it hasn't been
-
+; Check for the flag file in the configuration directory.  Create it after
+; initializing package the first time.
+(when (file-exists-p "~/.emacs.d/.package-init.done")
+  (package-initialize)
+  (shell-command "touch ~/.emacs.d/.package-init.done")
+ )
 
 ;; All packages that are needed from a package repo should use the ":ensure t" tag in their use-package
 ;; line, or ":ensure repoPackageName" if the name in the repo doesn't match the name that's downloaded.

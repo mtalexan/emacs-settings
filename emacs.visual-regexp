@@ -4,14 +4,13 @@
   ; get it from package.el
   :ensure t
   :commands (
-             vr/replace
-             vr/query-replace
-             vr/mc-mark ; requires multiple-cursors
-   )
+     vr/replace
+     vr/query-replace
+     vr/mc-mark ; requires multiple-cursors
+    )
   :init
     (require 'visual-regexp)
   :config
-
     ; always show help for keys available in the minibuffer during replace when non-nil
     (setq vr/auto-show-help t)
 
@@ -24,7 +23,7 @@
 
     ; if set, works like plain search/replace instead of regex.  Default=nil
     (setq vr/plain nil)
-    
+
   :bind (
     ;remap from replace-regex to vr/replace
     ("C-M-%" . vr/replace)

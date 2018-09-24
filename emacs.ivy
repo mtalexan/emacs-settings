@@ -16,17 +16,17 @@
     ; Includes recentf-mode and bookmarks to ivy-switch-buffer completion candidates
     (setq ivy-use-virtual-buffers t)
     (setq enable-recursive-minibuffers t)
-    
+
     ; How to display the number of candidate matches.  Default is "%d ".
     ; Following displays the item number of the current selection as well.
     (setq ivy-count-format "(%d/%d) ")
-    
+
     ; When reaching top or bottom of list, wrap to the other end.  Default is off/nil
     ;(setq ivy-wrap t)
-    
+
     ; Default number of lines in ivy prompt. Default is 10
     ;(setq ivy-height 10)
-    
+
     ; Sets the match function: ivy--regex, ivy--regex-plus, ivy--regex-ignore-order,
     ;                          ivy--regex-fuzzy, or regezp-quote.
     ; default is ivy--regex-plus
@@ -36,7 +36,7 @@
     ; What to do when hitting DEL in buffer with nothing left to delete.
     ; Default is to exit the ivy session.  Set to nil means do nothing
     (setq ivy-on-del-error-function nil)
-    
+
     ; Copy ivy-yank-word, and replace the contents of the with-ivy-window call with the
     ; equivalent logic from isearch-forward-symbol-at-point
     (defun ivy-yank-symbol ()

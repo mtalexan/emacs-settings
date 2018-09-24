@@ -8,7 +8,10 @@
   :ensure t
   :commands (
     ace-window
-   ) ; end :commands
+    ) ; end :commands
+  :after (
+    avy
+    ); after
   :init
     ; Set the keybinding
     (define-key global-map (kbd "M-=") 'ace-window)

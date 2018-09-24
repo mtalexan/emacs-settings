@@ -2,6 +2,9 @@
 ;; files.  Lists results of search in a buffer with selectable locations.
 
 ;; This requires the CSCOPE tool from the system!!!
+(when (not (executable-find "cscope"))
+  (error "Unable to find required tool cscope")
+  )
 
 (use-package xcscope
   ; get it from package.el
@@ -64,14 +67,14 @@
          (".*"
            ( t )
            t      ;; stop here if matches are found
-           ;( "/home/mtalexander/modular/" )
-           ;( "/home/mtalexander/rrsdk/ksi/" )
+           ;( "${HOME}/modular/" )
+           ;( "${HOME}/rrsdk/ksi/" )
            ;t      ;; stop here if matches are found
-           ;( "/home/mtalexander/emacs_tags/modular/" )
-           ;( "/home/mtalexander/emacs_tags/OR1BusDev/" )
-           ;( "/home/mtalexander/emacs_tags/rrsdk/" )
+           ;( "${HOME}/emacs_tags/modular/" )
+           ;( "${HOME}/emacs_tags/OR1BusDev/" )
+           ;( "${HOME}/emacs_tags/rrsdk/" )
            ;t      ;; stop here if matches are found
-           ;( "/home/mtalexander/emacs_tags/everything/" )
+           ;( "${HOME}/emacs_tags/everything/" )
           )
         )
       )

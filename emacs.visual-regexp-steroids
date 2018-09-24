@@ -6,13 +6,13 @@
   ; get it from package.el
   :ensure t
   :after (
-          visual-regexp
+      visual-regexp
     )
   :commands (
-             vr/replace
-             vr/query-replace
-             vr/mc-mark ; requires multiple-cursors
-   )
+      vr/replace
+      vr/query-replace
+      vr/mc-mark ; requires multiple-cursors
+    )
   :init
     (if (executable-find "python")
         (require 'visual-regexp-steroids))

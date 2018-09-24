@@ -16,7 +16,10 @@
       fa-active-jump
       fa-abort
       fa-show
-    ) ; end :commands
+      ) ; end :commands
+  :after (
+      ivy
+      ) ;end :after
   :init
     (add-hook 'function-args-mode-hook 'fa-mode-disable-check)
   :config

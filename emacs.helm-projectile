@@ -22,14 +22,14 @@
     ("C-c f" . helm-projectile-find-file-dwim)
 
     :map helm-projectile-find-file-map
-    ;Ergo keys
-    ("M-i" . helm-previous-line)
-    ("M-k" . helm-next-line)
-    ("M-j" . helm-previous-source)
-    ("M-l" . helm-next-source)
-    ("M-I" . helm-previous-page)
-    ("M-K" . helm-next-page)
-    ([tab] . nil)
+      ;Ergo keys
+      ("M-i" . helm-previous-line)
+      ("M-k" . helm-next-line)
+      ("M-j" . helm-previous-source)
+      ("M-l" . helm-next-source)
+      ("M-I" . helm-previous-page)
+      ("M-K" . helm-next-page)
+      ([tab] . nil)
    ) ;end of :bind
   ) ; end of use-package
 

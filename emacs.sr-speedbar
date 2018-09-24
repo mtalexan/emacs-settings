@@ -8,8 +8,8 @@
     sr-speedbar-open
   :init
     ; Auto-open in C and C++ modes
-    (add-hook 'c++-mode 'sr-sppedbar-open)
-    (add-hook 'c-mode 'sr-sppedbar-open)
+    (add-hook 'c++-mode 'sr-speedbar-open)
+    (add-hook 'c-mode 'sr-speedbar-open)
   :config
     ; Remap the select window command to use the sr-speedbar version
     (global-set-key (kbd "M-9") 'sr-speedbar-select-window)
@@ -23,7 +23,6 @@
     (setq sr-speedbar-skip-other-window-p nil)
     ;don't use image icons
     (setq speedbar-use-images nil)
-  
   )
 
 

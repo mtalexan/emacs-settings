@@ -94,117 +94,116 @@
 
     ;override a key in the isearch map
     :map isearch-mode-map
-    ;trigger multi-occur in the minibuffer
-    ("C-o" . helm-occur-from-isearch)
+      ;trigger multi-occur in the minibuffer
+      ("C-o" . helm-occur-from-isearch)
 
     ;add to elscreen map
     :map elscreen-map
-    ("C-b" . helm-elscreen)
+      ("C-b" . helm-elscreen)
 
     ;swap these around so C-e says "do everything" and C-z brings up the action list
     ;rebind tab to run persistent actions
     :map helm-map
-    ;Ergo keys
-    ("M-i" . helm-previous-line)
-    ("M-k" . helm-next-line)
-    ("M-j" . helm-previous-source)
-    ("M-l" . helm-next-source)
-    ("M-I" . helm-previous-page)
-    ("M-K" . helm-next-page)
-    ([tab] . nil)
-    ("C-z" . helm-select-action)
-    ("C-e" . helm-execute-persistent-action)
+      ;Ergo keys
+      ("M-i" . helm-previous-line)
+      ("M-k" . helm-next-line)
+      ("M-j" . helm-previous-source)
+      ("M-l" . helm-next-source)
+      ("M-I" . helm-previous-page)
+      ("M-K" . helm-next-page)
+      ([tab] . nil)
+      ("C-z" . helm-select-action)
+      ("C-e" . helm-execute-persistent-action)
 
     :map helm-buffer-map
-    ("C-k" . helm-delete-current-selection)
-    ("C-c C-k" . helm-delete-current-selection)
-    ;Ergo keys
-    ("M-i" . helm-previous-line)
-    ("M-k" . helm-next-line)
-    ("M-j" . helm-previous-source)
-    ("M-l" . helm-next-source)
-    ("M-I" . helm-previous-page)
-    ("M-K" . helm-next-page)
-    ([tab] . nil)
-    ("C-z" . helm-select-action)
-    ("C-e" . helm-execute-persistent-action)
+      ("C-k" . helm-delete-current-selection)
+      ("C-c C-k" . helm-delete-current-selection)
+      ;Ergo keys
+      ("M-i" . helm-previous-line)
+      ("M-k" . helm-next-line)
+      ("M-j" . helm-previous-source)
+      ("M-l" . helm-next-source)
+      ("M-I" . helm-previous-page)
+      ("M-K" . helm-next-page)
+      ([tab] . nil)
+      ("C-z" . helm-select-action)
+      ("C-e" . helm-execute-persistent-action)
 
 
     :map helm-etags-map
-    ;Ergo keys
-    ("M-i" . helm-previous-line)
-    ("M-k" . helm-next-line)
-    ("M-j" . helm-previous-source)
-    ("M-l" . helm-next-source)
-    ("M-I" . helm-previous-page)
-    ("M-K" . helm-next-page)
-    ([tab] . nil)
-    ("C-z" . helm-select-action)
-    ("C-e" . helm-execute-persistent-action)
+      ;Ergo keys
+      ("M-i" . helm-previous-line)
+      ("M-k" . helm-next-line)
+      ("M-j" . helm-previous-source)
+      ("M-l" . helm-next-source)
+      ("M-I" . helm-previous-page)
+      ("M-K" . helm-next-page)
+      ([tab] . nil)
+      ("C-z" . helm-select-action)
+      ("C-e" . helm-execute-persistent-action)
 
     :map helm-generic-files-map
-    ;Ergo keys
-    ("M-i" . helm-previous-line)
-    ("M-k" . helm-next-line)
-    ("M-j" . helm-previous-source)
-    ("M-l" . helm-next-source)
-    ("M-I" . helm-previous-page)
-    ("M-K" . helm-next-page)
-    ([tab] . nil)
-    ("C-z" . helm-select-action)
-    ("C-e" . helm-execute-persistent-action)
+      ;Ergo keys
+      ("M-i" . helm-previous-line)
+      ("M-k" . helm-next-line)
+      ("M-j" . helm-previous-source)
+      ("M-l" . helm-next-source)
+      ("M-I" . helm-previous-page)
+      ("M-K" . helm-next-page)
+      ([tab] . nil)
+      ("C-z" . helm-select-action)
+      ("C-e" . helm-execute-persistent-action)
 
     :map helm-buffers-ido-virtual-map
-    ;Ergo keys
-    ("M-i" . helm-previous-line)
-    ("M-k" . helm-next-line)
-    ("M-j" . helm-previous-source)
-    ("M-l" . helm-next-source)
-    ("M-I" . helm-previous-page)
-    ("M-K" . helm-next-page)
-    ([tab] . nil)
-    ("C-z" . helm-select-action)
-    ("C-e" . helm-execute-persistent-action)
+      ;Ergo keys
+      ("M-i" . helm-previous-line)
+      ("M-k" . helm-next-line)
+      ("M-j" . helm-previous-source)
+      ("M-l" . helm-next-source)
+      ("M-I" . helm-previous-page)
+      ("M-K" . helm-next-page)
+      ([tab] . nil)
+      ("C-z" . helm-select-action)
+      ("C-e" . helm-execute-persistent-action)
 
     :map helm-grep-map
-    ;Ergo keys
-    ("M-i" . helm-previous-line)
-    ("M-k" . helm-next-line)
-    ("M-j" . helm-previous-source)
-    ("M-l" . helm-next-source)
-    ("M-I" . helm-previous-page)
-    ("M-K" . helm-next-page)
-    ([tab] . nil)
-    ("C-z" . helm-select-action)
-    ("C-e" . helm-execute-persistent-action)
+      ;Ergo keys
+      ("M-i" . helm-previous-line)
+      ("M-k" . helm-next-line)
+      ("M-j" . helm-previous-source)
+      ("M-l" . helm-next-source)
+      ("M-I" . helm-previous-page)
+      ("M-K" . helm-next-page)
+      ([tab] . nil)
+      ("C-z" . helm-select-action)
+      ("C-e" . helm-execute-persistent-action)
 
     :map helm-find-files-map
-    ("C-/" . helm-ff-run-find-sh-command)
-    ("M-f" . helm-ff-run-grep)
-    ;Ergo keys
-    ("M-i" . helm-previous-line)
-    ("M-k" . helm-next-line)
-    ("M-j" . helm-previous-source)
-    ("M-l" . helm-next-source)
-    ("M-I" . helm-previous-page)
-    ("M-K" . helm-next-page)
-    ([tab] . nil)
-    ("C-z" . helm-select-action)
-    ("C-e" . helm-execute-persistent-action)
-
+      ("C-/" . helm-ff-run-find-sh-command)
+      ("M-f" . helm-ff-run-grep)
+      ;Ergo keys
+      ("M-i" . helm-previous-line)
+      ("M-k" . helm-next-line)
+      ("M-j" . helm-previous-source)
+      ("M-l" . helm-next-source)
+      ("M-I" . helm-previous-page)
+      ("M-K" . helm-next-page)
+      ([tab] . nil)
+      ("C-z" . helm-select-action)
+      ("C-e" . helm-execute-persistent-action)
 
     ;used during helm-regexp
     :map helm-moccur-map
-    ;Ergo keys
-    ("M-i" . helm-previous-line)
-    ("M-k" . helm-next-line)
-    ("M-j" . helm-previous-source)
-    ("M-l" . helm-next-source)
-    ("M-I" . helm-previous-page)
-    ("M-K" . helm-next-page)
-    ([tab] . nil)
-    ("C-z" . helm-select-action)
-    ("C-e" . helm-execute-persistent-action)
+      ;Ergo keys
+      ("M-i" . helm-previous-line)
+      ("M-k" . helm-next-line)
+      ("M-j" . helm-previous-source)
+      ("M-l" . helm-next-source)
+      ("M-I" . helm-previous-page)
+      ("M-K" . helm-next-page)
+      ([tab] . nil)
+      ("C-z" . helm-select-action)
+      ("C-e" . helm-execute-persistent-action)
     ) ;end of :bind
   ) ; end of use-package
 

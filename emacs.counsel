@@ -97,6 +97,11 @@
        )
       )
 
+    ; if rgrep is installed, use that instead of grep for the command underlying counsel-grep-or-swiper
+    (when (= 0 (shell-command "which rg"))
+      (setq counsel-grep-base-command
+            "rg --smart-case --max-columns 120 --no-heading --line-number --color never '%s' %s"))
+
     ; counsel-yank-pop preselects what yank-pop would use rather than the
     ; last thing yanked (C-u 1 instead of C-u 0) when nil.  counsel-yank-pop
     ; doesn't include defaults in the yank ring though

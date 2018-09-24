@@ -3,7 +3,8 @@
 (use-package smooth-scrolling
   ; get it from package.el
   :ensure t
-  )
+  :init
+    ; always enable this
+    (require 'smooth-scrolling)
+)
 
-; always require this
-(require 'smooth-scrolling)

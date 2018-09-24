@@ -40,13 +40,13 @@
 
   :bind (
     :map swiper-map
-         ([remap ivy-avy] . swiper-avy) ; swiper-unique variant of ivy-avy
-         ;("C-w" . ivy-yank-symbol) ; see ivy-minibuffer-map this is inherited from
-         ("M-q" . swiper-query-replace) ; default setting
+      ([remap ivy-avy] . swiper-avy) ; swiper-unique variant of ivy-avy
+      ;("C-w" . ivy-yank-symbol) ; see ivy-minibuffer-map this is inherited from
+      ("M-q" . swiper-query-replace) ; default setting
 
-     :map swiper-all-map
-         ([remap ivy-avy] . swiper-avy) ; swiper-unique variant of ivy-avy.
-         ;("C-w" . ivy-yank-symbol) ; see ivy-minibuffer-map  this is inherited from
-         ("M-q" . swiper-all-query-replace) ; default setting
+    :map swiper-all-map
+      ([remap ivy-avy] . swiper-avy) ; swiper-unique variant of ivy-avy.
+      ;("C-w" . ivy-yank-symbol) ; see ivy-minibuffer-map  this is inherited from
+      ("M-q" . swiper-all-query-replace) ; default setting
     ) ;end of :bind
   ) ; end of use-package

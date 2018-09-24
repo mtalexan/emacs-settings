@@ -4,18 +4,16 @@
   ; get it from package.el 
   :ensure t
   :after (
-          avy
+     avy
    )
   :commands (
-             zzz-to-char
-             zzz-up-to-char
+     zzz-to-char
+     zzz-up-to-char
    ) ; end :commands
   :config
-
     ; maximum number of characters to zap from point.  Default=80
-    (setq zzz-to-char-reach 100)
-
+    (setq zzz-to-char-reach 120)
   :bind (
-         ("M-z" . zzz-up-to-char)
-   ) ;end of :bind
+      ("M-z" . zzz-up-to-char)
+    ) ;end of :bind
   ) ; end of use-package

@@ -1,22 +1,17 @@
 ;; .emacs
 
-;; Don't edit this by hand, instead use the Options->Customize Emacs
-;; from the menubar and edit the options from the customization groups.
-;; Saving the changes there actually saves them here.
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
-; We need to initialize package before we load our regular config, and we need the use-package (which
-; is cloned as a submodule) in order to use that. 
-
-(load-file "~/.emacs.d/emacs.package")
-
 ; This is almost deprecated, so conditionaly include it to make it easier to remove later
 (let ((file "~/.emacs.d/emacs.cl-lib"))
   (if (file-executable-p file) (load-file file)))
+
+; We need to initialize package before we load our regular config, and we need the use-package (which
+; is cloned as a submodule) in order to use that. 
+(load-file "~/.emacs.d/emacs.package")
 
 ; Do this first, since the rest of the package loading should be making use of it
 (load-file "~/.emacs.d/emacs.use-package")
@@ -28,6 +23,9 @@
 (let ((file "~/.emacs.d/emacs.codingstyle"))
   (if (file-executable-p file) (load-file file)))
 
+;; Don't edit this by hand, instead use the Options->Customize Emacs
+;; from the menubar and edit the options from the customization groups.
+;; Saving the changes there actually saves them here.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -136,7 +134,6 @@
 (let ((file "~/.emacs.d/emacs.fileident"))
   (if (file-executable-p file) (load-file file)))
 
-
 ;; Garbage collection default is very low.  Large file/index operations are therefore terrible.
 ;; fix it by increasing the default garbage collection limit
 (setq gc-cons-threshold 20000000)
@@ -232,7 +229,7 @@
 
 ;;some useful mappings for deleting. Ignore M- on backspace
 (global-set-key (kbd "M-<backspace>") 'backward-delete-char-untabify)
-;;Do the best we can do delete the last word on C-backspace.  It adds it to the kill ring though,
+;;Do the best we can to delete the last word on C-backspace.  It adds it to the kill ring though,
 ;;there's no other option
 (global-set-key (kbd "C-<backspace>") 'backward-kill-word)
 ;;C-S-k does the same as the delete key
@@ -269,7 +266,6 @@
   (define-key minibuffer-local-map (kbd "<up>") 'previous-line-or-history-element)
   (define-key minibuffer-local-map (kbd "<down>") 'next-line-or-history-element)
   )
-
 ;emacs prior to 25.0?
 (when (< emacs-major-version 25)
   (define-key minibuffer-local-map [(meta i)] 'previous-history-element)
@@ -295,7 +291,8 @@
 
 ;; ISearch modifications
 ;redefine the keybinding that normally copies the rest of the word forward from the point to copy the whole
-;of the current symbol and search forward with that
+;of the current symbol and search forward with that.
+; Note that this may get further overridden by counsel or helm modes
 (define-key isearch-mode-map (kbd "C-w") 'isearch-forward-symbol-at-point)
 
 ;; Run shell selected region in shell
@@ -340,7 +337,7 @@
 ;; then returning to the splits that were already there
 
 (setq winner-mode t)
-; defaults are C-c left and C-c right, just ad C-j and C-l as right and left
+; defaults are C-c left and C-c right, just ad C-j and C-l as left and right
 (global-set-key (kbd "C-c C-j") 'winner-undo)
 (global-set-key (kbd "C-c C-l") 'winner-redo)
 
@@ -362,7 +359,7 @@
  (current-buffer)))
 
 ; assign a key to the function
-;(global-set-key [Scroll_Lock] 'toggle-window-dedicated)
+(global-set-key [Scroll_Lock] 'toggle-window-dedicated)
 
 ;; Window Split Direction Preference
 ;; To set how windows automatically get split when creating a new buffer, there are
@@ -381,7 +378,6 @@
 ;(setq split-width-threshold 0)
 
 (when (>= emacs-major-version 24)
-
   ; split-window-sensibly duplicated but with horizontal over vertical preference instead.
   (defun my-split-window-sensibly (&optional window)
     (let ((window (or window (selected-window))))
@@ -402,7 +398,6 @@
                  (when (window-splittable-p window t)
                    (with-selected-window window
                      (split-window-right))))))))
-
   ;set our function that prefers horizontal over vertical splitting as the one used for automatic splitting
   (setq split-window-preferred-function 'my-split-window-sensibly)
   )
@@ -425,15 +420,6 @@
 
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
-
-;; Modify some of the file type identification
-(add-to-list 'auto-mode-alist '("Makefile" . makefile-gmake-mode))
-(add-to-list 'auto-mode-alist '("GNUMakefile" . makefile-gmake-mode))
-(add-to-list 'auto-mode-alist '("\\.mk\\'" . makefile-gmake-mode))
-(add-to-list 'auto-mode-alist '("\\.defs\\'" . makefile-gmake-mode))
-(add-to-list 'auto-mode-alist '("\\.class\\'" . makefile-gmake-mode))
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '(".?Config.*" . makefile-gmake-mode))
 
 ;; Changes the tabify to only operate on leading whitespace
 (setq tabify-regexp "^\t* [ \t]+")
@@ -467,27 +453,25 @@
 
 (load-file "~/.emacs.d/emacs.elscreen")
 
-(if use-helm-instead-of-ivy
+(when use-helm-instead-of-ivy
     (load-file "~/.emacs.d/emacs.helm"))
 
 ; pick either ace-jump-mode or avy
-(if (not use-avy-instead-of-ace-jump)
-    (load-file "~/.emacs.d/emacs.ace-jump-mode"))
 (if use-avy-instead-of-ace-jump
-    (load-file "~/.emacs.d/emacs.avy"))
+   (load-file "~/.emacs.d/emacs.avy")
+   (load-file "~/.emacs.d/emacs.ace-jump-mode")
+  )
 
-(if (not use-helm-instead-of-ivy)
-    (load-file "~/.emacs.d/emacs.ivy"))
-(if (not use-helm-instead-of-ivy)
-    (load-file "~/.emacs.d/emacs.ivy-rich"))
-(if (not use-helm-instead-of-ivy)
-    (load-file "~/.emacs.d/emacs.counsel"))
-(if (not use-helm-instead-of-ivy)
-    (load-file "~/.emacs.d/emacs.swiper"))
+(when (not use-helm-instead-of-ivy)
+    (load-file "~/.emacs.d/emacs.ivy")
+    (load-file "~/.emacs.d/emacs.ivy-rich")
+    (load-file "~/.emacs.d/emacs.counsel")
+    (load-file "~/.emacs.d/emacs.swiper")
+  )
 
 (load-file "~/.emacs.d/emacs.projectile")
 
-(if use-helm-instead-of-ivy
+(when use-helm-instead-of-ivy
     (load-file "~/.emacs.d/emacs.helm-projectile"))
 
 (load-file "~/.emacs.d/emacs.company")

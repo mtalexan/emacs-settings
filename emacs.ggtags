@@ -20,9 +20,11 @@
 ;;
 ;; Install pygments:
 ;;   pip install pygments
-;;   cp 
 
-
+;; Required that global be installed or there's no point
+(if (not (executable-find "gtags"))
+    (error "Cannot find necessary installation of global")
+  )
 
 (use-package ggtags
   ; get it from package.el
@@ -40,9 +42,12 @@
           (ggtags-mode 1))))
   :config
 
-    ; This must be set to the location of gtags (global)
+    (require 'subr-x) ; required for string operations
+
+    ; parse the gtags location from the command-line
     (if (not ggtags-executable-directory)
-        (setq ggtags-executable-directory "~/global-6.5.6/bin/"))
+        (setq ggtags-executable-directory
+              (executable-find "gtags")))
     ; Allow very large database files
     (setq ggtags-oversize-limit 104857600)
     (setq ggtags-sort-by-nearness t)
