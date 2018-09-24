@@ -2,3 +2,6 @@
 	path = use-package
 	url = https://github.com/jwiegley/use-package.git
 	branch = master
+[submodule "wgrep"]
+	path = wgrep
+	url = https://github.com/mhayashi1120/Emacs-wgrep.git

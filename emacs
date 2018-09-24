@@ -494,6 +494,9 @@
 
 (load-file "~/.emacs.d/emacs.easy-kill")
 
+; auto-handles dependence on ripgrep installed on host
+(load-file "~/.emacs.d/emacs.rg")
+
 ; hidden until F8 is pressed
 (load-file "~/.emacs.d/emacs.neotree")
 
