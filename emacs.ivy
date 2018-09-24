@@ -73,7 +73,7 @@
        ("RET" . ivy-done)
        ;("M-o" . ivy-dispatching-done)
        ("C-o" . ivy-dispatching-done)
-       ("C-j" . ivy-alt-done)
+       ("C-j" . ivy-alt-done) ; includes directory completion via current selection
        ("TAB" . ivy-partial-or-done)
        ;("C-M-j" . ivy-immediate-done) ; necessary for when creating new file from find-file
        ("C-l" . ivy-immediate-done) ; for some reason C-J overwrites C-j keybinding too
