@@ -98,7 +98,7 @@
       )
 
     ; if rgrep is installed, use that instead of grep for the command underlying counsel-grep-or-swiper
-    (when (= 0 (shell-command "which rg"))
+    (when (executable-find "rg")
       (setq counsel-grep-base-command
             "rg --smart-case --max-columns 120 --no-heading --line-number --color never '%s' %s"))
 
