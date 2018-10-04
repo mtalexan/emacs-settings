@@ -62,11 +62,11 @@
  '(delete-active-region 'kill)
  '(ediff-make-buffers-readonly-at-startup nil)
  '(ediff-prefer-iconified-control-frame t)
- '(ediff-split-window-function 'split-window-horizontally t)
+ '(ediff-split-window-function 'split-window-horizontally)
  '(ediff-temp-file-prefix "tmp_diff_")
  '(ediff-use-long-help-message t)
  '(ediff-version-control-package 'vc)
- '(ediff-window-setup-function 'ediff-setup-windows-plain t)
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(elscreen-display-tab nil)
  '(elscreen-tab-display-control nil)
  '(elscreen-tab-display-kill-screen nil)
@@ -77,7 +77,7 @@
  '(kill-read-only-ok t)
  '(kill-whole-line nil)
  '(package-selected-packages
-   '(neotree easy-kill zzz-to-char smart-tabs-mode visual-regexp-steroids visual-regexp ace-window ggtags company projectile counsel ivy-rich ivy avy elscreen ibuffer semantic aggressive-indent json-mode lua-mode color-theme-approximate egg multi-term))
+   '(rg wgrep neotree easy-kill zzz-to-char smart-tabs-mode visual-regexp-steroids visual-regexp ace-window ggtags company projectile counsel ivy-rich ivy avy elscreen ibuffer semantic aggressive-indent json-mode lua-mode color-theme-approximate egg multi-term))
  '(paradox-github-token t)
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode 'right)
@@ -358,8 +358,26 @@
     "Window '%s' is normal")
  (current-buffer)))
 
+(provide 'toggle-window-dedicated)
 ; assign a key to the function
 (global-set-key [Scroll_Lock] 'toggle-window-dedicated)
+
+;; Toggle indent-tabs-mode
+;; A function that just toggles the status, which only affects the current buffer.
+;; After toggle, it prints a message to the minibuffer indicating the new state
+(defun toggle-indent-tabs-mode-p ()
+  "Toggles the indent with tabs mode for the current buffer"
+  (interactive)
+  (if indent-tabs-mode
+      (setq indent-tabs-mode nil)
+    (setq indent-tabs-mode t))
+  (message
+   "Indent with tabs mode is now: %s"
+   indent-tabs-mode))
+
+(provide 'toggle-indent-tabs-mode-p)
+;assign it to a key
+(global-set-key (kbd "C-c t") 'toggle-indent-tabs-mode-p)
 
 ;; Window Split Direction Preference
 ;; To set how windows automatically get split when creating a new buffer, there are
@@ -418,6 +436,7 @@
         (setq mark-ring (nbutlast mark-ring))
         (goto-char (marker-position (car (last mark-ring))))))
 
+(provide 'unpop-to-mark-command)
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
 

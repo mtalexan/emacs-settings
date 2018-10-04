@@ -70,6 +70,7 @@
         ; final argument is t or nil to select on-by-default
         (rg-define-toggle "--hidden" "h" nil)
         (rg-define-toggle "--follow" "F" nil)
+        (rg-define-toggle "--word-regexp" "w" nil)
 
      :bind (
       ) ;end of :bind
