@@ -36,7 +36,7 @@
 
 ; Check for the flag file in the configuration directory.  Create it after
 ; initializing package the first time.
-(when (file-exists-p "~/.emacs.d/.package-init.done")
+(when (not (file-exists-p "~/.emacs.d/.package-init.done"))
   (package-initialize)
   (shell-command "touch ~/.emacs.d/.package-init.done")
  )
