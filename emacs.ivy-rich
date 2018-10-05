@@ -5,12 +5,17 @@
   :ensure t
   :after (
           ivy
-  )
+          )
+  :commands (
+     ivy-rich-mode
+   )
   :init
     (require 'ivy-rich)
+    (ivy-rich-mode 1)
   :config
     ; Actually use this package as the display transformer for ivy-switch-buffer
-    (ivy-set-display-transformer 'ivy-switch-buffer 'ivy-rich-switch-buffer-transformer)
+    ; deprecated, replaced with (ivy-rich-mode 1)
+    ;(ivy-set-display-transformer 'ivy-switch-buffer 'ivy-rich-switch-buffer-transformer)
 
     ; Align the virtual buffers too
     ;(setq ivy-virtual-abbreviate 'full
