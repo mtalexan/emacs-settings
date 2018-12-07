@@ -5,22 +5,16 @@
 (use-package company
   ;get it from package.el if necessary
   :ensure t
-
   :commands (
     company-mode
     company-complete
-  )
+    )
+  ; Add company-mode to the mode hooks for the list of modes given
+  :hook (
+      ((lisp-mode c-mode-common perl-mode python-mode lua-mode sh-mode makefile-mode emacs-list-mode) . company-mode)
+    )
   :init
-    (add-hook 'lisp-mode-hook 'company-mode)
-    (add-hook 'c-mode-common-hook 'company-mode)
-    (add-hook 'perl-mode-hook 'company-mode)
-    (add-hook 'python-mode-hook 'company-mode)
-    (add-hook 'lua-mode-hook 'company-mode)
-    (add-hook 'sh-mode-hook 'company-mode)
-    (add-hook 'makefile-mode-hook 'company-mode)
-    (add-hook 'emacs-list-mode-hook 'company-mode)
     (setq company-global-modes t)
-
   :config
     ; How to trigger an autocomplete to be used
     (setq company-auto-complete 'company-explicit-action-p)

@@ -11,11 +11,6 @@
     ace-jump-mode-pop-mark
    ) ; end :commands
   :init
-    ; Turn on ace-jump-mode and ace-jump-mode-pop-mark support
-    (autoload 'ace-jump-mode "ace-jump-mode" "Emacs quick move minor mode" t)
-    (autoload 'ace-jump-mode-pop-mark "ace-jump-mode" "Ace mode jump back" t)
-    ; Set the keybindings
-    (define-key global-map (kbd "C-:") 'ace-jump-mode)
   :config
     ; Swap the char and line mode defaults
     (setq ace-jump-mode-submode-list
@@ -34,6 +29,8 @@
     ;(ace-jump-mode-disable-mark-sync)
 
  :bind (
+    ; main key
+    ("C-:" . ace-jump-mode)
     ; Pops between visible frames too
     ("C-M-," . ace-jump-mode-pop-mark)
     ) ;end of :bind

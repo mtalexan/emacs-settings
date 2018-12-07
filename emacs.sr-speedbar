@@ -4,16 +4,14 @@
 (use-package sr-speedbar
   ; get it from package.el
   :ensure t
-  :commands
-    sr-speedbar-open
+  :commands (
+             sr-speedbar-open
+             sr-speedbar-select-window
+             )
+  ; Auto-open in C and C++ modes
+  :hook ( (c++-mode c-mode) . sr-speedbar-open)
   :init
-    ; Auto-open in C and C++ modes
-    (add-hook 'c++-mode 'sr-speedbar-open)
-    (add-hook 'c-mode 'sr-speedbar-open)
   :config
-    ; Remap the select window command to use the sr-speedbar version
-    (global-set-key (kbd "M-9") 'sr-speedbar-select-window)
-
     ;set default and max widths
     (setq sr-speedbar-default-width 15)
     (setq sr-speedbar-max-width 3)
@@ -23,6 +21,10 @@
     (setq sr-speedbar-skip-other-window-p nil)
     ;don't use image icons
     (setq speedbar-use-images nil)
+    :bind (
+           ; Remap the select other-window "M-9" command to use the sr-speedbar version
+           ([remap other-frame] . sr-speedbar-select-window)
+     )
   )
 
 

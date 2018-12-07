@@ -6,11 +6,11 @@
   :commands (
     if-projectile-projectile-compile-project-or-compile
     if-projectile-projectile-grep-or-rgrep
+    projectile-find-other-file
   ) ; end of :commands
   :init
     ;enable it to work everywhere, even outside projectile projects
     (projectile-global-mode)
-  
   :config
     (setq projectile-enable-caching t)
 

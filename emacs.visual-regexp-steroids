@@ -3,6 +3,10 @@
 
 ; Requires Python!
 (use-package visual-regexp-steroids
+  ; only if we have viaul-regexp
+  :requires visual-regexp
+  ; only if we have python available on the system
+  :if (executable-find "python")
   ; get it from package.el
   :ensure t
   :after (
@@ -14,8 +18,7 @@
       vr/mc-mark ; requires multiple-cursors
     )
   :init
-    (if (executable-find "python")
-        (require 'visual-regexp-steroids))
+   (require 'visual-regexp-steroids)
   :config
 
     ; always show help for keys available in the minibuffer during replace when non-nil
@@ -41,9 +44,9 @@
     (setq vr/default-regexp-modifiers '(:I nil :M t :S nil :U nil))
 
   :bind (
-    ;remap from replace-regex to vr/replace
-    ("C-M-%" . vr/replace)
-    ; remap from query-replace-regex to vr/query-replace
-    ("M-%" . vr/query-replace)
+    ;remap from replace-regex "C-M-%" to vr/replace
+    ([remap replace-regex] . vr/replace)
+    ; remap from query-replace-regex "M-%" to vr/query-replace
+    ([remap query-replace-regex] . vr/query-replace)
     ); bind
   )

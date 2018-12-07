@@ -8,6 +8,7 @@
   :commands (
      ivy-mode
      ivy-resume
+     ivy-minibuffer-map
    ) ; end :commands
   :init
     (ivy-mode 1)

@@ -1,17 +1,21 @@
 ;; Helm interface based swoop (multi-occur search and edit)
 
 (use-package helm-swoop
+  ; Only use this if helm is present
+  :requires helm
   ; get it from package.el
   :ensure t
   :after (
           helm
    ) ; after
   :commands (
-    helm-swoop-back-to-last-point
+             helm-swoop
+             helm-swoop-back-to-last-point
+             helm-swoop-map
+             helm-multi-swoop-map
+             helm-multi-swoop-buffers-map
     ) ; end :commands
   :init
-    ; always use this
-    (require 'helm-swoop)
   :config
     ; change how the window is split for helm-swoop
     (setq helm-swoop-split-direction 'split-window-horizontally)

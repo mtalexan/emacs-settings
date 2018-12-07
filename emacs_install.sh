@@ -222,7 +222,30 @@ fi
 
 echo ""
 echo ""
+echo "Installing ripgrep"
+if ! command -v rg &>/dev/null ; then
+    if command -v dpkg &>/dev/null ; then
+        RIPGREP_VERSION=0.10.0
+        
+        if ! wget https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/ripgrep_${RIPGREP_VERSION}_amd64.deb ; then
+            echo "ERROR: unable to get the ripgrep deb file"
+            exit 1
+        fi
+        #install it
+        sudo dpkg -i ripgrep_${RIPGREP_VERSION}_amd64.deb
+        #clean it up
+        rm ripgrep_${RIPGREP_VERSION}_amd64.deb
+    else
+        echo "    Manual install required: https://github.com/BurntSushi/ripgrep/releases"
+        echo ""
+    fi
+fi
+
+echo ""
+echo ""
 echo "Completed successfully!"
 echo "Opening emacs for the first time to allow it to download missing packages"
 echo "This may take some time ..."
-emacs --debug-init
+# Force it to re-initialize the packages immediately, otherwise
+# it won't have the new elpa and melpa repos
+emacs --execute='(package-refresh-contents)' --debug-init

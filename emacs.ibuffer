@@ -6,9 +6,10 @@
 ; Reached with ivy-occur from ivy-switch-buffer/counsel-ibuffer
 (use-package ibuffer
   ; get it from package.el
-  :ensure t
+  ;:ensure t
   :commands (
-     ibuffer-mode
+             ibuffer-mode
+             ibuffer-mode-map
    ) ; end :commands
   :config
 

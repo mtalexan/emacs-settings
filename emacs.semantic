@@ -13,10 +13,9 @@
     semantic-projectile-parse-project
     projectile-semantic-parse-project
     ) ; end :commands
+  ; always enable for c and c++ modes
+  :hook ( (c++-mode c-mode) . semantic-mode)
   :init
-    ; always enable for c and c++ modes
-    (add-hook 'c++-mode-hook 'semantic-mode)
-    (add-hook 'c-mode-hook 'semantic-mode)
   :config
     ;set the global modes for these always
     (setq global-semantic-decoration-mode nil)

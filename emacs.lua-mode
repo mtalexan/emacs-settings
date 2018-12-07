@@ -4,7 +4,8 @@
 (use-package lua-mode
   ; get it from package.el
   :ensure t
-  :commands
-    lua-mode
+  :commands (
+             lua-mode
+    )
   )
 

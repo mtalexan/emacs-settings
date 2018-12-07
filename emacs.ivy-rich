@@ -1,13 +1,16 @@
 ;; Extends ivy to set different display transformers, e.g. ivy-switch-buffer has more content
 
 (use-package ivy-rich
+  ; only load this if we have ivy
+  :requires ivy
   ; get it from package.el
   :ensure t
   :after (
           ivy
           )
   :commands (
-     ivy-rich-mode
+             ivy-rich
+             ivy-rich-mode
    )
   :init
     (require 'ivy-rich)

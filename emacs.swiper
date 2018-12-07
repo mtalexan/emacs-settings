@@ -2,6 +2,8 @@
 
 ;; really an extension of Ivy
 (use-package swiper
+  ;only if we have ivy
+  :requires ivy
   ; get it from package.el
   :ensure t
   :after (
@@ -17,6 +19,8 @@
              swiper-from-isearch
              swiper-multi
              swiper-all
+             swiper-map
+             swiper-all-map
    ) ; end :commands
   :init
 

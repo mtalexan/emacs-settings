@@ -1,16 +1,22 @@
 ;; Helm interface to Projectile requires both
 
 (use-package helm-projectile
+  ; only use this if both helm and projectile are present
+  :requires (helm projectile)
   ; get it from package.el
   :ensure t
   :after (
           helm
           projectile
    );after
+  :commands (
+             helm-projectile-find-file
+             helm-projectile-find-other-file
+             helm-projectile-find-file-dwim
+             helm-projectile-find-file-map
+   )
   :init
     (setq projectile-completion-system 'helm)
-    ; always use this
-    (require 'helm-projectile)
   :config
 
   :bind (

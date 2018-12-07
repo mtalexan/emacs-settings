@@ -13,8 +13,6 @@
     neotree-hidden-file-toggle
    )
   :init
-    ; Don't auto-start it since it can be slow
-    (define-key global-map (kbd "<f8>") 'neotree-toggle)
   :config
     ; If theme not set, set it to "nerd" for graphics displays and "arrow" for terminal displays
     ; Options are: classic (default), ascii, arrow, icons, or nerd.  Icon requires special
@@ -76,7 +74,10 @@
     ; If this is set to prompt, it goes crazy with ivy since the buffers it creates don't
     ; correspond to a file neotree can find and it will constantly keep prompting
     (setq neo-force-change-root t)
-
+    :bind (
+           ; main entry key
+           ([f8] . neotree-toggle)
+     )
   )
 
 

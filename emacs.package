@@ -45,3 +45,9 @@
 ;; line, or ":ensure repoPackageName" if the name in the repo doesn't match the name that's downloaded.
 ;; To pin to a specific archive, use the ":pin archive" tag in the call.  If you don't want it auto-updated
 ;; you'll have to ":pin manual"
+
+;; A different overlay for the package manager that doesn't lock up when loading
+;; the package lists.  Doing the following will overwrite how the "list-packages"
+;; command works by default so it uses this new one instead.
+(require 'paradox)
+(paradox-enable)

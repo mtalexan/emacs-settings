@@ -46,9 +46,6 @@
   :init
     ; Sets C-' as avy-isearch in isearch-mode-map
     (avy-setup-default)
-
-    ; Set the keybindings
-    (define-key global-map (kbd "C-:") 'avy-goto-char)
   :config
     ; Use the letters listed as decision keys rather than just the homerow keys
     ; (number-sequenc ?a ?z) can also be used instead of a list
@@ -91,6 +88,8 @@
     ;(setq avy-line-insert-style 'above)
 
  :bind (
+    ; Main key entry
+    ("C-:" . avy-goto-char)
     ; Starts single character select against beginning of words
     ("M-:" . avy-goto-char-in-line)
     ("M-;" . avy-goto-word-1)

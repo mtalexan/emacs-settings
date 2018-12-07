@@ -20,8 +20,10 @@
   :after (
       ivy
       ) ;end :after
+  :hook (
+     (function-args-mode . fa-mode-disable-check)
+   )
   :init
-    (add-hook 'function-args-mode-hook 'fa-mode-disable-check)
   :config
     ; initial defaults
     (fa-config-default)

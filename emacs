@@ -16,6 +16,9 @@
 ; Do this first, since the rest of the package loading should be making use of it
 (load-file "~/.emacs.d/emacs.use-package")
 
+; Paradox can/does replace some package stuff with async versions
+(load-file "~/.emacs.d/emacs.paradox")
+
 ;;Load a coding style settings file that can be changed modularly
 ;;  This should be the only file like this before the custom-set-variables.
 ;;  We want it here so different settings can be tested through the customize-group
@@ -77,7 +80,7 @@
  '(kill-read-only-ok t)
  '(kill-whole-line nil)
  '(package-selected-packages
-   '(ivy-rich rg wgrep neotree easy-kill zzz-to-char smart-tabs-mode visual-regexp-steroids visual-regexp ace-window ggtags company projectile counsel ivy avy elscreen ibuffer semantic aggressive-indent json-mode lua-mode color-theme-approximate egg multi-term))
+   '(s shut-up smart-mode-line smooth-scrolling spinner swiper visible-mark pallet paradox hydra rust-mode ivy-rich rg wgrep neotree easy-kill zzz-to-char smart-tabs-mode visual-regexp-steroids visual-regexp ace-window ggtags company projectile counsel ivy avy elscreen ibuffer semantic aggressive-indent json-mode lua-mode color-theme-approximate egg multi-term))
  '(paradox-github-token t)
  '(save-interprogram-paste-before-kill t)
  '(scroll-bar-mode 'right)
@@ -442,6 +445,37 @@
 
 ;; Changes the tabify to only operate on leading whitespace
 (setq tabify-regexp "^\t* [ \t]+")
+
+;; Smart beginning of line
+;; Taken from https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
+;; Auto toggles start of non-whitespace, and real start of line as
+;; "beginning of line"
+(defun smarter-move-beginning-of-line (arg)
+  "Move point back to indentation of beginning of line.
+
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
+
+If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there."
+  (interactive "^p")
+  (setq arg (or arg 1))
+
+  ;; Move lines first
+  (when (/= arg 1)
+    (let ((line-move-visual nil))
+      (forward-line (1- arg))))
+
+  (let ((orig-point (point)))
+    (back-to-indentation)
+    (when (= orig-point (point))
+      (move-beginning-of-line 1))))
+
+;; remap `move-beginning-of-line' to `smarter-move-beginning-of-line'
+(global-set-key [remap move-beginning-of-line]
+                'smarter-move-beginning-of-line)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Modules/Packages should be added here

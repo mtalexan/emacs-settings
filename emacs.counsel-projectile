@@ -21,12 +21,12 @@
   :init
     ; Don't enable the whole mode, we just want a few key bindings
     ;(counsel-projectile-mode)
-
-    (define-key global-map (kbd "C-x f") 'counsel-projectile-find-file)
-    (define-key global-map [remap projectile-grep] 'counsel-projectile-grep)
-    (define-key global-map [remap projectile-switch-project] 'counsel-projectile-switch-project)
   :config
   :bind (
+    ; main entry keys
+    ("C-x f" . counsel-projectile-find-file)
+    ([remap projectile-grep] . counsel-projectile-grep)
+    ([remap projectile-switch-project] . counsel-projectile-switch-project)
    ) ;end of :bind
   ) ; end of use-package
 

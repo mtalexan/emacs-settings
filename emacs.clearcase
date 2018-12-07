@@ -16,10 +16,10 @@
    ); commands
   :init
     (define-prefix-command 'clearcase-command-mode-map)
-    (define-key global-map [(control x) (C)] 'clearcase-command-mode-map)
   :config
     (setq clearcase-suppress-checkout-comments t)
   :bind (
+    ("C-x S-c" . clearcase-command-mode-map)
     ; clearcase key commands
     ; C-x C o          checkout current
     ; C-x C i          checkin current

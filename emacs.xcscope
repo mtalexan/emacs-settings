@@ -3,10 +3,12 @@
 
 ;; This requires the CSCOPE tool from the system!!!
 (when (not (executable-find "cscope"))
-  (error "Unable to find required tool cscope")
+  (warn "Unable to find required tool cscope")
   )
 
 (use-package xcscope
+  ; only load it if we have the tool
+  :if (executable-find "cscope")
   ; get it from package.el
   :ensure t
   :commands (

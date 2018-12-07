@@ -25,9 +25,9 @@
     (setq vr/plain nil)
 
   :bind (
-    ;remap from replace-regex to vr/replace
-    ("C-M-%" . vr/replace)
-    ; remap from query-replace-regex to vr/query-replace
-    ("M-%" . vr/query-replace)
+    ;remap from replace-regex "C-M-%" to vr/replace
+    ([remap replace-regex] . vr/replace)
+    ; remap from query-replace-regex "M-%"to vr/query-replace
+    ([remap query-replace-regex] . vr/query-replace)
     ); bind
   )
