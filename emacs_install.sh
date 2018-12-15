@@ -212,11 +212,11 @@ fi
 echo ""
 echo ""
 echo "Creating link for .emacs config"
-cd ~ && ln -sf .emacs.d/emacs .emacs
+cd ~ && ln -sf .emacs.d/config/emacs .emacs
 if [ $? -ne 0 ] ; then
     echo ""
     echo ""
-    echo "Couldn't create symlink from ~/.emacs to ~/.emacs.d/emacs"
+    echo "Couldn't create symlink from ~/.emacs to ~/.emacs.d/config/emacs"
     exit 1
 fi
 
