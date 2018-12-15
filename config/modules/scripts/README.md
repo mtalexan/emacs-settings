@@ -1,0 +1,1 @@
+These are scripts used as part of the emacs configurations.

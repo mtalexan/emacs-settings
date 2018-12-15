@@ -1,0 +1,1 @@
+These are configuration files that don't rely on extra packages being installed via package.el or equivalent
