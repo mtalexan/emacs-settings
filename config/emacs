@@ -6,7 +6,7 @@
 (load "~/.emacs.d/config/startup/emacs.__loadpath")
 
 ;; Only the options from before the custom-set-variables and custom-set-faces
-(load "~/.emacs.d/config/startup/emacs._00preload")
+(load "emacs._00preload")
 ;; The custom-set variables
 (load "emacs._01custom-set")
 ;; basic functionality modifications
