@@ -67,6 +67,3 @@
 ;; Set subword-mode to trigger in all C/C++ mode buffers so camelcase is treated as a word boundary
 (add-hook 'c-mode-common-hook
           (lambda () (subword-mode 1)))
-
-;; Changes the tabify to only operate on leading whitespace
-(setq tabify-regexp "^\t* [ \t]+")

@@ -1,3 +1,6 @@
+;; Changes the tabify to only operate on leading whitespace
+(setq tabify-regexp "^\t* [ \t]+")
+
 ;; Toggle indent-tabs-mode
 ;; A function that just toggles the status, which only affects the current buffer.
 ;; After toggle, it prints a message to the minibuffer indicating the new state
