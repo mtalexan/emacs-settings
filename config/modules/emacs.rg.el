@@ -39,7 +39,8 @@
   :config
      ; wgrep installed from package.el doesn't seem to include wgrep-ag
      ; so we pull from the submodule instead
-     (autoload 'wgrep-ag-setup "~/.emacs.d/wgrep/wgrep-ag.el")
+     (autoload 'wgrep-ag-setup
+       (concat user-emacs-directory (convert-standard-filename "wgrep/wgrep-ag")))
   
      ; set additional custom type aliases here
      ;(setq rg-custom-type-aliases

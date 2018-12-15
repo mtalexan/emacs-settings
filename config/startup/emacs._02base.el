@@ -20,8 +20,8 @@
     (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10")))))
 
 ;;Load a file identification settings file that can be changed modularly
-(let ((file "~/.emacs.d/emacs.fileident.el"))
-  (if (file-executable-p file) (load-file file)))
+(let ((file "emacs.fileident"))
+  (if (file-executable-p file) (load file)))
 
 ;; Garbage collection default is very low.  Large file/index operations are therefore terrible.
 ;; fix it by increasing the default garbage collection limit

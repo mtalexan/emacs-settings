@@ -5,7 +5,8 @@
 ; package is included in Emacs 24.x and later, so we just need to add a repo source
 ; Prior to that, we need to specify the file as a manual load, and add a different repo source
 (when (< emacs-major-version 24)
-  (load-file "~/.emacs.d/package23.x/package.el"))
+  (load (concat user-emacs-directory
+		     (convert-standard-filename "package23.x/package"))))
 
 (require 'package)
 

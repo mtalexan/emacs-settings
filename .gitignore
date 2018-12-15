@@ -12,3 +12,5 @@ temp/*
 url/*
 /bookmarks
 /.package-init.done
+config/**/*.elc
+package23.x/package.elc

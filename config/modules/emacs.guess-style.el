@@ -4,11 +4,11 @@
 ;; We can't use the use-package as a result since it doesn't load anything correctly
 
 ; define the functions that can be called
-(autoload 'guess-style-set-variable "~/.emacs.d/guess-style.el" nil t)
-(autoload 'guess-style-guess-variable "~/.emacs.d/guess-style.el")
-(autoload 'guess-style-guess-all "~/.emacs.d/guess-style.el" nil t)
-(autoload 'guess-style-guess-tabs-mode "~/.emacs.d/guess-style.el" nil t)
-(autoload 'guess-style-guess-tab-width "~/.emacs.d/guess-style.el" nil t)
+(autoload 'guess-style-set-variable "guess-style" nil t)
+(autoload 'guess-style-guess-variable "guess-style")
+(autoload 'guess-style-guess-all "guess-style" nil t)
+(autoload 'guess-style-guess-tabs-mode "guess-style" nil t)
+(autoload 'guess-style-guess-tab-width "guess-style" nil t)
 
 ; add hooks for these formats
 (add-hook 'c-mode-common-hook 'guess-style-guess-all)
