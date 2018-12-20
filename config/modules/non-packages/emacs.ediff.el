@@ -1,3 +1,4 @@
+(require 'ediff)
 ;; Command-line Diff
 ;; Usage: emacs -diff file1 file2
 (defun command-line-diff (switch)

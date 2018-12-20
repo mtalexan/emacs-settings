@@ -8,6 +8,7 @@
 ;; auto complete closes it will return to the dark background frame you're working
 ;; in with the cursor still set to black and therefore invisible
 
+(require 'frame)
 (defun frame-bg (frame)
   "Custom behaviours for new frames."
   (with-selected-frame frame

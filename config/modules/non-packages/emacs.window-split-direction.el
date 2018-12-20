@@ -1,5 +1,4 @@
-;; This is built-in and doesn't provide a matching feature, so it can't be
-;; called here and should just be assumed.
+;; This is built-in and doesn't have a require
 ;(require 'window)
 
 ;; Window Split Direction Preference

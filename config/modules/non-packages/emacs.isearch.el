@@ -1,4 +1,3 @@
-
 (require 'isearch)
 ;; ISearch modifications
 ;; Redefine the keybinding that normally copies the rest of the word

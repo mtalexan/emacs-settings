@@ -1,4 +1,4 @@
-;; These are built in, so there's nothing to require.
+(require 'simple)
 
 ;; UNPOP MARK
 ;; The C-u C-SPC command does a pop-mark and will go back to the last mark.

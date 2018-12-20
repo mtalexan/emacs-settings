@@ -1,4 +1,4 @@
-;; Nothing to require here, window is built-int
+;; Nothing to require here, window is built-in
 ;(require 'window)
 
 ;; Lock Window mode

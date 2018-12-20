@@ -1,10 +1,5 @@
 ;; Contains only the things that MUST be done before the custom-settings and custom-faces
 
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-
 ; This is almost deprecated, so conditionaly include it to make it easier to remove later
 ; It's a backwards compatibility library so the config can be used with older emacs versions
 (let ((file "emacs.cl-lib"))

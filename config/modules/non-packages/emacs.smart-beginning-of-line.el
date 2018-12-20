@@ -1,4 +1,4 @@
-;; required commands are built-in, nothing to require
+(require 'simple)
 
 ;; Smart beginning of line
 ;; Taken from https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
