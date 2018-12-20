@@ -1,9 +1,12 @@
+;; These are built in, so there's nothing to require.
+
 ;; UNPOP MARK
-;; The C-u C-SPC command does a pop-mark and will go back to the last mark.  This is handy, but it would
-;; be nice to have a way of moving forward through the list as well
-;; Marks are set for selection, but are set other times too.  Double setting the mark will leave the
-;; mark but leave off the transient selection mode used to select and modify text.  The marks can then
-;; be navigated
+;; The C-u C-SPC command does a pop-mark and will go back to the last mark.
+;; This is handy, but it would be nice to have a way of moving forward
+;; through the list as well.  Marks are set for selection, but are set
+;; other times too.  Double setting the mark will leave the mark but leave
+;; off the transient selection mode used to select and modify text.  The
+;; marks can then be navigated.
 (defun unpop-to-mark-command ()
   "Unpop off mark ring. Does nothing if mark ring is empty."
   (interactive)

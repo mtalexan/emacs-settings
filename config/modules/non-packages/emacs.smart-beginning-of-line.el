@@ -1,7 +1,10 @@
+;; required commands are built-in, nothing to require
+
 ;; Smart beginning of line
 ;; Taken from https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
 ;; Auto toggles start of non-whitespace, and real start of line as
-;; "beginning of line"
+;; "beginning of line" so a `move-beginning-of-line' can alternate between
+;; the two locations (if different).
 (defun smarter-move-beginning-of-line (arg)
   "Move point back to indentation of beginning of line.
 

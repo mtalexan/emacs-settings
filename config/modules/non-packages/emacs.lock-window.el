@@ -1,3 +1,6 @@
+;; Nothing to require here, window is built-int
+;(require 'window)
+
 ;; Lock Window mode
 ;; A common problem is maintaining splits when tasks generate windows automatically.
 ;; In order to keep splits from being stolen, and force a new one to be created

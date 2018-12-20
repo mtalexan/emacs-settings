@@ -3,6 +3,7 @@
 ;; to have an undo/redo history.  It's useful if pulling up cscope results when window already
 ;; then returning to the splits that were already there
 
+(require 'winner)
 (setq winner-mode t)
 ; defaults are C-c left and C-c right, just ad C-j and C-l as left and right
 (global-set-key (kbd "C-c C-j") 'winner-undo)
