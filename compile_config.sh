@@ -8,6 +8,7 @@ FILES= \
      ~/.emacs.d/config/startup/emacs._03keys.el \
      ~/.emacs.d/config/modules/non-packages/emacs.cursor-color.el \
      ~/.emacs.d/config/modules/non-packages/emacs.ediff.el \
+     ~/.emacs.d/config/modules/non-packages/emacs.fileident.el \
      ~/.emacs.d/config/modules/non-packages/emacs.indent-tabs.el \
      ~/.emacs.d/config/modules/non-packages/emacs.isearch.el \
      ~/.emacs.d/config/modules/non-packages/emacs.lock-window.el \
@@ -22,6 +23,9 @@ FILES+= \
      ~/.emacs.d/package23.x/package.el \
      ~/.emacs.d/config/modules/scripts/guess-style.el
 
-for F in ${FILES} ; do 
+for F in ${FILES} ; do
+    # remove any elc files that have already been compiled
+    rm -f ${F}c
+    # manually recompile
     emacs -batch -f batch-byte-compile ${F}
 done

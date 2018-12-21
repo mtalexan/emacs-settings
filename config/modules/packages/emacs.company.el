@@ -15,6 +15,7 @@
           python
           lua-mode
           ggtags
+          make-mode
     )
   ;; Add company-mode to the mode hooks for the list of modes given
   :hook (
