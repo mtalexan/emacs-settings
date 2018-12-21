@@ -1,9 +1,9 @@
-; An ace-jump-mode like tool, but provides necessary dependencies for ace-window.
+;; An ace-jump-mode like tool, but provides necessary dependencies for ace-window.
 
-; NOTE: minimal necessary to force install, but not usage.  ace-window dependencies in MELPA are screwed up
-;       and this fixes the problem
+;; NOTE: minimal necessary to force install, but not usage.
+;;       ace-window dependencies in MELPA are screwed up and this fixes
+;;       the problem
 (use-package avy
-  ; get it from package.el
   :ensure t
   :commands (
     avy-linum-mode ; temporary minor mode used with avy-goto-line
@@ -44,63 +44,70 @@
     avy-isearch ;jump to an isearch candidate (from within isearch)
    ) ; end :commands
   :init
-    ; Sets C-' as avy-isearch in isearch-mode-map
+    ;; Sets C-' as avy-isearch in isearch-mode-map
     (avy-setup-default)
   :config
-    ; Use the letters listed as decision keys rather than just the homerow keys
-    ; (number-sequenc ?a ?z) can also be used instead of a list
-    ; WARNING: the following keys are normally reserved for avy actions if not used in the avy-keys list
-    ;          x=avy-action-kill-move
-    ;          X=avy-action-kill-stay
-    ;          t=avy-action-teleport
-    ;          m=avy-action-mark
-    ;          n=avy-action-copy
-    ;          y=avy-action-yank
-    ;          i=avy-action-ispell
-    ;          z=avy-action-zap-to-char
-    ; WARNING: avy limits to 2 cycles of jump keys, so this list needs to have enough to
-    ;          index everything within that number of loops
+    ;; Use the letters listed as decision keys rather than just the homerow keys
+    ;; (number-sequenc ?a ?z) can also be used instead of a list
+    ;; WARNING: the following keys are normally reserved for avy actions if not used in the avy-keys list
+    ;;          x=avy-action-kill-move
+    ;;          X=avy-action-kill-stay
+    ;;          t=avy-action-teleport
+    ;;          m=avy-action-mark
+    ;;          n=avy-action-copy
+    ;;          y=avy-action-yank
+    ;;          i=avy-action-ispell
+    ;;          z=avy-action-zap-to-char
+    ;; WARNING: avy limits to 2 cycles of jump keys, so this list needs to have enough to
+    ;;          index everything within that number of loops
     (setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?w ?e ?r ?u ?o ?p ?c ?v ?b))
 
-    ; Overlay style for keys: pre, at, at-full, or post
+    ;; Overlay style for keys: pre, at, at-full, or post
     (setq avy-style 'at)
 
-    ; Grey out the background when making selection. Default is nil/disabled
+    ;; Grey out the background when making selection. Default is
+    ;;  nil/disabled
     (setq avy-background t)
 
-    ; What to find selection candidates in: nil (current window), t (current frame), or all-frames
+    ;; What to find selection candidates in: nil (current window),
+    ;;   t (current frame), or all-frames
     (setq avy-all-windows 'all-frames)
 
-    ; All matches are selected with lowercase chars (default enabled)
+    ;; All matches are selected with lowercase chars (default enabled)
     (setq avy-case-fold-search t)
 
-    ; timeout time between avy-goto-char-timer switching between avy-goto-char-2 and avy-goto-char
+    ;; timeout time between avy-goto-char-timer switching between
+    ;;   avy-goto-char-2 and avy-goto-char
     (setq avy-timeout-seconds 0.8)
 
-    ; non-nil, avy-goto-char-timer timeout exists immediately on Enter. nil, it enters a newline
+    ;; non-nil, avy-goto-char-timer timeout exists immediately on Enter.
+    ;;   nil, it enters a newline
     (setq avy-enter-times-out t)
-    
-    ; Set to regexp of punctuation chars to match as part of word when searching.  Set nil to disable
+
+    ;; Set to regexp of punctuation chars to match as part of word when
+    ;;  searching.  Set nil to disable
     ;(setq avy-word-punc-regexp nil)
 
-    ; when using avy-copy-line and avy-move-line, where is the selected line copied/moved relative to the
-    ; current line.  Options: above (default), below
+    ;; when using avy-copy-line and avy-move-line, where is the selected
+    ;;  line copied/moved relative to the current line.  Options: above
+    ;;  (default), below
     ;(setq avy-line-insert-style 'above)
 
  :bind (
-    ; Main key entry
+    ;; Main key entry
     ("C-:" . avy-goto-char)
-    ; Starts single character select against beginning of words
+    ;; Starts single character select against beginning of words
     ("M-:" . avy-goto-char-in-line)
     ("M-;" . avy-goto-word-1)
     ("C-M-;" . avy-goto-char)
     ("C-M-:" . avy-goto-line)
     ("C-:" . avy-resume)
 
-    ; Pops between visible frames too
+    ;; Pops between visible frames too
     ("C-M-," . avy-pop-mark)
 
-    ;Customize so avy-isearch can be triggered with the normal keybinding for avy
+    ;; Customize so avy-isearch can be triggered with the normal
+    ;;  keybinding for avy
     :map isearch-mode-map
       ("M-;" . avy-isearch) ; see ivy-avy command also
   ) ;end of :bind

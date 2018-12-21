@@ -1,8 +1,7 @@
-;; Places line numbers along the left edge.  Numbering is done on each window.
+;; Built-in syntax parser and analyzer for fancy C support
 
-; This package is included in Emacs by default
+;; This package is included in Emacs by default
 (use-package semantic
-  ; get it from package.el
   :ensure t
   :commands (
     semantic-mode
@@ -13,11 +12,11 @@
     semantic-projectile-parse-project
     projectile-semantic-parse-project
     ) ; end :commands
-  ; always enable for c and c++ modes
+  ;; always enable for c and c++ modes
   :hook ( (c++-mode c-mode) . semantic-mode)
   :init
   :config
-    ;set the global modes for these always
+    ;; set the global modes for these always
     (setq global-semantic-decoration-mode nil)
     (setq global-semantic-highlight-edits-mode nil)
     (setq global-semantic-highlight-func-mode t)
@@ -29,7 +28,6 @@
     (setq global-semantic-show-unmatched-syntax-mode nil)
     (setq global-semantic-stickyfunc-mode t)
     (setq global-semanticdb-minor-mode nil)
-
 
     (setq semantic-complete-inline-analyzer-displayor-class (quote semantic-displayor-tooltip))
     (setq semantic-complete-inline-analyzer-idle-displayor-class (quote semantic-displayor-tooltip))
@@ -71,9 +69,9 @@
             omniscience)))
     (setq semanticdb-persistent-path (quote (project)))
 
-    ;Semantic relies on EDE to provide the file list it needs to support.  EDE is retarded and doesn't
-    ;work right, especially on C++.  Someone wrote a fix that will recursively parse all files in all 
-    ;sub-directories.
+    ;; Semantic relies on EDE to provide the file list it needs to support.  EDE is retarded and doesn't
+    ;; work right, especially on C++.  Someone wrote a fix that will recursively parse all files in all 
+    ;; sub-directories.
     (defvar c-files-regex ".*\\.\\(c\\|cpp\\|h\\|hpp\\)$"
       "A regular expression to match any c/c++ related files under a directory")
 

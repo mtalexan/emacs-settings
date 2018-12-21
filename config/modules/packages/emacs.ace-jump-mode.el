@@ -1,7 +1,6 @@
 ;; A quick-jump tool for within visible, see Avy as a better alternative
 
 (use-package ace-jump-mode
-  ; get it from package.el
   :ensure t
   :commands (
     ace-jump-mode
@@ -12,7 +11,7 @@
    ) ; end :commands
   :init
   :config
-    ; Swap the char and line mode defaults
+    ;; Swap the char and line mode defaults
     (setq ace-jump-mode-submode-list
       '(ace-jump-word-mode              ;; the first one always map to : C-c SPC
         ace-jump-line-mode              ;; the second one always map to: C-u C-c SPC            

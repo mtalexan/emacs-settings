@@ -4,6 +4,10 @@
 (use-package paradox
   ; get it from package.el
   :ensure t
+  :commands (
+             paradox-mode
+             paradox-enable
+   )
   :init
     ; always enable for list-packages by default
     (paradox-enable)

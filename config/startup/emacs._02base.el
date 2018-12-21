@@ -72,6 +72,7 @@
 
 (require 'subword)
 ;; Treat camelcase as a word boundary by default in these modes
+(require 'cc-mode)
 (add-hook 'c-mode-common-hook
           (lambda () (subword-mode 1)))
 (require 'cperl-mode)

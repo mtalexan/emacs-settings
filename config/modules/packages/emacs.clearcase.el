@@ -1,7 +1,6 @@
 ;; Adds support for automatically doing clearcase commands
 
 (use-package clearcase
-  ; get it from package.el
   :ensure t
   :commands (
              clearcase
@@ -15,11 +14,12 @@
              clearcase-command-mode-map
    ); commands
   :init
+    (defvar clearcase-command-mode-map)
     (define-prefix-command 'clearcase-command-mode-map)
+    ("C-x S-c" . clearcase-command-mode-map)
   :config
     (setq clearcase-suppress-checkout-comments t)
   :bind (
-    ("C-x S-c" . clearcase-command-mode-map)
     ; clearcase key commands
     ; C-x C o          checkout current
     ; C-x C i          checkin current

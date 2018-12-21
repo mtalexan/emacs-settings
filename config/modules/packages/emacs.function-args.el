@@ -1,10 +1,9 @@
-;; Tool intended to display function arguments as tool tips and support overridden functions,
-;; but it ends up extending the built in CEDET (and especially Semantic) to support C++
-;; since they do a very poor job of supporting it
-
+;; Tool intended to display function arguments as tool tips and support
+;; overridden functions, but it ends up extending the built in CEDET (and
+;; especially Semantic) to support C++ since they do a very poor job of
+;; supporting it.
 
 (use-package function-args
-  ; get it from package.el
   :ensure t
   :commands (
       function-args-active-mode
@@ -25,14 +24,15 @@
    )
   :init
   :config
-    ; initial defaults
+    ;; initial defaults
     (fa-config-default)
 
-    ; this line is necessary to be sure it's loaded before we try to adjust the map.  It's loaded indirectly by function-args
+    ;; this line is necessary to be sure it's loaded before we try to adjust the map.  It's loaded indirectly by function-args
     (require 'ivy)
 
-    ; Function Args really should have a minor mode that activates on the fa-show call since half of the
-    ; available actions only apply after an fa-show call and before an fa-abort
+    ;; Function Args really should have a minor mode that activates on the
+    ;; fa-show call since half of the available actions only apply after
+    ;; an fa-show call and before an fa-abort
     (define-minor-mode function-args-active-mode
       "Minor mode that should be triggered in place of fa-show to keep related commands under a minor-mode keymap"
       :lighter " fa-active"
@@ -45,7 +45,7 @@
                 map)
       :group function-args
 
-      ;activating does fa-show, deactivating does fa-abort  
+      ;; activating does fa-show, deactivating does fa-abort  
       (if function-args-active-mode
           (fa-active-enter)
           (fa-active-exit)) 
@@ -58,16 +58,19 @@
       "Handlling for when the function-args-active-mode is enabled.  Does fa-show and pushes a mark."
       (fa-show)
       (push-mark))
+    (provide 'fa-active-enter)
 
     (defun fa-active-exit ()
       (interactive)
       "Handlling for when the function-args-active-mode is enabled.  Does fa-show and pushes a mark."
       (fa-abort))
+    (provide 'fa-active-exit)
 
     (defun fa-active-end ()
       (interactive)
       "Turns off the function-args-active-mode, which implicitly aborts"
       (function-args-active-mode 0))
+    (provide 'fa-active-exit)
 
     (defun fa-mode-disable-check ()
       "For use in the function-args-mode-hook.  
@@ -75,6 +78,7 @@
       (if function-args-mode
           nil
         (function-args-active-mode 0)))
+    (provide 'fa-mode-disable-check)
 
     (defun fa-active-jump ()
       (interactive)
@@ -83,13 +87,15 @@
       (fa-jump)
       (fa-active-end) ;fa-abort gets ignored here for some reason, so do it explicitly next
       (fa-abort))
+    (provide 'fa-active-jump)
 
+    ;; parse include files too
     (setq moo-do-includes t)
 
     :bind (
 
       :map function-args-mode-map
-        ;key bindings weren't under a prefix map so clear them all
+        ;;key bindings weren't under a prefix map so clear them all
         ("M-o" . nil)
         ("M-i" . nil)
         ("M-n" . nil)
@@ -97,14 +103,14 @@
         ("M-u" . nil)
         ("M-j" . nil)
         ("C-M-j" . nil)
-        ; Now remap only the ones we want to something useable
+        ;; Now remap only the ones we want to something useable
         ("M-;" . moo-complete)
         ("M-:" . function-args-active-mode)
-        ; intentionally override the helm-semantic-or-imenu
+        ;; intentionally override the helm-semantic-or-imenu
         ("C-c C-s" . moo-jump-local)
 
       :map ivy-minibuffer-map
-        ;Ergo
+        ;; Ergo
         ("M-n" . ivy-next-line)
         ("M-k" . ivy-next-line)
         ("M-K" . ivy-scroll-up-command)

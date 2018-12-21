@@ -1,9 +1,8 @@
 ;; Helm interface to Projectile requires both
 
 (use-package helm-projectile
-  ; only use this if both helm and projectile are present
+  ;; only use this if both helm and projectile are present
   :requires (helm projectile)
-  ; get it from package.el
   :ensure t
   :after (
           helm
@@ -20,15 +19,15 @@
   :config
 
   :bind (
-    ; find files looking at all within the projectile project
+    ;; find files looking at all within the projectile project
     ("C-x f" . helm-projectile-find-file)
-    ; find matching header/source in pair
+    ;; find matching header/source in pair
     ([remap projectile-find-other-file] . helm-projectile-find-other-file)
-    ; find file under point, or default to find-file
+    ;; find file under point, or default to find-file
     ("C-c f" . helm-projectile-find-file-dwim)
 
     :map helm-projectile-find-file-map
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)

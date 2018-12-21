@@ -1,12 +1,17 @@
-;for some reason the tab-width can't be overriden even with this
+;; for some reason the tab-width can't be overriden even with this
 (setq-default tab-width 4)
-; we tab-width when set is file-local, so add a file open hook to set the
-; tab width in every file
+
+(require 'files)
+;; tab-width when set is file-local, so add a file open hook to set the
+;; tab width in every file
 (add-hook 'find-file-hook '(lambda () (setq tab-width 4)))
 
+(require 'cc-mode)
+(add-hook 'c-mode-common-hook '(lambda () (setq tab-width 4)))
+(require 'python)
 (add-hook 'python-mode-hook '(lambda () (setq tab-width 4)))
 (add-hook 'inferior-python-mode-hook '(lambda () (setq tab-width 4)))
-(add-hook 'c-mode-common-hook '(lambda () (setq tab-width 4)))
+(require 'lua-mode)
 (add-hook 'lua-mode-hook '(lambda () (setq tab-width 4)))
 
 (setq c-offsets-alist

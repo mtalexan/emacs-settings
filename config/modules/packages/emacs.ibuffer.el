@@ -5,8 +5,6 @@
 ; Can change filtering of files listed.
 ; Reached with ivy-occur from ivy-switch-buffer/counsel-ibuffer
 (use-package ibuffer
-  ; get it from package.el
-  ;:ensure t
   :commands (
              ibuffer-mode
              ibuffer-mode-map
@@ -14,7 +12,7 @@
   :config
 
   :bind (
-     ;used with ivy-occur on ivy-switch-buffer results
+     ;; used with ivy-occur on ivy-switch-buffer results
      :map ibuffer-mode-map
        ;; defaults
        ("m" . ibuffer-mark-forward)
@@ -29,14 +27,14 @@
        ("q" . ibuffer-quit)
        ("h" . ibuffer-help)
        ("?" . ibuffer-help)
-       ; default operations on previously marked buffers
+       ;; default operations on previously marked buffers
        ("A" . ibuffer-do-view)
        ("D" . ibuffer-do-delete)
        ("R" . ibuffer-do-rename-uniquely)
        ("S" . ibuffer-do-save)
        ("V" . ibuffer-do-revert)
 
-       ; newly added
+       ;; newly added
        ("K" . ibuffer-do-delete) 
    ) ;end of :bind
   ) ; end of use-package

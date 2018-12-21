@@ -1,11 +1,11 @@
 ;; Adds some git commands to emacs.  Specifically useful for file blame mode.
 
-; This package is included in Emacs 24.x by default
+;; This package is included in Emacs 24.x by default
 (use-package egg
-  ; get it from package.el
   :ensure t
-  :commands
-    egg-minor-mode
+  :commands (
+             egg-minor-mode
+   )
   :init
     (setq egg-mode-key-prefix "C-x g")
     (egg-minor-mode 1)

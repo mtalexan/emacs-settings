@@ -9,6 +9,7 @@
       cperl-mode
       lua-mode
       python
+      cc-mode
   )
   :commands (
       guess-style-set-variable

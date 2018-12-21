@@ -1,9 +1,8 @@
 ;; Helm interface based swoop (multi-occur search and edit)
 
 (use-package helm-swoop
-  ; Only use this if helm is present
+  ;; Only use this if helm is present
   :requires helm
-  ; get it from package.el
   :ensure t
   :after (
           helm
@@ -17,24 +16,28 @@
     ) ; end :commands
   :init
   :config
-    ; change how the window is split for helm-swoop
+    ;; change how the window is split for helm-swoop
     (setq helm-swoop-split-direction 'split-window-horizontally)
- :bind (
-    ;start a swoop search
+  :bind (
+    ;; start a swoop search
     ("C-e" . helm-swoop)
     ("C-S-e" . helm-swoop-back-to-last-point)
 
-    ;for some reason helm-swoop is overriding the tab command to be helm-swoop, restore it
+    ;; for some reason helm-swoop is overriding the tab command to be
+    ;; helm-swoop, restore it
+    ;; TODO: figure out how to save what it was before we loaded and
+    ;;       restore that instead of re-defining what we think tab used
+    ;;       to be.
     ([tab] . indent-for-tab-command)
 
     :map isearch-mode-map
-     ;key combo to switch to swoop mode
+     ;; key combo to switch to swoop mode
      ("C-e" . helm-swoop-from-isearch)
 
     :map helm-swoop-map
-      ;go onto multi-swoop mode
+      ;; go onto multi-swoop mode
       ("C-e" . helm-multi-swoop-all-from-helm-swoop)
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)
@@ -44,7 +47,7 @@
       ([tab] . nil)
 
     :map helm-multi-swoop-map
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)
@@ -54,7 +57,7 @@
       ([tab] . nil)
 
     :map helm-multi-swoop-buffers-map
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)

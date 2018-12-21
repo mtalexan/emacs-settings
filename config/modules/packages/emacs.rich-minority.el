@@ -2,12 +2,11 @@
 ;; turned on by default if smart-mode-line is also used
 
 (use-package rich-minority
-  ; get it from package.el
   :ensure t
   :init
     (rich-minority-mode 1) ;default setting (not needed if using smart-mode-line as well)
   :config
-    ;list of minor modes to never show in the list.  Note that most start with a space
+    ;;list of minor modes to never show in the list.  Note that most start with a space
     (setq rm-blacklist '(" Helm"
                          " company"
                          " Abbrev"

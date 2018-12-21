@@ -1,7 +1,6 @@
 ;; A very different interface from IDO which is the default
-;; Assumes elscreen is included first
+
 (use-package helm
-  ; get it from package.el
   :ensure t
   :after (
           elscreen
@@ -22,38 +21,40 @@
   :init
     (helm-mode 1)
   :config
-    ;auto resize, and set resize limits
+    ;; auto resize, and set resize limits
     (setq helm-autoresize-mode t)
     (setq helm-autoresize-max-height 20) ;20%
     (setq helm-autoresize-min-height 20) ;20%
 
     (setq helm-buffer-max-length nil)
 
-    ;fuzzy matching
-    ;nearly everything (global helm mode)
+    ;;fuzzy matching
+
+    ;;nearly everything (global helm mode)
     (setq helm-mode-fuzzy-match t)
     ;(setq helm-completion-in-region-fuzzy-match t)
-    ;M-x commands
+    ;; M-x commands
     (setq helm-M-x-fuzzy-match t)
-    ;in the recentf
+    ;; in the recentf
     ;(setq helm-recentf-fuzzy-match t)
-    ;in buffer list
+    ;; in buffer list
     (setq helm-buffers-fuzzy-matching t)
-    ;in minibuffer (needs helm-buffers-fuzzy-matching also)
+    ;; in minibuffer (needs `helm-buffers-fuzzy-matching' also)
     (setq helm-mini-fuzzy-match t)
-    ;in imenu
+    ;; in imenu
     (setq helm-imenu-fuzzy-match t)
-    ;in apropos
+    ;; in apropos
     (setq helm-apropos-fuzzy-match t)
-    ;in semantic
+    ;; in semantic
     (setq helm-semantic-fuzzy-match t)
 
-    ;key to enter command
-    ;this conflicts with almost everything, but since it's not the mechanism we use to access helm commands
-    ;it works to simply change the default mapping that does have conflicts
+    ;; key to enter command
+    ;; This conflicts with almost everything, but since it's not the
+    ;; mechanism we use to access helm commands it works to simply change
+    ;; the default mapping that does have conflicts
     (setq helm-command-prefix "C-d")
 
-    ; May be used to move minibuffer to the top of helm window in helm mode
+    ;; May be used to move minibuffer to the top of helm window in helm mode
     (defun spacemacs//helm-hide-minibuffer-maybe ()
       "Hide minibuffer in Helm session if we use the header line as input field."
       (when (with-helm-buffer helm-echo-input-in-header-line)
@@ -64,47 +65,53 @@
                          `(:background ,bg-color :foreground ,bg-color)))
           (setq-local cursor-type nil))))
 
-    ;This puts what we type in the minibuffer at the top of the helm window and keeps the minibuffer limited
-    ;to one line without wrapping.  If used with the defun above, it simply moves the minibuffer to the top
+    ;; This puts what we type in the minibuffer at the top of the helm
+    ;; window and keeps the minibuffer limited to one line without wrapping.
+    ;; If used with the defun above, it simply moves the minibuffer to the
+    ;; top.
     ;(setq helm-echo-input-in-header-line t)
 
-    ;hide the minibuffer when in helm if we have it visible at the top of the helm window
+    ;; hide the minibuffer when in helm if we have it visible at the top
+    ;; of the helm window
     (add-hook 'helm-minibuffer-set-up-hook
               'spacemacs//helm-hide-minibuffer-maybe)
 
-    ; MUST be done last
+    ;; MUST be done last
     (require 'helm-config)
  :bind (
-    ;default helm keybinding is C-x c which is almost C-x C-c that's used to exit emacs.
+    ;; default helm keybinding is C-x c which is almost C-x C-c that's
+    ;; used to exit emacs.
     ("C-x c" . nil)
-    ;override buffer list keys to use helm version
+    ;; override buffer list keys to use helm version
     ("C-x C-b" . helm-buffers-list)
-    ;use helm-mini instead of helm-buffers-list since it includes recently visited files also
+    ;; use `helm-mini' instead of `helm-buffers-list' since it includes
+    ;; recently visited files also.
     ;("C-x C-b" . helm-mini)
-    ;resume the last session again
+    ;; resume the last session again
     ("C-c C-c" . helm-resume)
-    ;finding files uses helm
+    ;; finding files uses helm
     ("C-x C-f" . helm-find-files)
-    ;Map M-x to the helm version
+    ;; Map M-x to the helm version
     ("M-x" . helm-M-x)
-    ; imenu is a code buffer org/completion engine
+    ;; imenu is a code buffer org/completion engine
     ("C-;" . helm-semantic-or-imenu)
-    ; use helm for the apropos help handling
+    ;; use helm for the apropos help handling
     ("C-h a" . helm-apropos)
 
-    ;override a key in the isearch map
+    ;; override a key in the isearch map
     :map isearch-mode-map
-      ;trigger multi-occur in the minibuffer
+      ;; trigger multi-occur in the minibuffer
       ("C-o" . helm-occur-from-isearch)
 
-    ;add to elscreen map
+    ;; add to elscreen map
     :map elscreen-map
       ("C-b" . helm-elscreen)
 
-    ;swap these around so C-e says "do everything" and C-z brings up the action list
-    ;rebind tab to run persistent actions
+    ;; swap these around so C-e says "do everything" and C-z brings up the
+    ;; action list.
+    ;; Rebind tab to run persistent actions
     :map helm-map
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)
@@ -118,7 +125,7 @@
     :map helm-buffer-map
       ("C-k" . helm-delete-current-selection)
       ("C-c C-k" . helm-delete-current-selection)
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)
@@ -131,7 +138,7 @@
 
 
     :map helm-etags-map
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)
@@ -143,19 +150,19 @@
       ("C-e" . helm-execute-persistent-action)
 
     :map helm-generic-files-map
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)
       ("M-l" . helm-next-source)
       ("M-I" . helm-previous-page)
       ("M-K" . helm-next-page)
-      ([tab] . nil)
+      ([tab] . nil) 
       ("C-z" . helm-select-action)
       ("C-e" . helm-execute-persistent-action)
 
     :map helm-buffers-ido-virtual-map
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)
@@ -167,7 +174,7 @@
       ("C-e" . helm-execute-persistent-action)
 
     :map helm-grep-map
-      ;Ergo keys
+      ;;Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)
@@ -181,7 +188,7 @@
     :map helm-find-files-map
       ("C-/" . helm-ff-run-find-sh-command)
       ("M-f" . helm-ff-run-grep)
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)
@@ -192,9 +199,9 @@
       ("C-z" . helm-select-action)
       ("C-e" . helm-execute-persistent-action)
 
-    ;used during helm-regexp
+    ;; used during helm-regexp
     :map helm-moccur-map
-      ;Ergo keys
+      ;; Ergo keys
       ("M-i" . helm-previous-line)
       ("M-k" . helm-next-line)
       ("M-j" . helm-previous-source)

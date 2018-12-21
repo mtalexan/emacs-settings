@@ -1,9 +1,8 @@
 ;; An alternative to helm or ido
 
-;; NOTE: Counsel should really be used instead, it has ivy as a dependency, but
-;;       significantly extends what it can do.
+;; NOTE: Counsel should really be used instead, it has ivy as a dependency,
+;;       but significantly extends what it can do.
 (use-package ivy
-  ; get it from package.el
   :ensure t
   :commands (
      ivy-mode
@@ -13,57 +12,60 @@
   :init
     (ivy-mode 1)
   :config
-
-    ; Includes recentf-mode and bookmarks to ivy-switch-buffer completion candidates
+    ;; Includes `recentf-mode' and bookmarks in `ivy-switch-buffer'
+    ;; completion candidates
     (setq ivy-use-virtual-buffers t)
     (setq enable-recursive-minibuffers t)
 
-    ; How to display the number of candidate matches.  Default is "%d ".
-    ; Following displays the item number of the current selection as well.
+    ;; How to display the number of candidate matches.  Default is "%d ".
+    ;; Following displays the item number of the current selection as well.
     (setq ivy-count-format "(%d/%d) ")
 
-    ; When reaching top or bottom of list, wrap to the other end.  Default is off/nil
+    ;; When reaching top or bottom of list, wrap to the other end.
+    ;; Default is off/nil
     ;(setq ivy-wrap t)
 
-    ; Default number of lines in ivy prompt. Default is 10
+    ;; Default number of lines in ivy prompt. Default is 10
     ;(setq ivy-height 10)
 
-    ; Sets the match function: ivy--regex, ivy--regex-plus, ivy--regex-ignore-order,
-    ;                          ivy--regex-fuzzy, or regezp-quote.
-    ; default is ivy--regex-plus
+    ;; Sets the match function: `ivy--regex', `ivy--regex-plus',
+    ;; `ivy--regex-ignore-order', `ivy--regex-fuzzy', or `regexp-quote'.
+    ;; default is `ivy--regex-plus'
     (setq ivy-re-builders-alist
           '((t . ivy--regex-ignore-order)))
 
-    ; What to do when hitting DEL in buffer with nothing left to delete.
-    ; Default is to exit the ivy session.  Set to nil means do nothing
+    ;; What to do when hitting DEL in buffer with nothing left to delete.
+    ;; Default is to exit the ivy session.  Set to nil means do nothing
     (setq ivy-on-del-error-function nil)
 
-    ; Copy ivy-yank-word, and replace the contents of the with-ivy-window call with the
-    ; equivalent logic from isearch-forward-symbol-at-point
+    ;; Copy `ivy-yank-word', and replace the contents of the
+    ;; `with-ivy-window' call with the equivalent logic from
+    ;; `isearch-forward-symbol-at-point'
     (defun ivy-yank-symbol ()
       "Pull next word from buffer into search string."
       (interactive)
       (let (amend)
         (with-ivy-window
-          ; start of from isearch-forward-symbol-at-point
+          ;; start of from isearch-forward-symbol-at-point
           (let ((bounds (find-tag-default-bounds)))
             (cond
              (bounds
               (when (< (car bounds) (point))
                 (goto-char (car bounds)))
-              ;setq amend instead of direct usage of buffer-substring-no-properties
+              ;;setq amend instead of direct usage of buffer-substring-no-properties
               (setq amend (buffer-substring-no-properties (car bounds) (cdr bounds)))))))
-           ; end of from isearch-forward-symbol-at-point
+           ;' end of from isearch-forward-symbol-at-point
              (when amend
                (insert (replace-regexp-in-string "  +" " " amend)))))
 
   :bind (
-     ("C-c C-r" . ivy-resume) ; alsy re-bound in counsel to the same thing
+     ("C-c C-r" . ivy-resume) ; also re-bound in counsel to the same thing
 
-     ; NOTE: This map is inherited by multiple counsel maps that are customizable by specific
-     ;       function being performed.  Only minimal changes should be included here.
+     ;; NOTE: This map is inherited by multiple counsel maps that are
+     ;;       customizable by specific function being performed.  Only
+     ;;       minimal changes should be included here.
      :map ivy-minibuffer-map
-       ; defaults
+       ;; defaults
        ("C-n" . ivy-next-line)
        ("C-p" . ivy-previous-line)
        ("M-<" . ivy-beginning-of-buffer)
@@ -96,11 +98,11 @@
        ("C-c C-o" . ivy-occur)
        ;; in file mode, M-r switches between regex and non-regex mode
 
-       ; Make the ivy area larger or smaller
+       ;; Make the ivy area larger or smaller
        ("C-+" . ivy-minibuffer-grow)
        ("C--" . ivy-minibuffer-shrink)
 
-       ;Ergo
+       ;; Ergo
        ("M-k" . ivy-next-line)
        ("C-M-k" . ivy-next-line-and-call)
        ("M-K" . ivy-scroll-up-command)

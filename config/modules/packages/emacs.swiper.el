@@ -2,9 +2,8 @@
 
 ;; really an extension of Ivy
 (use-package swiper
-  ;only if we have ivy
+  ;;only if we have ivy
   :requires ivy
-  ; get it from package.el
   :ensure t
   :after (
           ivy
@@ -26,20 +25,20 @@
 
   :config
 
-    ; minimum match length before highlighting. Default=2
+    ;; minimum match length before highlighting. Default=2
     (setq swiper-min-highlight 2)
 
-    ;non-nil includes line numbers in swiper match output. Default=nil
+    ;;non-nil includes line numbers in swiper match output. Default=nil
     (setq swiper-include-line-number-in-search t)
 
-    ;goes to the start of the match rather than the end when non-nil. Default=nil
+    ;;goes to the start of the match rather than the end when non-nil. Default=nil
     (setq swiper-goto-start-of-match t)
 
-    ;non-nil means don't go back to where search was started from when quitting with
-    ; nothing picked. Default=nil
+    ;;non-nil means don't go back to where search was started from when quitting with
+    ;; nothing picked. Default=nil
     (setq swiper-stay-on-quit nil)
 
-    ;non-nil recenters after exiting swiper.  isearch doesn't do this, but occur does. Default=nil
+    ;;non-nil recenters after exiting swiper.  isearch doesn't do this, but occur does. Default=nil
     (setq swiper-action-recenter nil)
 
   :bind (

@@ -2,7 +2,6 @@
 
 ;; really an extension of Ivy
 (use-package counsel-projectile
-  ; get it from package.el
   :ensure t
   :after (
           counsel
@@ -19,11 +18,11 @@
              counsel-projectile-rg ;requires external tool
    ) ; end :commands
   :init
-    ; Don't enable the whole mode, we just want a few key bindings
+    ;; Don't enable the whole mode, we just want a few key bindings
     ;(counsel-projectile-mode)
   :config
   :bind (
-    ; main entry keys
+    ;; main entry keys
     ("C-x f" . counsel-projectile-find-file)
     ([remap projectile-grep] . counsel-projectile-grep)
     ([remap projectile-switch-project] . counsel-projectile-switch-project)
