@@ -244,8 +244,18 @@ fi
 echo ""
 echo ""
 echo "Completed successfully!"
-echo "Opening emacs for the first time to allow it to download missing packages"
+echo "Opening emacs for the first time to allow it to download missing packages."
+echo "Note that this may result in warnings.  Once completed, simply exit emacs and the additional"
+echo "packages will be downloaded with a second invocation."
 echo "This may take some time ..."
 # Force it to re-initialize the packages immediately, otherwise
-# it won't have the new elpa and melpa repos
-emacs --execute='(package-refresh-contents)' --debug-init
+# it won't have the new elpa and melpa repos.
+# We have to do this on the first time opening/running it or use-package won't find the
+# missing package dependencies it needs to download and install.
+# Compiling these packages frequently produces warnings though, so we can't do --debug-init.
+# We do it twice with the refresh because it's pretty common to get an erroneous missing dependency
+# compile error on some of the packages during the first run, that are resolved by simply exiting
+# and re-running the same thing.
+emacs --execute='(package-refresh-contents)'
+emacs --execute='(package-refresh-contents)'
+emacs --debug-init
