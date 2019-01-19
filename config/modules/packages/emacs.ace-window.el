@@ -12,7 +12,7 @@
     ); after
   :init
     ;; Set the keybinding
-    ;(define-key global-map (kbd "M-=") 'ace-window)
+    (define-key global-map (kbd "M-=") 'ace-window)
   :config
 
   ;; Set the initial list of shortcut keys used to label the windows.
@@ -55,7 +55,7 @@
 
  :bind (
      ;; main key
-     ("M-=" . ace-window)
+     ;("M-=" . ace-window)
    ) ;end of :bind
   ) ; end of use-package
 

@@ -18,6 +18,7 @@
              counsel-projectile-rg ;requires external tool
    ) ; end :commands
   :init
+    (define-key global-map (kbd "C-x f") 'counsel-projectile-find-file)
     ;; Don't enable the whole mode, we just want a few key bindings
     ;(counsel-projectile-mode)
   :config

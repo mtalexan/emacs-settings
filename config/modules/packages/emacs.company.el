@@ -23,6 +23,7 @@
     )
   :init
     (setq company-global-modes t)
+    (define-key global-map (kbd "M-'") 'company-complete)
   :config
     ;; How to trigger an autocomplete to be used
     (setq company-auto-complete 'company-explicit-action-p)

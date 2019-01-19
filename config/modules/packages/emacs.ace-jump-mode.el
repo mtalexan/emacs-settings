@@ -10,6 +10,8 @@
     ace-jump-mode-pop-mark
    ) ; end :commands
   :init
+   (define-key global-map (kbd "C-:") 'ace-jump-mode)
+   (define-key global-map (kbd "C-M-,") 'ace-jump-mode-pop-mark)
   :config
     ;; Swap the char and line mode defaults
     (setq ace-jump-mode-submode-list

@@ -1,38 +1,43 @@
 ;; Contains general key bindings, including rectangle mode
 ;; See other files for special mode bindings
 
-;; General Key bindings
-(require 'simple)
-(define-key global-map [(meta g)] 'goto-line)
-;(require 'window)
-(define-key global-map [(meta -)] 'delete-window)
-(define-key global-map [(meta ?1)] 'delete-other-windows)
-(define-key global-map [(meta ?3)] 'split-window-horizontally)
-(define-key global-map [(meta ?2)] 'split-window-vertically)
-(define-key global-map [(meta ?0)] 'other-window)
-(define-key global-map [(meta ?9)] 'other-frame)
-(require 'compile)
-(define-key global-map [(meta c)] 'compile)
-(require 'grep)
-(define-key global-map [(meta f)] 'rgrep)
+(require 'simple) ; for the line-based commands
+;(require 'window) ; for window commands, but those aren't in a module for some reason
+(require 'compile) ; for compile mode
+(require 'grep) ; for rgrep call
+(require 'cc-mode) ; for the c/c++ mode maps
 
-;; redefine movement keys (rough copy of ergo movement with modifications)
-;; permanently built-in commands
-(define-key global-map [(meta j)] 'backward-char)
-(define-key global-map [(meta l)] 'forward-char)
-(require 'simple)
-(define-key global-map [(meta i)] 'previous-line)
-(define-key global-map [(meta k)] 'next-line)
-(define-key global-map [(meta o)] 'move-end-of-line)
-(define-key global-map [(meta u)] 'move-beginning-of-line)
+;; The c-mode-map and c++-mode-map have a lot of these keybindings doing other things
+;; so clear those out as well as setting these for the global-map
 
-;; permanently built-in commands
-(define-key global-map [(meta I)] 'scroll-down)
-(define-key global-map [(meta K)] 'scroll-up)
-(define-key global-map [(meta J)] 'backward-word)
-(define-key global-map [(meta L)] 'forward-word)
-(define-key global-map [(meta O)] 'forward-sexp)
-(define-key global-map [(meta U)] 'backward-sexp)
+(dolist (map  (list global-map c-mode-map c++-mode-map))
+  ;; General Key bindings
+  (define-key global-map [(meta g)] 'goto-line)
+  (define-key global-map [(meta -)] 'delete-window)
+  (define-key global-map [(meta ?1)] 'delete-other-windows)
+  (define-key global-map [(meta ?3)] 'split-window-horizontally)
+  (define-key global-map [(meta ?2)] 'split-window-vertically)
+  (define-key global-map [(meta ?0)] 'other-window)
+  (define-key global-map [(meta ?9)] 'other-frame)
+  (define-key global-map [(meta c)] 'compile)
+  (define-key global-map [(meta f)] 'rgrep)
+
+  ;; redefine movement keys (rough copy of ergo movement with modifications)
+  ;; permanently built-in commands.
+  (define-key map [(meta j)] 'backward-char)
+  (define-key map [(meta l)] 'forward-char)
+  (define-key map [(meta i)] 'previous-line)
+  (define-key map [(meta k)] 'next-line)
+  (define-key map [(meta o)] 'move-end-of-line)
+  (define-key map [(meta u)] 'move-beginning-of-line)
+
+  (define-key map [(meta I)] 'scroll-down)
+  (define-key map [(meta K)] 'scroll-up)
+  (define-key map [(meta J)] 'backward-word)
+  (define-key map [(meta L)] 'forward-word)
+  (define-key map [(meta O)] 'forward-sexp)
+  (define-key map [(meta U)] 'backward-sexp)
+  )
 
 ;; In no-window mode arrow keys, pgup, pgdn, home, end, etc are prefaced with "ESC O"
 (defvar no-window-map)
