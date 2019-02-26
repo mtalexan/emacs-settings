@@ -2,7 +2,8 @@
 
 ; This package is included in Emacs 24.x by default
 (use-package linum
-  :ensure t
+  ;; part of emacs now, causes errors if we do ensure t on them
+  ;;:ensure t
   :commands (
              linum-mode
    )

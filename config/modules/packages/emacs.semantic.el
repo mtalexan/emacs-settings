@@ -2,7 +2,8 @@
 
 ;; This package is included in Emacs by default
 (use-package semantic
-  :ensure t
+  ;; part of emacs now, causes errors if we do ensure t on them
+  ;;:ensure t
   :commands (
     semantic-mode
     my-semantic-parse-dir
