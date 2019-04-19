@@ -37,10 +37,13 @@
 
 ;; Check for the flag file in the configuration directory.  Create it after
 ;; initializing package the first time.
-(when (not (file-exists-p "~/.emacs.d/.package-init.done"))
+(if (<= emacs-major-version 26)
   (package-initialize)
-  (shell-command "touch ~/.emacs.d/.package-init.done")
- )
+  (when (not (file-exists-p "~/.emacs.d/.package-init.done"))
+    (package-initialize)
+    (shell-command "touch ~/.emacs.d/.package-init.done")
+   )
+)
 
 ;; All packages that are needed from a package repo should use the ":ensure t" tag in their use-package
 ;; line, or ":ensure repoPackageName" if the name in the repo doesn't match the name that's downloaded.
