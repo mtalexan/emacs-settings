@@ -34,6 +34,9 @@
 ;;; uncomment this line to disable loading of "default.el" at startup
 ;; (setq inhibit-default-init t)
 
+;; disable the menu bar
+(menu-bar-mode -1)
+
 (require 'woman)
 ;; turn on font-lock mode
 (when (fboundp 'global-font-lock-mode)
