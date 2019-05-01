@@ -145,6 +145,8 @@
 ;; Package Modules
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(load "emacs.async")
+(load "emacs.paradox")
 (load "emacs.linum")
 (load "emacs.smoothscrolling")
 (load "emacs.visible-mark")

@@ -7,7 +7,8 @@
   :commands (
              paradox-mode
              paradox-enable
-   )
+             )
+  :after async
   :init
     ; always enable for list-packages by default
     (paradox-enable)
