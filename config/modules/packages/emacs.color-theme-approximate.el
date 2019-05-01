@@ -8,7 +8,7 @@
    )
   :init
     ;; Loads the module and turns it on so it will work if on the terminal
-    (autoload 'color-theme-approximate-on "color-theme-approximate")
-    (color-theme-approximate-on)
+    ;;(autoload 'color-theme-approximate-on "color-theme-approximate")
+    ;;(color-theme-approximate-on)
   )
 
