@@ -10,6 +10,7 @@
   :commands (
              counsel-projectile-mode
              counsel-projectile-find-file
+             counsel-projectile-find-file-dwim
              counsel-projectile-find-dir
              counsel-projectile-grep
              counsel-projectile-switch-to-buffer
@@ -18,7 +19,7 @@
              counsel-projectile-rg ;requires external tool
    ) ; end :commands
   :init
-    (define-key global-map (kbd "C-x f") 'counsel-projectile-find-file)
+    (define-key global-map (kbd "C-x f") 'counsel-projectile-find-file-dwim)
     ;; Don't enable the whole mode, we just want a few key bindings
     ;(counsel-projectile-mode)
   :config

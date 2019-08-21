@@ -19,6 +19,4 @@
 ;;  This should be the only file like this before the custom-set-variables.
 ;;  We want it here so different settings can be tested through the customize-group
 ;;  and won't be overridden by these settings.
-(let ((file "emacs.codingstyle"))
-  (if (file-executable-p file) (load file)))
-
+(load "emacs.codingstyle")
