@@ -7,6 +7,8 @@ FILE_VERSION=6.5.6
 
 APTITUDE=0
 YUM=0
+PACMAN=0
+AURPAC=""
 
 if command -v aptitude >/dev/null ; then
     APTITUDE=1
@@ -20,6 +22,16 @@ elif command -v apt-get >/dev/null ; then
     APTCACHE=apt-cache
 elif command -v yum >/dev/null ; then
     YUM=1
+elif command -v pacman >/dev/null ; then
+    PACMAN=1
+    if command -v pacaur > /dev/null ; then
+        AURPAC=pacaur
+    elif command -v yaourt > /dev/null ; then
+        AURPAC=yauort
+    else
+        echo "An AUR compatible package manager is required: e.g. pacaur or yaourt"
+	exit 1
+    fi
 else
     echo "Unrecognized Linux distribution" >&2
     exit 1
@@ -59,15 +71,30 @@ elif [ $YUM -eq 1 ] ; then
     sudo yum install -y ncurses-devel coreutils ctags
 
     PACKAGE_VERSION=$(yum list global | grep global | awk '{print $2}' | sed -e 's@[0-9]*:\(.*\)@\1@' -e 's@^\([0-9.]*\).*@\1@g')
+elif [ $PACMAN -eq 1 ] ; then
+    echo "Using pacman to install idutils and exuberant-ctags.  Sudo access required."
+
+    # We also need ncurses for development 
+    ${AURPAC} -S ncurses idutils ctags
+    if [ $? -ne 0 ] ; then
+        echo ""
+        echo ""
+        echo "Unable to install ncurses, idutils, and ctags"
+        exit 1
+    fi
 fi
 
-# Lexigraphically sort the required FILE_VERSION and the PACKAGE_VERSION to determine which is newer.
-# If the newer version matches the PACKAGE_VERSION, use the package manager to get and use it.
-# Also works if PACKAGE_VERSION matches FILE_VERSION
-if [[ ${PACKAGE_VERSION} == $(echo "${FILE_VERSION}" "${PACKAGE_VERSION}" | sort -u | tail -n1) ]] ; then
+if [ $PACMAN -eq 1 ] ; then
     from_source=0
 else
-    from_source=1
+    # Lexigraphically sort the required FILE_VERSION and the PACKAGE_VERSION to determine which is newer.
+    # If the newer version matches the PACKAGE_VERSION, use the package manager to get and use it.
+    # Also works if PACKAGE_VERSION matches FILE_VERSION
+    if [[ ${PACKAGE_VERSION} == $(echo "${FILE_VERSION}" "${PACKAGE_VERSION}" | sort -u | tail -n1) ]] ; then
+        from_source=0
+    else
+        from_source=1
+    fi
 fi
 
 if [ from_source -eq 0 ] ; then
@@ -89,6 +116,14 @@ if [ from_source -eq 0 ] ; then
             # does.  Symlink it so it works
             echo "Creating symlink for gtags.conf.  Sudo access required."
             sudo ln -s /etc/gtags.conf ${INSTALL_DIR}/share/gtags/gtags.conf
+        fi
+    elif [ $PACMAN -eq 1 ] ; then
+        sudo ${AURPAC} -Sy gtags
+        if [ $? -ne 0 ] ; then
+            echo ""
+            echo ""
+            echo "Unable to install gtags"
+            exit 1
         fi
     fi
 else

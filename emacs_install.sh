@@ -4,6 +4,8 @@ set -o pipefail
 
 APTITUDE=0
 YUM=0
+PACMAN=0
+AURPAC=""
 
 if command -v aptitude >/dev/null ; then
     APTITUDE=1
@@ -17,6 +19,16 @@ elif command -v apt-get >/dev/null ; then
     APTCACHE=apt-cache
 elif command -v yum >/dev/null ; then
     YUM=1
+elif command -v pacman >/dev/null ; then
+    PACMAN=1
+    if command -v pacaur > /dev/null ; then
+        AURPAC=pacaur
+    elif command -v yaourt > /dev/null ; then
+        AURPAC=yaourt
+    else
+        echo "An AUR capable package manager is required: e.g. pacaur or yaourt"
+	exit 1
+    fi
 else
     echo "Unrecognized Linux distribution" >&2
     exit 1
@@ -195,17 +207,32 @@ elif [ $YUM -eq 1 ] ; then
     # cleanup by deleting the source repo
     cd ..
     rm -rf emacs-src
+elif [ $PACMAN -eq 1 ] ; then
+    if ! pacman -Q emacs > /dev/null ; then
+	echo "Installing emacs from pacman, sudo access required" 
+        sudo ${AURPAC} -Sy emacs
+        if [ $? -ne 0 ] ; then
+            echo ""
+            echo ""
+            echo "Unable to install emacs from ${AURPAC}"
+            exit 1
+	fi
+    fi
+
+    NEW_EMACS_EXECUTABLE_NAME=$(which emacs)
 fi
 
-echo ""
-echo ""
-echo "Updating alternatives to use emacs-snapshot..."
-sudo update-alternatives --set emacs ${NEW_EMACS_EXECUTABLE_NAME}
-if [ $? -ne 0 ] ; then
+if [ $PACMAN -ne 1 ] ; then
     echo ""
     echo ""
-    echo "Unable to update emacs alternative to ${NEW_EMACS_EXECUTABLE_NAME}"
-    exit 1
+    echo "Updating alternatives to use emacs-snapshot..."
+    sudo update-alternatives --set emacs ${NEW_EMACS_EXECUTABLE_NAME}
+    if [ $? -ne 0 ] ; then
+        echo ""
+        echo ""
+        echo "Unable to update emacs alternative to ${NEW_EMACS_EXECUTABLE_NAME}"
+        exit 1
+    fi
 fi
 
 
@@ -220,24 +247,36 @@ if [ $? -ne 0 ] ; then
     exit 1
 fi
 
-echo ""
-echo ""
-echo "Installing ripgrep"
-if ! command -v rg &>/dev/null ; then
-    if command -v dpkg &>/dev/null ; then
-        RIPGREP_VERSION=0.10.0
-        
-        if ! wget https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/ripgrep_${RIPGREP_VERSION}_amd64.deb ; then
-            echo "ERROR: unable to get the ripgrep deb file"
-            exit 1
+if [ $PACMAN -eq 1 ] ; then
+    if ! pacman -Q ripgrep > /dev/null ; then
+        sudo ${AURPAC} -Sy ripgrep
+	if [ $? -ne 0 ] ; then
+            echo ""
+            echo ""
+            echo "Couldn't install ripgrep from ${AURPAC}"
+	    exit 1
         fi
-        #install it
-        sudo dpkg -i ripgrep_${RIPGREP_VERSION}_amd64.deb
-        #clean it up
-        rm ripgrep_${RIPGREP_VERSION}_amd64.deb
-    else
-        echo "    Manual install required: https://github.com/BurntSushi/ripgrep/releases"
-        echo ""
+    fi
+else
+    echo ""
+    echo ""
+    echo "Installing ripgrep"
+    if ! command -v rg &>/dev/null ; then
+        if command -v dpkg &>/dev/null ; then
+            RIPGREP_VERSION=0.10.0
+        
+            if ! wget https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/ripgrep_${RIPGREP_VERSION}_amd64.deb ; then
+                echo "ERROR: unable to get the ripgrep deb file"
+                exit 1
+            fi
+            #install it
+            sudo dpkg -i ripgrep_${RIPGREP_VERSION}_amd64.deb
+            #clean it up
+            rm ripgrep_${RIPGREP_VERSION}_amd64.deb
+        else
+            echo "    Manual install required: https://github.com/BurntSushi/ripgrep/releases"
+           echo ""
+        fi
     fi
 fi
 
