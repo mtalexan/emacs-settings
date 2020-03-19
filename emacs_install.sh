@@ -25,8 +25,10 @@ elif command -v pacman >/dev/null ; then
         AURPAC=pacaur
     elif command -v yaourt > /dev/null ; then
         AURPAC=yaourt
+    elif command -v yay > /dev/null ; then
+        AURPAC=yay
     else
-        echo "An AUR capable package manager is required: e.g. pacaur or yaourt"
+        echo "An AUR capable package manager is required: e.g. pacaur, yaourt, or yay"
 	exit 1
     fi
 else

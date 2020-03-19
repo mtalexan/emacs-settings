@@ -14,3 +14,4 @@ url/*
 /.package-init.done
 config/**/*.elc
 package23.x/package.elc
+/transient

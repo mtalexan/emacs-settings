@@ -39,6 +39,7 @@
              counsel-command-history
              counsel-irony ; requires irony backend
              counsel-apropos
+             counsel-flycheck ;requires flycheck
    ) ; end :commands
   :init
     (counsel-mode)
