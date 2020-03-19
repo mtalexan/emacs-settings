@@ -158,6 +158,7 @@
 (load "emacs.paradox")
 (load "emacs.linum")
 (load "emacs.smoothscrolling")
+(load "emacs.lang-modes")
 (load "emacs.visible-mark")
 (load "emacs.rich-minority")
 (load "emacs.smart-mode-line")
