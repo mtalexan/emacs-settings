@@ -334,13 +334,6 @@
     )
   )
 
-(use-package perl6-mode
-  :ensure t
-  :commands (
-            perl6-mode
-    )
-  )
-
 (use-package php-mode
   :ensure t
   :commands (
@@ -490,13 +483,6 @@
   :ensure t
   :commands (
             thrift-mode
-    )
-  )
-
-(use-package tup-mode
-  :ensure t
-  :commands (
-            tup-mode
     )
   )
 

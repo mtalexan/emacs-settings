@@ -11,8 +11,6 @@
 (require 'python)
 (add-hook 'python-mode-hook '(lambda () (setq tab-width 4)))
 (add-hook 'inferior-python-mode-hook '(lambda () (setq tab-width 4)))
-(require 'lua-mode)
-(add-hook 'lua-mode-hook '(lambda () (setq tab-width 4)))
 
 (setq c-offsets-alist
    (quote
